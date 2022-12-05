@@ -6,30 +6,13 @@ import axios from "axios";
 
 function App() {
     const [homes, setHomes] = useState([]);
-    const [rooms, setRooms] = useState([]);
-    const [devices, setDevices] = useState([]);
 
-
-    async function getHomes() {
-        console.log('getHomes()');
-        const response = await axios.get('http://localhost:8000/api/v1.0/get_devices/4');
-        setHomes(response.data.data.homes)
-        setRooms(response.data.data.rooms)
-        setDevices(response.data.data.devices)
-
-
-        console.log(response.data);
+    async function getDevices() {
+        console.log('getDevices called');
+        const response = await axios.get('http://localhost:8001/api/v1.0/get_devices/2');
+        setHomes(response.data.data)
+        console.log(homes[0]);
     }
-
-    // const onLoadHomes = function() {
-    //
-    //     getHomes().then(r => {
-    //         debugger;
-    //         setResp(r.data)
-    //     });
-    //
-    // }
-
 
     const renderDeviceByType = (device) => {
         let color = "red"
@@ -47,56 +30,96 @@ function App() {
         )
     }
 
-    const alertRef = useRef();
-    let isAlertExampleVisible = true;
-    const onLoadHomesClick = function () {
-        console.log('onLoadHomesClick');
-        getHomes().then(r => {
-            console.log('r is ok');
-        });
-        toggleAlert();
-    }
-    const [visible, setVisible] = useState(true);
-    const toggleAlert = function () {
-        if (visible)
-            setVisible(false);
-        else setVisible(true);
-    }
+    // const alertRef = useRef();
+    // let isAlertExampleVisible = true;
+    // const onLoadHomesClick = function () {
+    //     console.log('onLoadHomesClick');
+    //     getDevicesLine().then(r => {
+    //         console.log('r is ok');
+    //     });
+    //     toggleAlert();
+    // }
+    // const [visible, setVisible] = useState(true);
+    // const toggleAlert = function () {
+    //     if (visible)
+    //         setVisible(false);
+    //     else setVisible(true);
+    // }
     return (
         <div>
-            <AlertExample
-                color="success"
-                visible={visible}
-                toggleAlert={toggleAlert}
-                msg="lorem ipsum"
-            />
-            <Button color="warning" onClick={getHomes}>
-                test
+            <Button color="success" onClick={getDevices}>
+                get devices
             </Button>
 
             <div>
                 {homes.map(home =>
-                    <div key={home.home_id}>
-                        <p>{home.name}</p>
-                        <ul>
-                            {
-                                rooms.filter(r => r.home_id === home.home_id).map(room => <li key={room.room_id}>
+                    <div key={home.home_id} style={{border: "3px solid #eee", margin: "3px"}}>
+                        <p>
+                            {home.name}<br/>
+                            <small className="text-muted">{home.geo_name}</small>
+                        </p>
+                        {home.rooms.map(room =>
+                            <div key={room.room_id} style={{border: "2px solid #ccc", margin: "2px 0px"}}>
+                                <p>
                                     {room.name}
-                                    <ul>
-                                        {
-                                            devices.filter(d => d.room_id === room.room_id).map(device =>
-                                                renderDeviceByType(device)
-                                            )
-                                        }
-                                    </ul>
-                                </li>)
-                            }
-                        </ul>
-
+                                </p>
+                                {room.devices.map(device =>
+                                    <div key={device.uuid} style={{border: "1px solid #aaa", margin: "1px 0px"}}>
+                                        <img
+                                            src={device.icon_url}
+                                            className="rounded float-start"
+                                            alt={device.name}
+                                            style={{height: "60px"}}
+                                        />
+                                        <p>
+                                            {device.name}<br/>
+                                            <small className="text-muted">
+                                                {device.category}<br/>
+                                            </small>
+                                        </p>
+                                    </div>
+                                )}
+                            </div>
+                        )}
                     </div>
                 )}
             </div>
+
+
+            {/*<Button color="warning" onClick={getDevicesLine}>*/}
+            {/*    get devices line*/}
+            {/*</Button>*/}
+            {/*<div>*/}
+            {/*    {homes.map(home =>*/}
+            {/*        <div key={home.home_id}>*/}
+            {/*            <p>{home.name}</p>*/}
+            {/*            <ul>*/}
+            {/*                {*/}
+            {/*                    rooms.filter(r => r.home_id === home.home_id).map(room => <li key={room.room_id}>*/}
+            {/*                        {room.name}*/}
+            {/*                        <ul>*/}
+            {/*                            {*/}
+            {/*                                devices.filter(d => d.room_id === room.room_id).map(device =>*/}
+            {/*                                    renderDeviceByType(device)*/}
+            {/*                                )*/}
+            {/*                            }*/}
+            {/*                        </ul>*/}
+            {/*                    </li>)*/}
+            {/*                }*/}
+            {/*            </ul>*/}
+
+            {/*        </div>*/}
+            {/*    )}*/}
+            {/*</div>*/}
         </div>
+
+
+        // <AlertExample
+        //     color="success"
+        //     visible={visible}
+        //     toggleAlert={toggleAlert}
+        //     msg="lorem ipsum"
+        // />
         // <div>
         //     <AlertExample
         //         color="success"
@@ -107,7 +130,7 @@ function App() {
         //     <p ref={alertRef}>the stuff is here</p>
         //     <p>кнопки управления</p>
         //     <ButtonGroup>
-        //         <Button color="warning" onClick={getHomes}>
+        //         <Button color="warning" onClick={}>
         //             test
         //         </Button>
         //         <Button color="warning" onClick={onLoadHomesClick}>
