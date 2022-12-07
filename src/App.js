@@ -8,7 +8,23 @@ import HomeSelector from "./components/ui/HomeSelector";
 function App() {
     const [homes, setHomes] = useState([]);
     const [currentHomeID, setCurrentHomeID] = useState(0);
-    
+
+    // const renderDeviceByType = (device) => {
+    //     let color = "red"
+    //     switch(device.category) {
+    //         case 'tgq':
+    //             color = "blue"
+    //             break
+    //     }
+    //
+    //     return (<li  style={{color: color}} key={device.uuid}>
+    //             {
+    //                 device.name
+    //             }
+    //         </li>
+    //     )
+    // }
+
     function fetchHomes() {
         const loadData = (async () => {
             const response = await axios.get('http://127.0.0.1:8000/api/v1.0/get_devices/2')
@@ -35,21 +51,7 @@ function App() {
         setCurrentHomeID( Number(home_id) );
     }
 
-    // const renderDeviceByType = (device) => {
-    //     let color = "red"
-    //     switch(device.category) {
-    //         case 'tgq':
-    //             color = "blue"
-    //             break
-    //     }
-    //
-    //     return (<li  style={{color: color}} key={device.uuid}>
-    //             {
-    //                 device.name
-    //             }
-    //         </li>
-    //     )
-    // }
+
 
     return (
         <div>
