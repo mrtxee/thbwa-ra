@@ -2,34 +2,42 @@ import React, {useEffect, useRef, useState} from 'react';
 import {Alert, Button, ButtonGroup, Spinner} from 'reactstrap';
 import axios from "axios";
 import HomeRoomsTabs from "./components/ui/HomeRoomsTabs";
+import HomeSelector from "./components/ui/HomeSelector";
 
 
 function App() {
     const [homes, setHomes] = useState([]);
-    const [cur_home, setRooms] = useState([]);
+    const [currentHomeID, setCurrentHomeID] = useState(0);
 
-    //const [homes1, setHomes1] = useState([]);
-
-    useEffect(() => {
-        console.log("sdgsdgsdg")
-        //getDevices()
-    }, [])
-
-    async function getDevices() {
-        console.log('getDevices called');
-        const response = await axios.get('http://localhost:8000/api/v1.0/get_devices/2');
-        setHomes(response.data.data);
-        console.log(response.data.data[0]);
+    async function fetchHomes() {
+        const response = await axios.get('http://127.0.0.1:8001/api/v1.0/get_devices/2')
+        setHomes(await response.data.data);
+        return true;
     }
-    function homeChange(e){
-        console.log('homeChange event says that current home_id is');
-        console.log(e.target.value);
-        console.log(homes);
-        console.log(
-            homes.filter( h => h.home_id === Number(e.target.value) )
-        )
-        setRooms(homes.filter( h => h.home_id === Number(e.target.value))[0] );
 
+    useEffect( () => {
+        console.log("mount useEffect happened")
+        fetchHomes().then(()=>{
+            console.log("fetchHomes then happened");
+            console.log(homes);
+            console.log("fetchHomes then happened homes[0]");
+            console.log(homes[0]);
+            console.log("fetchHomes then happened homes[0].home_id");
+            //console.log(homes[0].home_id);
+            console.log(currentHomeID);
+            if (0 == currentHomeID && homes[0].home_id){
+                console.log("lets setCurrentHomeID")
+                setCurrentHomeID(homes[0].home_id)
+            }
+        });
+
+
+    },[])
+
+    function homeChange(home_id){
+        console.log('homeChange event says that current home_id is');
+        console.log(home_id);
+        setCurrentHomeID( Number(home_id) );
     }
 
     // const renderDeviceByType = (device) => {
@@ -50,16 +58,21 @@ function App() {
 
     return (
         <div>
-            <Button color="success" onClick={getDevices}>
+            <Button color="success" onClick={fetchHomes}>
                 get devices
             </Button>
-            <select className="form-select form-select-lg mb-3" aria-label=".form-select-lg example" onChange={homeChange}>
-                <option defaultValue>select home</option>
-                {homes.map(home =>
-                    <option key={"option"+home.home_id} value={home.home_id}>{home.name}</option>
-                )}
-            </select>
-            <HomeRoomsTabs home={cur_home}/>
+            <HomeSelector
+                value={currentHomeID}
+                onChange={homeChange}
+                homes={homes}
+                defaultValue="select home"
+            />
+            {homes.length > 0 && currentHomeID > 0
+                ?
+                <HomeRoomsTabs home={homes.filter(h => h.home_id === Number(currentHomeID))[0]}/>
+                :
+                <div>homes are not loaded yet</div>
+            }
         </div>
     );
 }
