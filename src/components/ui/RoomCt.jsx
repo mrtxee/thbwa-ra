@@ -3,13 +3,21 @@ import React from "react";
 
 function RoomCt(props) {
     return (
-        <div style={{border: "2px solid #ccc", margin: "2px 0px"}}>
-            <p>
+        <div>
+            <div className="p-2 bg-warning bg-opacity-10 border border-warning">
                 {props.room.name}
+            </div>
+
+            <p>
+
             </p>
-            {props.room.devices.map(device =>
-                <DeviceCt key={device.uuid}  device={device}/>
-            )}
+            <div className={"container"}>
+                <div className={"row row-cols-lg-5 row-cols-md-4 row-cols-sm-3 row-cols-2 row-cols-xs-2"}>
+                    {props.room.devices.map(device =>
+                        <DeviceCt key={device.uuid}  device={device}/>
+                    )}
+                </div>
+            </div>
         </div>
     );
 }

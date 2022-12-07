@@ -1,6 +1,6 @@
 function DeviceCt(props) {
     return (
-        <div style={{border: "1px solid #aaa", margin: "1px 0px"}}>
+        <div className={"col m-1 p-3 border bg-light bg-gradient"}>
             <img
                 src={props.device.icon_url}
                 className="rounded float-start"

@@ -59,8 +59,8 @@ function App() {
     return (
         <div>
             <div className={"row my-3"}>
-                <div className={"col-8"}></div>
-                <div className={"col-4"}>actions:
+                <div className={"col-lg-8"}></div>
+                <div className={"col-lg-4"}>actions:
                     <div className="btn-group ms-1" role="group" aria-label="Basic example">
                         <button type="button" className="btn btn-primary" onClick={fetchHomes}>Reload Homes</button>
                         <button type="button" className="btn btn-primary disabled">Reload Tuya data</button>
