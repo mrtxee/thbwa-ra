@@ -8,31 +8,26 @@ import HomeSelector from "./components/ui/HomeSelector";
 function App() {
     const [homes, setHomes] = useState([]);
     const [currentHomeID, setCurrentHomeID] = useState(0);
-
-    async function fetchHomes() {
-        const response = await axios.get('http://127.0.0.1:8001/api/v1.0/get_devices/2')
-        setHomes(await response.data.data);
-        return true;
+    
+    function fetchHomes() {
+        const loadData = (async () => {
+            const response = await axios.get('http://127.0.0.1:8000/api/v1.0/get_devices/2')
+            return response.data.data
+        })
+        loadData().then(fetchHomesResult => {
+            setHomes(fetchHomesResult)
+        })
     }
-
     useEffect( () => {
-        console.log("mount useEffect happened")
-        fetchHomes().then(()=>{
-            console.log("fetchHomes then happened");
-            console.log(homes);
-            console.log("fetchHomes then happened homes[0]");
-            console.log(homes[0]);
-            console.log("fetchHomes then happened homes[0].home_id");
-            //console.log(homes[0].home_id);
-            console.log(currentHomeID);
-            if (0 == currentHomeID && homes[0].home_id){
-                console.log("lets setCurrentHomeID")
-                setCurrentHomeID(homes[0].home_id)
-            }
-        });
-
-
+        // получить список домов при запусе приложения
+        fetchHomes();
     },[])
+    useEffect( () => {
+        // если поменялись дома, задать поинтер на первый дом
+        if (homes.length>0){
+            setCurrentHomeID( homes[0].home_id )
+        }
+    }, [homes]);
 
     function homeChange(home_id){
         console.log('homeChange event says that current home_id is');
