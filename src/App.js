@@ -30,9 +30,14 @@ function App() {
             const response = await axios.get('http://127.0.0.1:8000/api/v1.0/get_devices/2')
             return response.data.data
         })
-        loadData().then(fetchHomesResult => {
-            setHomes(fetchHomesResult)
+
+        loadData().then(data => {
+            setTimeout(function() {
+                setHomes(data);
+            }, (1 * 100));
+
         })
+        console.log("fetchHomes did")
     }
     useEffect( () => {
         // получить список домов при запусе приложения
@@ -46,8 +51,6 @@ function App() {
     }, [homes]);
 
     function homeChange(home_id){
-        console.log('homeChange event says that current home_id is');
-        console.log(home_id);
         setCurrentHomeID( Number(home_id) );
     }
 
@@ -55,21 +58,25 @@ function App() {
 
     return (
         <div>
-            <Button color="success" onClick={fetchHomes}>
-                get devices
-            </Button>
+            <div className={"row my-3"}>
+                <div className={"col-8"}></div>
+                <div className={"col-4"}>actions:
+                    <div className="btn-group ms-1" role="group" aria-label="Basic example">
+                        <button type="button" className="btn btn-primary" onClick={fetchHomes}>Reload Homes</button>
+                        <button type="button" className="btn btn-primary disabled">Reload Tuya data</button>
+                    </div>
+                </div>
+            </div>
             <HomeSelector
                 value={currentHomeID}
                 onChange={homeChange}
                 homes={homes}
                 defaultValue="select home"
             />
-            {homes.length > 0 && currentHomeID > 0
-                ?
-                <HomeRoomsTabs home={homes.filter(h => h.home_id === Number(currentHomeID))[0]}/>
-                :
-                <div>homes are not loaded yet</div>
-            }
+            <HomeRoomsTabs
+                home = {homes.filter(h => h.home_id === Number(currentHomeID))[0]}
+                activeTabIndex = {0}
+            />
         </div>
     );
 }
