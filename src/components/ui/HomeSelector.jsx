@@ -2,9 +2,21 @@ import DeviceCt from "./DeviceCt";
 import React from "react";
 
 function HomeSelector({homes, defaultValue, value, onChange}) {
+    let home1 = homes.filter(h => h.home_id === Number(value))[0];
+    if(!home1){
+        home1 = {
+            name: "home",
+            geo_name: "address"
+        };
+    }
     return (
         <div className={"row my-3"}>
-            <div className={"col-lg-8"}></div>
+            <div className={"col-lg-8"}>
+                <p className="h3">{home1.name}
+                    <small className="text-muted">{home1.geo_name}
+                    </small>
+                </p>
+            </div>
             <div className={"col-lg-4"}>
                 <div className={"form-floating"}>
                     <select
@@ -20,8 +32,7 @@ function HomeSelector({homes, defaultValue, value, onChange}) {
                 </div>
             </div>
         </div>
-
-);
+    );
 }
 export default HomeSelector;
 

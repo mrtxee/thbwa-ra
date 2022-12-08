@@ -1,20 +1,27 @@
-function DeviceCt(props) {
-    return (
-        <div className={"col m-1 p-3 border bg-light bg-gradient"}>
-            <img
-                src={props.device.icon_url}
-                className="rounded float-start"
-                alt={props.device.name}
-                style={{height: "60px"}}
-            />
-            <p>
-                {props.device.name}<br/>
-                <small className="text-muted">
-                    {props.device.category}<br/>
-                </small>
-            </p>
-        </div>
-    );
+import DefaultDeviceCat from "./device_category/DefaultDeviceCat";
+import Dj from "./device_category/Dj";
+import Kg from "./device_category/Kg";
+
+function DeviceCt({device}) {
+
+    switch (device.category) {
+        case "kg":
+            return (
+                <Kg device={device}/>
+            );
+            break;
+        case "dj":
+            return (
+                <Dj device={device}/>
+            );
+            break;
+        default:
+            return (
+                <DefaultDeviceCat device={device}/>
+            );
+            break;
+    }
+
 }
 
 export default DeviceCt;
