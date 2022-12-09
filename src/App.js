@@ -3,6 +3,7 @@ import {Alert, Button, ButtonGroup, Spinner} from 'reactstrap';
 import axios from "axios";
 import HomeRoomsTabs from "./components/ui/HomeRoomsTabs";
 import HomeSelector from "./components/ui/HomeSelector";
+import {ToastContainer} from "react-toastify";
 
 
 function App() {
@@ -30,7 +31,6 @@ function App() {
             const response = await axios.get('http://127.0.0.1:8000/api/v1.0/get_devices/2')
             return response.data.data
         })
-
         loadData().then(data => {
             setTimeout(function() {
                 setHomes(data);
@@ -54,8 +54,6 @@ function App() {
         setCurrentHomeID( Number(home_id) );
     }
 
-
-
     return (
         <div>
             <div className={"row my-3"}>
@@ -77,6 +75,7 @@ function App() {
                 home = {homes.filter(h => h.home_id === Number(currentHomeID))[0]}
                 activeTabIndex = {0}
             />
+            <ToastContainer />
         </div>
     );
 }

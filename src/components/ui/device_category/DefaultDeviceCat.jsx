@@ -1,6 +1,6 @@
 function DefaultDeviceCat({device}) {
     return (
-        <div className={"col m-1 p-3 border bg-light bg-gradient"}>
+        <div className={"col m-1 p-3 border bg-light bg-gradient"}  key={'DeviceCtD'+device.device_id}>
             <img
                 src={device.icon_url}
                 className="rounded float-start"
