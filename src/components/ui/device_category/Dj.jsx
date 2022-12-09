@@ -4,12 +4,16 @@ import qs from "qs";
 import SimpleToast from "../SimpleToast";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {useEffectNoFirstRender} from "../../hooks/ReactHooks";
+
+export default Dj;
 
 function Dj({device}) {
     const [deviceState, setDeviceState] = useState({
         'switch_led' : false,
         'bright_value' : 30
     });
+
     function fetchDeviceStatus() {
         const loadData = (async () => {
             const response = await axios.get(
@@ -34,22 +38,11 @@ function Dj({device}) {
         // получить статус этого девайса
         fetchDeviceStatus();
     },[])
-    function switchStateChange(e){
-        setDeviceState({...deviceState, "switch_led": e.target.checked})
-        console.log('send new state via AXIOS')
 
+    useEffectNoFirstRender( () => {
         const sendData = (async () => {
-            console.log(deviceState)
             const response = await axios.post(
-                `http://localhost:8000/api/v1.0/set_device_status/2/${device.device_id}`
-                , qs.stringify(deviceState)
-                )
-                // .then(function (response) {
-                //     console.log('response OK');
-                // })
-                .catch(function (error) {
-                    console.log(error);
-                });
+                `http://localhost:8000/api/v1.0/set_device_status/2/${device.device_id}`, deviceState);
             //console.log(response.data.data);
             return response.data.data
         })
@@ -62,10 +55,15 @@ function Dj({device}) {
                 });
             }
         })
+
+    },[deviceState])
+
+    function switchStateChange(e){
+        console.log('switch_led current is '+e.target.checked)
+        setDeviceState({...deviceState, "switch_led": e.target.checked})
     }
     return (
         <div className={"col m-1 p-3 border bg-warning bg-gradient"}>
-            <SimpleToast text="shit!"/>
             <img
                 src={device.icon_url}
                 className="rounded float-start"
@@ -81,8 +79,8 @@ function Dj({device}) {
             </p>
             <div className="form-check form-switch">
                 <input className="form-check-input" type="checkbox" role="switch" id={'switch'+device.device_id}
-                   checked={deviceState.switch_led}
-                   onChange={switchStateChange}
+                       checked={deviceState.switch_led}
+                       onChange={switchStateChange}
                 />
                 <label className="form-check-label" htmlFor={'switch'+device.device_id}>on/off</label>
             </div>
@@ -90,5 +88,3 @@ function Dj({device}) {
         </div>
     );
 }
-
-export default Dj;
