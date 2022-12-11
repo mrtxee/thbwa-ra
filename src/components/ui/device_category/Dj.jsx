@@ -14,35 +14,33 @@ function Dj({device}) {
         'bright_value' : 30
     });
 
-    function fetchDeviceStatus() {
-        const loadData = (async () => {
-            const response = await axios.get(
-                `http://localhost:8000/api/v1.0/get_device_status/2/${device.device_id}`)
-                // .then(function (response) {
-                //     console.log('response OK');
-                // })
-                .catch(function (error) {
-                    console.log('response BAD');
-                    console.log(error);
-                });
-            //console.log(response.data.data);
-            return response.data.data
+    async function fetchDeviceStatus() {
+        await axios.get(`http://localhost:8000/api/v1.0/get_device_status/2/${device.device_id}`).then(state => {
+            console.log("set state")
+            const newState = state.data.data
+            console.log(newState)
+            setDeviceState(newState)
         })
-        loadData().then(data => {
-            setDeviceState(data);
-        })
-        console.log("11111111 fetchDeviceStatus for "+device.device_id)
     }
 
     useEffect( () => {
-        // получить статус этого девайса
-        fetchDeviceStatus();
+        const interval = setInterval(() => {
+            fetchDeviceStatus()
+        }, 10000)
+
+        return () => clearInterval(interval)
     },[])
 
-    useEffectNoFirstRender( () => {
+
+
+    function switchStateChange(e){
+        console.log('switch_led current is '+e.target.checked)
+        const newState = {...deviceState, "switch_led": e.target.checked}
+        setDeviceState(newState)
+
         const sendData = (async () => {
             const response = await axios.post(
-                `http://localhost:8000/api/v1.0/set_device_status/2/${device.device_id}`, deviceState);
+                `http://localhost:8000/api/v1.0/set_device_status/2/${device.device_id}`, newState);
             //console.log(response.data.data);
             return response.data.data
         })
@@ -55,13 +53,8 @@ function Dj({device}) {
                 });
             }
         })
-
-    },[deviceState])
-
-    function switchStateChange(e){
-        console.log('switch_led current is '+e.target.checked)
-        setDeviceState({...deviceState, "switch_led": e.target.checked})
     }
+
     return (
         <div className={"col m-1 p-3 border bg-warning bg-gradient"}>
             <img
