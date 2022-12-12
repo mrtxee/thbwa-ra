@@ -5,11 +5,6 @@ import React from "react";
 function DeviceCatInputCt({func}) {
 
     switch (func.type) {
-        case "dj":
-            return (
-                <div>dj</div>
-            );
-            break;
         case "Boolean":
             return (
                 <div className="form-check form-switch">
@@ -40,6 +35,14 @@ function DeviceCatInputCt({func}) {
                         )}
                     </select>
                 </div>
+            );
+        case "String":
+            return (
+                <div>️🖊️{func.code}</div>
+            );
+        case "Readonly":
+            return (
+                <div>️👁️️{func.code}</div>
             );
         default:
             return (
