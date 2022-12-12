@@ -53,7 +53,7 @@ function App() {
     function homeChange(home_id){
         setCurrentHomeID( Number(home_id) );
     }
-    async function getDeviceState(device, setDeviceState) {
+    async function updateDeviceState(device, setDeviceState) {
         await axios.get(`http://localhost:8000/api/v1.0/get_device_status/2/${device.device_id}`).then(state => {
             console.log(`update component status ${device.device_id}`)
             const newState = state.data.data
@@ -95,8 +95,8 @@ function App() {
                 activeTabIndex = {0}
                 passToChild ={{
                     deviceCt : {
-                        getDeviceStateMethod: getDeviceState,
-                        getDeviceStateUpdateInterval: 120*1000,
+                        updateDeviceStateMethod: updateDeviceState,
+                        updateDeviceStateUpdateInterval: 120*1000,
                         postDeviceStateMethod: postDeviceState
                     }
                 }}

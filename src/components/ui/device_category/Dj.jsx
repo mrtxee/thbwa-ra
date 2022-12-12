@@ -15,10 +15,10 @@ function Dj({device, ...props}) {
         'bright_value' : 30
     });
     useEffect( () => {
-        deviceCt.getDeviceStateMethod(device,setDeviceState)
+        deviceCt.updateDeviceStateMethod(device,setDeviceState)
         const interval = setInterval(() => {
-            deviceCt.getDeviceStateMethod(device,setDeviceState)
-        }, deviceCt.getDeviceStateUpdateInterval)
+            deviceCt.updateDeviceStateMethod(device,setDeviceState)
+        }, deviceCt.updateDeviceStateUpdateInterval)
         return () => clearInterval(interval)
     },[])
     function switchStateChange(e){
