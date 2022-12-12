@@ -1,7 +1,7 @@
 import React from 'react';
 import RoomCt from "./RoomCt";
 
-const HomeRoomsTabs = ({home, activeTabIndex}) => {
+const HomeRoomsTabs = ({home, activeTabIndex, ...props}) => {
     return (
         <div className={"row my-3"}>
             {home && home.rooms && home.rooms.length
@@ -32,7 +32,10 @@ const HomeRoomsTabs = ({home, activeTabIndex}) => {
                                  id={"pills-"+room.room_id}
                                  aria-labelledby={"pills-"+room.room_id+"-tab"}
                             >
-                                <RoomCt key={room.room_id}  room={room}/>
+                                <RoomCt key={room.room_id}
+                                        room={room}
+                                        passToChild = {props.passToChild}
+                                />
                             </div>
                         )}
                     </div>

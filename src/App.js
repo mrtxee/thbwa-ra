@@ -3,7 +3,7 @@ import {Alert, Button, ButtonGroup, Spinner} from 'reactstrap';
 import axios from "axios";
 import HomeRoomsTabs from "./components/ui/HomeRoomsTabs";
 import HomeSelector from "./components/ui/HomeSelector";
-import {ToastContainer} from "react-toastify";
+import {toast, ToastContainer} from "react-toastify";
 
 
 function App() {
@@ -53,6 +53,25 @@ function App() {
     function homeChange(home_id){
         setCurrentHomeID( Number(home_id) );
     }
+    async function getDeviceState(device, setDeviceState) {
+        await axios.get(`http://localhost:8000/api/v1.0/get_device_status/2/${device.device_id}`).then(state => {
+            console.log(`update component status ${device.device_id}`)
+            const newState = state.data.data
+            setDeviceState(newState)
+        })
+    }
+    async function postDeviceState(device, newDeviceState) {
+        await axios.post(`http://localhost:8000/api/v1.0/set_device_status/2/${device.device_id}`
+            , newDeviceState).then(resp => {
+            const data = resp.data.data
+            if(!data.success){
+                toast.error("shit!",{
+                    position: toast.POSITION.BOTTOM_RIGHT,
+                });
+            }
+        })
+    }
+
 
     return (
         <div>
@@ -74,6 +93,13 @@ function App() {
             <HomeRoomsTabs
                 home = {homes.filter(h => h.home_id === Number(currentHomeID))[0]}
                 activeTabIndex = {0}
+                passToChild ={{
+                    deviceCt : {
+                        getDeviceStateMethod: getDeviceState,
+                        getDeviceStateUpdateInterval: 120*1000,
+                        postDeviceStateMethod: postDeviceState
+                    }
+                }}
             />
             <ToastContainer />
         </div>

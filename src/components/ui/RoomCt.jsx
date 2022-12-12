@@ -14,7 +14,10 @@ function RoomCt(props) {
             <div className={"container"}>
                 <div className={"row row-cols-lg-5 row-cols-md-4 row-cols-sm-3 row-cols-2 row-cols-xs-2"}>
                     {props.room.devices.map(device =>
-                        <DeviceCt key={device.device_id} device={device}/>
+                        <DeviceCt key={device.device_id}
+                                  device={device}
+                                  passToChild = {props.passToChild}
+                        />
                     )}
                 </div>
             </div>
