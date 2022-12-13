@@ -16,11 +16,8 @@ function Dj({device, ...props}) {
     });
     useEffect( () => {
         deviceCt.updateDeviceStateMethod(device,setDeviceState)
-        const interval = setInterval(() => {
-            deviceCt.updateDeviceStateMethod(device,setDeviceState)
-        }, deviceCt.updateDeviceStateUpdateInterval)
-        return () => clearInterval(interval)
     },[])
+
     function switchStateChange(e){
         console.log(`switchStateChange switch_led is ${e.target.checked} for ${device.device_id}`)
         const newDeviceState = {...deviceState, "switch_led": e.target.checked}

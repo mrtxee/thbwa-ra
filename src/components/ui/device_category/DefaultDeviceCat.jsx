@@ -1,8 +1,16 @@
 import DeviceCt from "../DeviceCt";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import DeviceCatInputCt from "./DeviceCatInputCt";
 
-function DefaultDeviceCat({device}) {
+function DefaultDeviceCat({device,...props}) {
+    const deviceCt = props.passToChild.deviceCt;
+    const [deviceState, setDeviceState] = useState({
+        'switch_led' : false,
+        'bright_value' : 30
+    });
+    useEffect( () => {
+        deviceCt.updateDeviceStateMethod(device,setDeviceState)
+    },[])
 
     if('cz'==device.category)
         console.log(device)
@@ -28,7 +36,7 @@ function DefaultDeviceCat({device}) {
                             <div className="col">
                                 <h5>{device.name}</h5>
                                 <small className="text-muted">
-                                    {device.category}
+                                    {device.category} {device.device_id}
                                 </small>
                             </div>
                         </div>

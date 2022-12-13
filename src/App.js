@@ -53,12 +53,28 @@ function App() {
     function homeChange(home_id){
         setCurrentHomeID( Number(home_id) );
     }
+
+
     async function updateDeviceState(device, setDeviceState) {
-        await axios.get(`http://localhost:8000/api/v1.0/get_device_status/2/${device.device_id}`).then(state => {
-            console.log(`update component status ${device.device_id}`)
-            const newState = state.data.data
-            setDeviceState(newState)
-        })
+        const loadData = (async () => {
+            await axios.get(`http://localhost:8000/api/v1.0/get_device_status/2/${device.device_id}`).catch(err => {
+                console.log(`err 9999999999 on ${device.device_id}`);
+                console.log(err)
+            }).then(resp => {
+                if (resp){
+                    console.log(`update component status ${device.device_id}`)
+                    const newDeviceState = resp.data.data
+                    setDeviceState(newDeviceState)
+                }
+                else
+                    console.log(`err 777777777 on ${device.device_id}`);
+            })
+        });
+        loadData(device,setDeviceState)
+        const interval = setInterval(() => {
+            loadData(device,setDeviceState)
+        }, 120 * 1000)
+        return () => clearInterval(interval)
     }
     async function postDeviceState(device, newDeviceState) {
         await axios.post(`http://localhost:8000/api/v1.0/set_device_status/2/${device.device_id}`
@@ -96,7 +112,6 @@ function App() {
                 passToChild ={{
                     deviceCt : {
                         updateDeviceStateMethod: updateDeviceState,
-                        updateDeviceStateUpdateInterval: 120*1000,
                         postDeviceStateMethod: postDeviceState
                     }
                 }}
