@@ -37,7 +37,7 @@ function App() {
             }, (1 * 100));
 
         })
-        console.log("fetchHomes did")
+        //console.log("fetchHomes did")
     }
     useEffect( () => {
         // получить список домов при запусе приложения
@@ -59,10 +59,10 @@ function App() {
         const loadData = (async () => {
             await axios.get(`http://localhost:8000/api/v1.0/get_device_status/2/${device.device_id}`).catch(err => {
                 console.log(`err 9999999999 on ${device.device_id}`);
-                console.log(err)
+                //console.log(err)
             }).then(resp => {
                 if (resp){
-                    console.log(`update component status ${device.device_id}`)
+                    //console.log(`update component status ${device.device_id}`)
                     const newDeviceState = resp.data.data
                     setDeviceState(newDeviceState)
                 }
@@ -73,7 +73,7 @@ function App() {
         loadData(device,setDeviceState)
         const interval = setInterval(() => {
             loadData(device,setDeviceState)
-        }, 120 * 1000)
+        }, 360 * 1000)
         return () => clearInterval(interval)
     }
     async function postDeviceState(device, newDeviceState) {

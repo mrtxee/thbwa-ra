@@ -1,16 +1,28 @@
 import Dj from "./Dj";
 import DefaultDeviceCat from "./DefaultDeviceCat";
-import React from "react";
+import React, {useState} from "react";
 
-function DeviceCatInputCt({func}) {
+function DefaultDeviceCatInputs({func, device_id, deviceState, setDeviceState}) {
+
+    if('53436805c44f33b7cadc'==device_id && func.type == "Boolean") {
+        console.log(deviceState)
+        console.log(deviceState[func.code])
+    }
+
+    function switchStateChange(e){
+        console.log(`switchStateChange switch_led is ${e.target.checked} for ${device_id}`)
+        const newDeviceState = {...deviceState, "switch_led": e.target.checked}
+        setDeviceState(newDeviceState)
+        // deviceCt.postDeviceStateMethod(device,newDeviceState)
+    }
 
     switch (func.type) {
         case "Boolean":
             return (
                 <div className="form-check form-switch">
-                    <input className="form-check-input" type="checkbox" role="switch" id={'switch'+func.code}
-                           // checked={deviceState.switch_led}
-                           // onChange={switchStateChange}
+                    <input className="form-check-input" type="checkbox" role="switch"
+                        checked={deviceState[func.code]}
+                        onChange={switchStateChange}
                     />
                     <label className="form-check-label" htmlFor={'switch'+func.code}>{func.name}</label>
                 </div>
@@ -52,4 +64,4 @@ function DeviceCatInputCt({func}) {
     }
 }
 
-export default DeviceCatInputCt;
+export default DefaultDeviceCatInputs;
