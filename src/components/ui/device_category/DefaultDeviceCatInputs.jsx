@@ -1,5 +1,5 @@
 import Dj from "./Dj";
-import DefaultDeviceCat from "./DefaultDeviceCat";
+import CommonDevice from "./CommonDevice";
 import React, {useState} from "react";
 
 function DefaultDeviceCatInputs({func, device_id, deviceState, setDeviceState}) {

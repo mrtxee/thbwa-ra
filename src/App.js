@@ -62,7 +62,7 @@ function App() {
                 //console.log(err)
             }).then(resp => {
                 if (resp){
-                    //console.log(`update component status ${device.device_id}`)
+                    console.log(`update component status ${device.device_id}`)
                     const newDeviceState = resp.data.data
                     setDeviceState(newDeviceState)
                 }
@@ -77,9 +77,11 @@ function App() {
         return () => clearInterval(interval)
     }
     async function postDeviceState(device, newDeviceState) {
+        //console.log('axios'+JSON.stringify(newDeviceState))
         await axios.post(`http://localhost:8000/api/v1.0/set_device_status/2/${device.device_id}`
             , newDeviceState).then(resp => {
             const data = resp.data.data
+            //console.log(data)
             if(!data.success){
                 toast.error("shit!",{
                     position: toast.POSITION.BOTTOM_RIGHT,

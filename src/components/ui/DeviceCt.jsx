@@ -1,10 +1,10 @@
-import DefaultDeviceCat from "./device_category/DefaultDeviceCat";
+import CommonDevice from "./device_category/CommonDevice";
 import Dj from "./device_category/Dj";
 
 function DeviceCt({device, ...props}) {
 
     switch (device.category) {
-        case "dj":
+        case "dj_OLD":
             return (
                 <Dj device={device}
                     passToChild = {props.passToChild}
@@ -13,8 +13,8 @@ function DeviceCt({device, ...props}) {
             break;
         default:
             return (
-                <DefaultDeviceCat device={device}
-                                  passToChild = {props.passToChild}
+                <CommonDevice device={device}
+                              passToChild = {props.passToChild}
                 />
             );
             break;
