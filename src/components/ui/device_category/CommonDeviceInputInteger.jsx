@@ -1,32 +1,35 @@
 import React, {useEffect, useRef, useState} from "react";
+import newId from '../../utils/newid';
 
-function CommonDeviceInputInteger({deviceFunction, initialFunctionState, ChangeHandler}) {
-    const [functionState, setFunctionState] = useState(initialFunctionState);
+function CommonDeviceInputInteger({deviceFunction, deviceState, ChangeHandler}) {
 
-    function deviceFunctionChangeHandler(e){
+    function deviceInputChangeHandler(e){
         const functionValue = Number(e.target.value)
-
-        const newFunctionState = {}
-        newFunctionState[deviceFunction.code] = functionValue
-        setFunctionState(newFunctionState)
-        ChangeHandler(deviceFunction.code, functionValue, false)
+        ChangeHandler(deviceFunction.code, functionValue, true)
     }
-
+    const thisId = newId();
 
     return (
         <div>
-            <label className="form-label"
-                   htmlFor={`customRange${deviceFunction.code}`}>
-                {deviceFunction.name}
-            </label>
+            <div className="float-start">
+                <label className="form-label"
+                       htmlFor={`${thisId}`}>
+                    {deviceFunction.name}:
+                </label>
+            </div>
+            <div className="float-end">
+                <span className="badge text-bg-light">
+                    {deviceState[deviceFunction.code]}
+                </span>
+            </div>
+
             <input type="range" className="form-range"
                    min={deviceFunction.values.min}
                    max={deviceFunction.values.max}
                    step={deviceFunction.values.step}
-                   value={functionState[deviceFunction.code]}
-                   onChange={deviceFunctionChangeHandler}
-                   function_code={deviceFunction.code}
-                   id={`customRange${deviceFunction.code}`}
+                   value={deviceState[deviceFunction.code]}
+                   onChange={deviceInputChangeHandler}
+                   id={`${thisId}`}
             />
         </div>
     );

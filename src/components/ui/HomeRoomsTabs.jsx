@@ -3,7 +3,7 @@ import RoomCt from "./RoomCt";
 
 const HomeRoomsTabs = ({home, activeTabIndex, ...props}) => {
     return (
-        <div className={"row my-3"}>
+        <div className={"container-fluid m-0 p-0"}>
             {home && home.rooms && home.rooms.length
                 ?
                 <div>
@@ -34,7 +34,8 @@ const HomeRoomsTabs = ({home, activeTabIndex, ...props}) => {
                             >
                                 <RoomCt key={room.room_id}
                                         room={room}
-                                        passToChild = {props.passToChild}
+                                        updateDeviceStateMethod={props.updateDeviceStateMethod}
+                                        postDeviceStateMethod={props.postDeviceStateMethod}
                                 />
                             </div>
                         )}

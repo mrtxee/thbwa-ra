@@ -1,27 +1,24 @@
 import React, {useEffect, useRef, useState} from "react";
+import newId from '../../utils/newid';
 
-function CommonDeviceInputBoolean({deviceFunction, initialFunctionState, ChangeHandler}) {
-    const [functionState, setFunctionState] = useState(initialFunctionState);
+function CommonDeviceInputBoolean({deviceFunction, deviceState, ChangeHandler}) {
 
-    function deviceFunctionChangeHandler(e){
+    function deviceInputChangeHandler(e){
         const functionValue = e.target.checked
 
-        const newFunctionState = {}
-        newFunctionState[deviceFunction.code] = functionValue
-        setFunctionState(newFunctionState)
         ChangeHandler(deviceFunction.code, functionValue, false)
     }
-
+    const thisId = newId();
 
     return (
         <div className="form-check form-switch">
             <input className="form-check-input" type="checkbox" role="switch"
-                   checked={functionState[deviceFunction.code]}
-                   onChange={deviceFunctionChangeHandler}
-                   id={`switch${deviceFunction.code}`}
+                   checked={deviceState[deviceFunction.code]}
+                   onChange={deviceInputChangeHandler}
+                   id={`${thisId}`}
             />
             <label className="form-check-label"
-                   htmlFor={`switch${deviceFunction.code}`}>{deviceFunction.name}</label>
+                   htmlFor={`${thisId}`}>{deviceFunction.name}</label>
         </div>
 
     );

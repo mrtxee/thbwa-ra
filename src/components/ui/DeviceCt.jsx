@@ -7,14 +7,16 @@ function DeviceCt({device, ...props}) {
         case "dj_OLD":
             return (
                 <Dj device={device}
-                    passToChild = {props.passToChild}
+                    updateDeviceStateMethod={props.updateDeviceStateMethod}
+                    postDeviceStateMethod={props.postDeviceStateMethod}
                 />
             );
             break;
         default:
             return (
                 <CommonDevice device={device}
-                              passToChild = {props.passToChild}
+                              updateDeviceStateMethod={props.updateDeviceStateMethod}
+                              postDeviceStateMethod={props.postDeviceStateMethod}
                 />
             );
             break;
