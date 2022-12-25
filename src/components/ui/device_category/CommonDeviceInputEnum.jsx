@@ -2,19 +2,12 @@ import React, {useEffect, useRef, useState} from "react";
 
 function CommonDeviceInputEnum({deviceFunction, deviceState, ChangeHandler}) {
 
-    function deviceInputChangeHandler(e){
-        const functionValue = e.target.value
-
-        ChangeHandler(deviceFunction.code, functionValue, false)
-    }
-
-
-    return (
-        <div>{deviceFunction.name}
+     return (
+        <div className={"my-2 mb-3"}>{deviceFunction.name}
             <select
                 value={deviceState[deviceFunction.code]}
-                onChange={deviceInputChangeHandler}
-                className="form-select form-select-sm" aria-label=".form-select-sm example">
+                onChange={e => {ChangeHandler(deviceFunction.code, e.target.value, false)}}
+                className="form-select mt-1" aria-label="chose enum">
                 {deviceFunction.values.range.map((line, index) =>
                     <option key={"DeviceCatInputCtSelectorOption"+index} value={line}>{line}</option>
                 )}

@@ -3,21 +3,21 @@ import newId from '../../utils/newid';
 
 function CommonDeviceInputJson({deviceFunction, deviceState, ChangeHandler}) {
 
-    function deviceInputChangeHandler(e){
-        const functionValue = e.target.value
-        console.log(functionValue);
-        ChangeHandler(deviceFunction.code, functionValue, true)
-    }
     const thisId = newId();
-
     return (
-        <div className="form-floating my-2">
-            <textarea className="form-control" placeholder={deviceFunction.name}
-                      id={`${thisId}`}
-                      onChange={deviceInputChangeHandler}
-                      value={deviceState[deviceFunction.code]}
-            ></textarea>
-            <label htmlFor={`${thisId}`}>{deviceFunction.name}</label>
+        <div className={"row my-2"}>
+            <div className="col-12">{deviceFunction.name}</div>
+            <div className="col-12 form-floating my-1">
+
+                <textarea className="form-control"
+                          style={{height: "160px"}}
+                          placeholder={deviceFunction.name}
+                          id={`${thisId}`}
+                          onChange={e => {ChangeHandler(deviceFunction.code, e.target.value, true)}}
+                          value={deviceState[deviceFunction.code]}
+                ></textarea>
+                <label htmlFor={`${thisId}`}>{deviceFunction.name}</label>
+            </div>
         </div>
     );
 }

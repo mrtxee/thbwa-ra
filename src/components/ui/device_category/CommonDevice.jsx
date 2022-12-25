@@ -1,7 +1,5 @@
-import DeviceCt from "../DeviceCt";
 import React, {useEffect, useRef, useState} from "react";
 import { debounce } from "lodash"
-import DefaultDeviceCatInputs from "./DefaultDeviceCatInputs";
 import CommonDeviceInputEnum from "./CommonDeviceInputEnum";
 import CommonDeviceInputBoolean from "./CommonDeviceInputBoolean";
 import CommonDeviceInputInteger from "./CommonDeviceInputInteger";
@@ -129,25 +127,21 @@ function CommonDevice({device, updateDeviceStateMethod, postDeviceStateMethod}) 
                             <div className="flex-shrink-0">
                                 <img
                                     src={device.icon_url}
-                                    className="rounded float-start img-thumbnail"
+                                    className="rounded float-start img-thumbnail me-2 p-0"
                                     alt={device.name}
-                                    style={{maxHeight: "60px"}}
+                                    style={{maxHeight: "68px"}}
                                 />
                             </div>
-                            <div className="flex-grow-1 ms-3">
-                                <h5>{device.name}</h5>
+                            <div className="flex-grow-1">
+                                <h5 className={"text-break"}>{device.name}</h5>
                             </div>
                         </div>
-                        <div className="row mt-3">
+                        <div className="row mt-4">
                             <div className="col">
                                 {!(device['card_functions'].length > 0) ? <div>no devices in here</div> : device['card_functions'].map(deviceFunction => {
                                         return getFunctionInput(deviceFunction);
                                     })
                                 }
-                            </div>
-                        </div>
-                        <div className="row mt-3">
-                            <div className="d-flex">
                             </div>
                         </div>
                     </div>
@@ -169,13 +163,29 @@ function CommonDevice({device, updateDeviceStateMethod, postDeviceStateMethod}) 
                     <div className="modal-dialog modal-lg">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <img
-                                    src={device.icon_url}
-                                    className="rounded float-start img-thumbnail"
-                                    alt={device.name}
-                                    style={{maxHeight: "32px"}}
-                                />
-                                <h1 className="modal-title fs-5" id={`${thisId}Label`}>{device.name}</h1>
+                                {/*<div className="d-flex align-items-center">*/}
+                                {/*    <div className="flex-shrink-0">*/}
+                                {/*        <img*/}
+                                {/*            src={device.icon_url}*/}
+                                {/*            className="rounded float-start img-thumbnail"*/}
+                                {/*            alt={device.name}*/}
+                                {/*            style={{maxHeight: "32px"}}*/}
+                                {/*        />*/}
+                                {/*    </div>*/}
+                                {/*    <div className="flex-grow-1 ms-1">*/}
+                                {/*        <h5 className={"text-break"}>{device.name}</h5>*/}
+                                {/*    </div>*/}
+                                {/*</div>*/}
+
+                                <h5 className="modal-title " id={`${thisId}Label`}>
+                                    <img
+                                        src={device.icon_url}
+                                        className="rounded float-start img-thumbnail me-2 p-0"
+                                        alt={device.name}
+                                        style={{maxHeight: "32px"}}
+                                    />
+                                    {device.name}
+                                </h5>
                                 <button type="button" className="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                             </div>
@@ -187,7 +197,7 @@ function CommonDevice({device, updateDeviceStateMethod, postDeviceStateMethod}) 
                             </div>
                             <div className="modal-footer">
                                 <small className="text-muted">
-                                    {device.category}.{device.device_id}
+                                    {device.category}.{device.product_id}.{device.device_id}
                                 </small>
                             </div>
                         </div>

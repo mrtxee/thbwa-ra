@@ -3,18 +3,12 @@ import newId from '../../utils/newid';
 
 function CommonDeviceInputBoolean({deviceFunction, deviceState, ChangeHandler}) {
 
-    function deviceInputChangeHandler(e){
-        const functionValue = e.target.checked
-
-        ChangeHandler(deviceFunction.code, functionValue, false)
-    }
     const thisId = newId();
-
     return (
-        <div className="form-check form-switch">
+        <div className="form-check form-switch my-2">
             <input className="form-check-input" type="checkbox" role="switch"
                    checked={deviceState[deviceFunction.code]}
-                   onChange={deviceInputChangeHandler}
+                   onChange={e => {ChangeHandler(deviceFunction.code, e.target.checked, false)}}
                    id={`${thisId}`}
             />
             <label className="form-check-label"

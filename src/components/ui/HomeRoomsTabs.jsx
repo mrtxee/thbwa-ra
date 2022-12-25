@@ -21,7 +21,7 @@ const HomeRoomsTabs = ({home, activeTabIndex, ...props}) => {
                             </li>
                         )}
                     </ul>
-                    <div className="tab-content" id="pills-tabContent">
+                    <div className="tab-content" id="pills-tabContent" style={{margin: "0rem -0.75rem"}}>
                         {home.rooms.map((room, index) =>
                             // <div className="tab-pane fade show active">...</div>
 

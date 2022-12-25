@@ -3,18 +3,13 @@ import newId from '../../utils/newid';
 
 function CommonDeviceInputInteger({deviceFunction, deviceState, ChangeHandler}) {
 
-    function deviceInputChangeHandler(e){
-        const functionValue = Number(e.target.value)
-        ChangeHandler(deviceFunction.code, functionValue, true)
-    }
     const thisId = newId();
-
     return (
-        <div>
+        <div className={"my-2"}>
             <div className="float-start">
                 <label className="form-label"
                        htmlFor={`${thisId}`}>
-                    {deviceFunction.name}:
+                    {deviceFunction.name}
                 </label>
             </div>
             <div className="float-end">
@@ -28,7 +23,7 @@ function CommonDeviceInputInteger({deviceFunction, deviceState, ChangeHandler}) 
                    max={deviceFunction.values.max}
                    step={deviceFunction.values.step}
                    value={deviceState[deviceFunction.code]}
-                   onChange={deviceInputChangeHandler}
+                   onChange={e => {ChangeHandler(deviceFunction.code, Number(e.target.value), true)}}
                    id={`${thisId}`}
             />
         </div>

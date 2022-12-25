@@ -1,11 +1,23 @@
 import React, {useEffect, useRef, useState} from "react";
+import newId from "../../utils/newid";
 
-function CommonDeviceInputReadonly({deviceFunction, deviceState, ChangeHandler}) {
+function CommonDeviceInputReadonly({deviceFunction, deviceState}) {
+    const thisId = newId();
+    if(""===deviceState[deviceFunction.code])
+        deviceState[deviceFunction.code]="∅"
     return (
-        <div>
-            <p className="h6">{deviceState[deviceFunction.code]}
-                <small className="text-muted"> {deviceFunction.name}</small>
-            </p>
+        <div className={"row my-2"}>
+            <div className="col-6">
+                <label className="form-label"
+                       htmlFor={`${thisId}`}>
+                    {deviceFunction.name}
+                </label>
+            </div>
+            <div className="col-6 text-end">
+                <div className="badge text-bg-warning text-wrap text-break" style={{maxWidth: "16rem"}}>
+                    {deviceState[deviceFunction.code]}
+                </div>
+            </div>
         </div>
     );
 }

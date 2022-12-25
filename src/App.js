@@ -1,6 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {Alert, Button, ButtonGroup, Spinner} from 'reactstrap';
-import axios from "axios";
+import React, {useEffect, useState} from 'react';
 import HomeRoomsTabs from "./components/ui/HomeRoomsTabs";
 import HomeSelector from "./components/ui/HomeSelector";
 import {toast, ToastContainer} from "react-toastify";
@@ -32,9 +30,14 @@ function App() {
     async function updateDeviceState(device, setDeviceState) {
         const loadData = (async () => {
             PostService.getDeviceState(device).catch(err => {
-                console.log(`err 9999999999 on ${device.device_id}`);
-                toast.error("shit! 9",{
+                console.log(`status loading error for ${device.device_id} ${device.name}`);
+                toast.error(`status loading error for ${device.device_id} ${device.name}`,{
                     position: toast.POSITION.BOTTOM_RIGHT,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored"
                 });
                 //console.log(err)
             }).then(resp => {
@@ -44,10 +47,7 @@ function App() {
                     setDeviceState(newDeviceState)
                 }
                 else {
-                    console.log(`err 777777777 on ${device.device_id}`);
-                    toast.error("shit! 7", {
-                        position: toast.POSITION.BOTTOM_RIGHT,
-                    });
+                    console.log(`update component status ERROR for ${device.device_id}`)
                 }
             })
         });
@@ -62,8 +62,13 @@ function App() {
         PostService.postDeviceState(device, newDeviceState).then(resp => {
             const data = resp
             if(!data.success){
-                toast.error("shit!",{
+                toast.error(`device managing error for ${device.device_id} ${device.name}`,{
                     position: toast.POSITION.BOTTOM_RIGHT,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored"
                 });
             }
         })
