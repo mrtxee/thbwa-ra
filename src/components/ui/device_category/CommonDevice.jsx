@@ -34,6 +34,7 @@ function CommonDevice({device, updateDeviceStateMethod, postDeviceStateMethod}) 
             default:
                 console.log('unknown device function value type '+deviceFunction.type)
         }
+        return true;
     })
     const [deviceState, setDeviceState] = useState(initialDeviceState);
     const debouncedPostDeviceStateMethod = useRef(debounce(postDeviceStateMethod, 2000)).current
@@ -69,7 +70,6 @@ function CommonDevice({device, updateDeviceStateMethod, postDeviceStateMethod}) 
                                            ChangeHandler = {ChangeHandler}
                     />
                 );
-                break;
             case "Boolean":
                 return (
                     <CommonDeviceInputBoolean key={`${device.device_id}${deviceFunction.code}`}
@@ -78,7 +78,6 @@ function CommonDevice({device, updateDeviceStateMethod, postDeviceStateMethod}) 
                                               ChangeHandler = {ChangeHandler}
                     />
                 );
-                break;
             case "Integer":
                 return (
                     <CommonDeviceInputInteger key={`${device.device_id}${deviceFunction.code}`}
@@ -87,7 +86,6 @@ function CommonDevice({device, updateDeviceStateMethod, postDeviceStateMethod}) 
                                               ChangeHandler = {ChangeHandler}
                     />
                 );
-                break;
             case "Readonly":
                 return (
                     <CommonDeviceInputReadonly key={`${device.device_id}${deviceFunction.code}`}
@@ -95,7 +93,6 @@ function CommonDevice({device, updateDeviceStateMethod, postDeviceStateMethod}) 
                                                deviceState = {deviceState}
                     />
                 );
-                break;
             case "String":
             case "Json":
                 return (
@@ -105,7 +102,6 @@ function CommonDevice({device, updateDeviceStateMethod, postDeviceStateMethod}) 
                                            ChangeHandler = {ChangeHandler}
                     />
                 );
-                break;
             default:
                 return (<div key={`${device.device_id}${deviceFunction.code}`}>{deviceFunction.type} {deviceFunction.code}</div>);
         }

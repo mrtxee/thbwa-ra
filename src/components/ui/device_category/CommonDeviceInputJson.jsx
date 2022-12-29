@@ -1,4 +1,3 @@
-import React, {useEffect, useRef, useState} from "react";
 import newId from '../../utils/newid';
 
 function CommonDeviceInputJson({deviceFunction, deviceState, ChangeHandler}) {

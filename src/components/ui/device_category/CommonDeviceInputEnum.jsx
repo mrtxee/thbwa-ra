@@ -1,4 +1,3 @@
-import React, {useEffect, useRef, useState} from "react";
 
 function CommonDeviceInputEnum({deviceFunction, deviceState, ChangeHandler}) {
 
