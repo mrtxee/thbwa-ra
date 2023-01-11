@@ -3,21 +3,32 @@ import HomeRoomsTabs from "./components/ui/HomeRoomsTabs";
 import HomeSelector from "./components/ui/HomeSelector";
 import {toast, ToastContainer} from "react-toastify";
 import PostService from "./API/PostService";
+import {default as TuyaWebSocket} from "./wss/dist";
+//import {default as TuyaWebSocket} from "./wss/dist";
+//import {default as TuyaWebSocket} from "./wss/dist";
+
+
 
 function App() {
-    const TuyaWebsocket = require('./wss/dist').default;
-    // const TuyaWebsocketClient = new TuyaWebsocket({
+
+    // const TuyaWebSocket = require('./wss/dist').default;
+    // const TuyaWebSocketClient = new TuyaWebSocket({
     //     accessId: "4fuehnegqrfqspnpymn9",
     //     accessKey: "5bb653adee024441aa74fc49f50b6727",
-    //     url: TuyaWebsocket.URL.EU,
-    //     env: TuyaWebsocket.env.PROD,
+    //     url: TuyaWebSocket.URL.EU,
+    //     env: TuyaWebSocket.env.PROD,
     //     maxRetryTimes: 100,
     // });
-    // TuyaWebsocketClient.message((ws, message) => {
-    //     TuyaWebsocketClient.ackMessage(message.messageId);
-    //     console.log('devId', message.payload.data.devId, 'update status',message.payload.data.status[0].code,'=',message.payload.data.status[0].value);
+    // TuyaWebSocketClient.message((ws, message) => {
+    //     TuyaWebSocketClient.ackMessage(message.messageId);
+    //     if(4===message.payload.protocol)
+    //         console.log('protocol',message.payload.protocol
+    //             ,'device_id', message.payload.data.devId
+    //             , 'updateStatus:',message.payload.data.status[0].code,'=',message.payload.data.status[0].value);
     // });
-    // TuyaWebsocketClient.start()
+    // TuyaWebSocketClient.start()
+
+
 
     const [homes, setHomes] = useState([]);
     const [currentHomeID, setCurrentHomeID] = useState(0);
@@ -43,7 +54,7 @@ function App() {
     async function updateDeviceState(device, setDeviceState) {
         const loadData = (async () => {
             PostService.getDeviceState(device).catch(err => {
-                console.log(`status loading error for ${device.device_id} ${device.name}`);
+                //console.log(`status loading error for ${device.device_id} ${device.name}`);
                 toast.error(`status loading error for ${device.device_id} ${device.name}`,{
                     position: toast.POSITION.BOTTOM_RIGHT,
                     closeOnClick: true,
@@ -55,12 +66,12 @@ function App() {
                 //console.log(err)
             }).then(resp => {
                 if (resp){
-                    console.log(`update component status ${device.device_id}`)
+                    //console.log(`update component status via HTTP ${device.device_id}`)
                     const newDeviceState = resp
                     setDeviceState(newDeviceState)
                 }
                 else {
-                    console.log(`update component status ERROR for ${device.device_id}`)
+                    //console.log(`update component status ERROR for ${device.device_id}`)
                 }
             })
         });
