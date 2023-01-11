@@ -4,8 +4,21 @@ import HomeSelector from "./components/ui/HomeSelector";
 import {toast, ToastContainer} from "react-toastify";
 import PostService from "./API/PostService";
 
-
 function App() {
+    const TuyaWebsocket = require('./wss/dist').default;
+    // const TuyaWebsocketClient = new TuyaWebsocket({
+    //     accessId: "4fuehnegqrfqspnpymn9",
+    //     accessKey: "5bb653adee024441aa74fc49f50b6727",
+    //     url: TuyaWebsocket.URL.EU,
+    //     env: TuyaWebsocket.env.PROD,
+    //     maxRetryTimes: 100,
+    // });
+    // TuyaWebsocketClient.message((ws, message) => {
+    //     TuyaWebsocketClient.ackMessage(message.messageId);
+    //     console.log('devId', message.payload.data.devId, 'update status',message.payload.data.status[0].code,'=',message.payload.data.status[0].value);
+    // });
+    // TuyaWebsocketClient.start()
+
     const [homes, setHomes] = useState([]);
     const [currentHomeID, setCurrentHomeID] = useState(0);
 
@@ -53,7 +66,7 @@ function App() {
         });
         await loadData(device, setDeviceState)
         const interval = setInterval(() => {
-            loadData(device,setDeviceState)
+            loadData(device, setDeviceState)
         }, 3600 * 1000)
         return () => clearInterval(interval)
     }
@@ -73,7 +86,6 @@ function App() {
             }
         })
     }
-
 
     return (
         <div className={"container-fluid"}>
