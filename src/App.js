@@ -3,14 +3,9 @@ import HomeRoomsTabs from "./components/ui/HomeRoomsTabs";
 import HomeSelector from "./components/ui/HomeSelector";
 import {toast, ToastContainer} from "react-toastify";
 import PostService from "./API/PostService";
-import {default as TuyaWebSocket} from "./wss/dist";
-//import {default as TuyaWebSocket} from "./wss/dist";
-//import {default as TuyaWebSocket} from "./wss/dist";
-
-
 
 function App() {
-
+    // TuyaWebSocket is not supported in browser cli mode =(
     // const TuyaWebSocket = require('./wss/dist').default;
     // const TuyaWebSocketClient = new TuyaWebSocket({
     //     accessId: "4fuehnegqrfqspnpymn9",
