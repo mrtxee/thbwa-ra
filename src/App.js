@@ -3,6 +3,7 @@ import HomeRoomsTabs from "./components/ui/HomeRoomsTabs";
 import HomeSelector from "./components/ui/HomeSelector";
 import {toast, ToastContainer} from "react-toastify";
 import PostService from "./API/PostService";
+import ToolsPanel from "./components/ui/ToolsPanel";
 
 function App() {
     // TuyaWebSocket is not supported in browser cli mode =(
@@ -95,13 +96,7 @@ function App() {
 
     return (
         <div className={"container-fluid"}>
-            <div className={"container mb-4 p-0"}>
-                <div className="float-end btn-group m-0 p-0" role="group" aria-label="Basic example">
-                    <button type="button" className="btn btn-primary" onClick={fetchHomes}>Reload Homes</button>
-                    <button type="button" className="btn btn-primary disabled">Reload Tuya data</button>
-                </div>
-                <br/>
-            </div>
+            <ToolsPanel />
             <HomeSelector
                 value={currentHomeID}
                 onChange={homeChange}

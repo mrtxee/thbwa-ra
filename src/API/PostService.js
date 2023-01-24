@@ -1,10 +1,12 @@
 import axios from "axios";
 
 export default class PostService{
-    static BACKEND_BASE_URL = 'http://localhost:8000';
+    static BACKEND_BASE_URL = 'http://localhost:8000'
     //document.currentScript.getAttribute('bbu')
-    static UID = 2;
+    //http://localhost:8000
+    static UID = 2//document.currentScript.getAttribute('ui');
     //document.currentScript.getAttribute('ui')
+    //2
     static async getHomesRoomsDevices(){
         const response = await axios.get(`${this.BACKEND_BASE_URL}/api/v1.0/get_devices/${this.UID}`)
         return response.data.data
