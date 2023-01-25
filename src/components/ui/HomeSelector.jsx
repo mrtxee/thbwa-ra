@@ -10,7 +10,7 @@ function HomeSelector({homes, defaultValue, value, onChange}) {
     }
 
     return (
-        <div className={"row my-3"}>
+        <div className={"row my-3 align-items-end"}>
             <div className={"col"}>
                 <span className="h3">{home1.name}
                     <small className="text-muted"> {home1.geo_name}

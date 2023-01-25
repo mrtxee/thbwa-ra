@@ -96,7 +96,9 @@ function App() {
 
     return (
         <div className={"container-fluid"}>
-            <ToolsPanel />
+            <ToolsPanel
+                loadSmartHomesSuccessMethod = {fetchHomes}
+            />
             <HomeSelector
                 value={currentHomeID}
                 onChange={homeChange}

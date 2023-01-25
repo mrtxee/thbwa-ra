@@ -19,4 +19,31 @@ export default class PostService{
         const response = await axios.post(`${this.BACKEND_BASE_URL}/api/v1.0/set_device_status/${this.UID}/${device.device_id}`, newDeviceState)
         return response.data.data
     }
+
+    // /api/v1.0/load_homes/2
+    // /api/v1.0/load_rooms/2
+    // /api/v1.0/load_devices/2
+    // /api/v1.0/load_device_functions/2
+    // /api/v1.0/set_device_rooms/2
+    static async fetchHomes(){
+        const response = await axios.get(`${this.BACKEND_BASE_URL}/api/v1.0/load_homes/${this.UID}`)
+        return response.data
+    }
+    static async fetchRooms(){
+        const response = await axios.get(`${this.BACKEND_BASE_URL}/api/v1.0/load_rooms/${this.UID}`)
+        return response.data
+    }
+    static async fetchDevices(){
+        const response = await axios.get(`${this.BACKEND_BASE_URL}/api/v1.0/load_devices/${this.UID}`)
+        return response.data
+    }
+    static async fetchDeviceFunctions(){
+        const response = await axios.get(`${this.BACKEND_BASE_URL}/api/v1.0/load_device_functions/${this.UID}`)
+        return response.data
+    }
+    static async fetchDeviceRooms(){
+        const response = await axios.get(`${this.BACKEND_BASE_URL}/api/v1.0/set_device_rooms/${this.UID}`)
+        return response.data
+    }
+
 }
