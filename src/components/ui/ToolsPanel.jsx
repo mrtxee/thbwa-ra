@@ -1,84 +1,77 @@
 import React, {useState} from "react";
 import PostService from "../../API/PostService";
-import {toast} from "react-toastify";
 
-function ToolsPanel({loadSmartHomesSuccessMethod}) {
+function ToolsPanel({loadSmartHomesSuccessCallback, errorMsgHandler, successMsgHandler}) {
     const [panelStatus, setPanelStatus] = useState([]);
     const [spinnerVisibility, setSpinnerVisibility] = useState('invisible'); //d-none d-block
 
-    async function LoadSmartHomesClickHandler(){
-        console.log('LoadSmartHomesClickHandler click')
-        const toastOptions = {
-            position: toast.POSITION.BOTTOM_RIGHT,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: true,
-            progress: undefined,
-            theme: "colored"
-        };
+    function errorHandler(msg){
+        console.log(msg);
+        errorMsgHandler(msg);
+        setPanelStatus(msg);
+        setSpinnerVisibility('invisible');
+    }
 
+    async function LoadSmartHomesClickHandler(){
         setSpinnerVisibility('visible');
         setPanelStatus('5% done');
         PostService.fetchHomes().then(resp => {
             const data = resp
-            if(!data.success){
-                toast.error(`LoadSmartHomesClickHandler ERROR`,toastOptions);
-                setPanelStatus('fetchHomes error');
-                setSpinnerVisibility('invisible');
-            }
+            if(!data.success)
+                errorHandler('homes loading error');
             else {
                 setSpinnerVisibility('visible');
                 setPanelStatus('15% done');
                 PostService.fetchRooms().then(resp => {
                     const data = resp
-                    if(!data.success){
-                        toast.error(`LoadSmartHomesClickHandler ERROR`,toastOptions);
-                        setPanelStatus('fetchRooms error');
-                        setSpinnerVisibility('invisible');
-                    }
+                    if(!data.success)
+                        errorHandler('rooms loading error');
                     else{
                         setSpinnerVisibility('visible');
                         setPanelStatus('27% done');
                         PostService.fetchDevices().then(resp => {
                             const data = resp
-                            if(!data.success){
-                                toast.error(`LoadSmartHomesClickHandler ERROR`,toastOptions);
-                                setPanelStatus('fetchDevices error');
-                                setSpinnerVisibility('invisible');
-                            }
+                            if(!data.success)
+                                errorHandler('devices loading error');
                             else {
                                 setSpinnerVisibility('visible');
                                 setPanelStatus('68% done');
                                 PostService.fetchDeviceFunctions().then(resp => {
                                     const data = resp
-                                    if(!data.success){
-                                        toast.error(`LoadSmartHomesClickHandler ERROR`,toastOptions);
-                                        setPanelStatus('fetchDeviceFunctions error');
-                                        setSpinnerVisibility('invisible');
-                                    }
+                                    if(!data.success)
+                                        errorHandler('functions loading error');
                                     else{
                                         setSpinnerVisibility('visible');
                                         setPanelStatus('84% done');
                                         PostService.fetchDeviceRooms().then(resp => {
                                             const data = resp
-                                            if(!data.success){
-                                                toast.error(`LoadSmartHomesClickHandler ERROR`,toastOptions);
-                                                setPanelStatus('fetchDeviceRooms error');
-                                            }
+                                            if(!data.success)
+                                                errorHandler('device rooms loading error');
                                             else{
-                                                setPanelStatus('');
-                                                loadSmartHomesSuccessMethod();
+                                                loadSmartHomesSuccessCallback();
+                                                successMsgHandler('smart homes loading success');
+                                                setPanelStatus(null);
+                                                setSpinnerVisibility('invisible');
                                             }
-                                            setSpinnerVisibility('invisible');
+                                        }).catch(function (error) {
+                                            errorHandler('connection error');
                                         })
                                     }
+                                }).catch(function (error) {
+                                    errorHandler('connection error');
                                 })
                             }
+                        }).catch(function (error) {
+                            errorHandler('connection error');
                         })
                     }
+                }).catch(function (error) {
+                    errorHandler('connection error');
                 })
             }
-        })
+        }).catch(function (error) {
+            errorHandler('connection error');
+        });
     }
     return (
         <div className={"container p-0"}>

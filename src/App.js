@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import HomeRoomsTabs from "./components/ui/HomeRoomsTabs";
 import HomeSelector from "./components/ui/HomeSelector";
-import {toast, ToastContainer} from "react-toastify";
 import PostService from "./API/PostService";
 import ToolsPanel from "./components/ui/ToolsPanel";
+import ToastCt, {toast_error, toast_success} from "./components/ui/ToastCt";
+
 
 function App() {
     // TuyaWebSocket is not supported in browser cli mode =(
@@ -24,8 +25,6 @@ function App() {
     // });
     // TuyaWebSocketClient.start()
 
-
-
     const [homes, setHomes] = useState([]);
     const [currentHomeID, setCurrentHomeID] = useState(0);
 
@@ -34,6 +33,7 @@ function App() {
             setHomes(data);
         })
     }
+
     useEffect( () => {
         fetchHomes();
     },[])
@@ -50,25 +50,14 @@ function App() {
     async function updateDeviceState(device, setDeviceState) {
         const loadData = (async () => {
             PostService.getDeviceState(device).catch(err => {
-                //console.log(`status loading error for ${device.device_id} ${device.name}`);
-                toast.error(`status loading error for ${device.device_id} ${device.name}`,{
-                    position: toast.POSITION.BOTTOM_RIGHT,
-                    closeOnClick: true,
-                    pauseOnHover: false,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "colored"
-                });
-                //console.log(err)
+                toast_error(`status loading error for ${device.device_id} ${device.name}`);
             }).then(resp => {
                 if (resp){
-                    //console.log(`update component status via HTTP ${device.device_id}`)
                     const newDeviceState = resp
                     setDeviceState(newDeviceState)
                 }
-                else {
-                    //console.log(`update component status ERROR for ${device.device_id}`)
-                }
+                else
+                    toast_error(`update component status ERROR for ${device.device_id}`)
             })
         });
         await loadData(device, setDeviceState)
@@ -82,14 +71,7 @@ function App() {
         PostService.postDeviceState(device, newDeviceState).then(resp => {
             const data = resp
             if(!data.success){
-                toast.error(`device managing error for ${device.device_id} ${device.name}`,{
-                    position: toast.POSITION.BOTTOM_RIGHT,
-                    closeOnClick: true,
-                    pauseOnHover: false,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "colored"
-                });
+                toast_error(`device managing error for ${device.device_id} ${device.name}`);
             }
         })
     }
@@ -97,7 +79,9 @@ function App() {
     return (
         <div className={"container-fluid"}>
             <ToolsPanel
-                loadSmartHomesSuccessMethod = {fetchHomes}
+                loadSmartHomesSuccessCallback= {fetchHomes}
+                errorMsgHandler = {toast_error}
+                successMsgHandler = {toast_success}
             />
             <HomeSelector
                 value={currentHomeID}
@@ -111,7 +95,7 @@ function App() {
                 updateDeviceStateMethod = {updateDeviceState}
                 postDeviceStateMethod = {postDeviceState}
             />
-            <ToastContainer />
+            <ToastCt />
         </div>
     );
 }
