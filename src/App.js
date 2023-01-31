@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import HomeRoomsTabs from "./components/ui/HomeRoomsTabs";
 import HomeSelector from "./components/ui/HomeSelector";
 import PostService from "./API/PostService";
@@ -27,10 +27,12 @@ function App() {
 
     const [homes, setHomes] = useState([]);
     const [currentHomeID, setCurrentHomeID] = useState(0);
+    const [loadSmartHomesRecommendFlag, setLoadSmartHomesRecommendFlag] = useState(false);
 
     function fetchHomes() {
         PostService.getHomesRoomsDevices().then(data => {
             setHomes(data);
+            setLoadSmartHomesRecommendFlag(data.length<1);
         })
     }
 
@@ -77,11 +79,12 @@ function App() {
     }
 
     return (
-        <div className={"container-fluid"}>
+        <div className={"container-fluid p-0"}>
             <ToolsPanel
                 loadSmartHomesSuccessCallback= {fetchHomes}
-                errorMsgHandler = {toast_error}
-                successMsgHandler = {toast_success}
+                loadSmartHomesRecommendFlag= {loadSmartHomesRecommendFlag}
+                errorMsgCallback= {toast_error}
+                successMsgCallback= {toast_success}
             />
             <HomeSelector
                 value={currentHomeID}

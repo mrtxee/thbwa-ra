@@ -11,7 +11,6 @@ function DeviceCt({device, ...props}) {
                     postDeviceStateMethod={props.postDeviceStateMethod}
                 />
             );
-            break;
         default:
             return (
                 <CommonDevice device={device}
@@ -19,7 +18,6 @@ function DeviceCt({device, ...props}) {
                               postDeviceStateMethod={props.postDeviceStateMethod}
                 />
             );
-            break;
     }
 
 }
