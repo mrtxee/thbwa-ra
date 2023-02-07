@@ -1,9 +1,5 @@
 import {useEffect, useState} from "react";
-import axios from "axios";
-import qs from "qs";
-import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {useEffectNoFirstRender} from "../../hooks/ReactHooks";
 
 export default Dj;
 

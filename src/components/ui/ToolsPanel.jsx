@@ -6,7 +6,7 @@ import { Modal, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-function ToolsPanel({loadSmartHomesSuccessCallback, loadSmartHomesRecommendFlag, errorMsgCallback, successMsgCallback}) {
+function ToolsPanel({loadSmartHomesSuccessCallback, loadSmartHomesRecommendFlag, errorMsgCallback, successMsgCallback, badCredentialErrorCallback}) {
     const [panelText, setPanelText] = useState([]);
     const [spinnerVisibility, setSpinnerVisibility] = useState('invisible'); //d-none d-block
 
@@ -31,54 +31,34 @@ function ToolsPanel({loadSmartHomesSuccessCallback, loadSmartHomesRecommendFlag,
 
     async function smartHomesLoadClickHandler(){
         setSpinnerVisibility('visible');
-        setPanelText('5% done');
+        setPanelText('5% complete');
         try{
-            await PostService.fetchHomes().then(data => {
-                if(!data.success){
-                    errorHandler('homes loading error');
-                    return false;
-                }
-            })
+            await PostService.fetchHomes().catch(err =>{ throw err })
             setSpinnerVisibility('visible');
-            setPanelText('15% done');
-            await PostService.fetchRooms().then(data => {
-                if(!data.success){
-                    errorHandler('homes loading error');
-                    return false;
-                }
-            })
+            setPanelText('15% complete');
+
+            await PostService.fetchRooms().catch(err =>{ throw err })
             setSpinnerVisibility('visible');
-            setPanelText('27% done');
-            await PostService.fetchDevices().then(data => {
-                if(!data.success){
-                    errorHandler('homes loading error');
-                    return false;
-                }
-            })
+            setPanelText('27% complete');
+
+            await PostService.fetchDevices().catch(err =>{ throw err })
             setSpinnerVisibility('visible');
-            setPanelText('68% done');
-            await PostService.fetchDeviceFunctions().then(data => {
-                if(!data.success){
-                    errorHandler('homes loading error');
-                    return false;
-                }
-            })
+            setPanelText('68% complete');
+
+            await PostService.fetchDeviceFunctions().catch(err =>{ throw err })
             setSpinnerVisibility('visible');
-            setPanelText('84% done');
-            await PostService.fetchDeviceRooms().then(data => {
-                if(!data.success){
-                    errorHandler('homes loading error');
-                    return false;
-                }
-                else{
-                    loadSmartHomesSuccessCallback();
-                    successMsgCallback('smart homes loading success');
-                    setPanelText(null);
-                    setSpinnerVisibility('invisible');
-                }
-            })
+            setPanelText('84% complete');
+
+            await PostService.fetchDeviceRooms().catch(err =>{ throw err })
+            loadSmartHomesSuccessCallback();
+            successMsgCallback('smart homes loading success');
+            setPanelText(null);
+            setSpinnerVisibility('invisible');
         }
-        catch(e) {
+        catch(err) {
+            console.log(err.message);
+            if ('badCredentialError'===err.message)
+                badCredentialErrorCallback();
             errorHandler('connection error');
         };
     }

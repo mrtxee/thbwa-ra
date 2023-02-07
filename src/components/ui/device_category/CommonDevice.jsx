@@ -40,12 +40,11 @@ function CommonDevice({device, updateDeviceStateMethod, postDeviceStateMethod}) 
     const debouncedPostDeviceStateMethod = useRef(debounce(postDeviceStateMethod, 2000)).current
 
     useEffect(() => {
-        // COUNSTRUCTOR
         updateDeviceStateMethod(device,setDeviceState)
     },[])
 
     function ChangeHandler(functionCode, functionValue, updateDebounced){
-        console.log(`switchStateChange ${functionCode} is ${functionValue} for ${device.device_id}`)
+        //console.log(`switchStateChange ${functionCode} is ${functionValue} for ${device.device_id}`)
         const newDeviceState = JSON.parse(JSON.stringify(deviceState))
         newDeviceState[functionCode] = functionValue;
         setDeviceState(newDeviceState)
