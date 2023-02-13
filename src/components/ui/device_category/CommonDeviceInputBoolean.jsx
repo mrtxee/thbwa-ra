@@ -7,7 +7,7 @@ function CommonDeviceInputBoolean({deviceFunction, deviceState, ChangeHandler}) 
 
         <div>
             <div className="form-check form-switch p-0">
-                <label className="form-check-label float-start"
+                <label className="form-check-label float-start text-nowrap"
                        htmlFor={`${thisId}`}>{deviceFunction.name}</label>
                 <input className="form-check-input float-end" type="checkbox" role="switch"
                        checked={deviceState[deviceFunction.code]}

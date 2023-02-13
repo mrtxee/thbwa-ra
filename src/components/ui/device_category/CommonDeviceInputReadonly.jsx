@@ -5,17 +5,17 @@ function CommonDeviceInputReadonly({deviceFunction, deviceState}) {
     if(""===deviceState[deviceFunction.code])
         deviceState[deviceFunction.code]="∅"
     return (
-        <div className={"row my-2"}>
-            <div className="col-6">
+        <div className={"row row-cols-2 my-2"}>
+            <div className="col text-nowrap">
                 <label className="form-label"
                        htmlFor={`${thisId}`}>
                     {deviceFunction.name}
                 </label>
             </div>
-            <div className="col-6 text-end">
-                <div className="badge text-bg-warning text-wrap text-break" style={{maxWidth: "16rem"}}>
+            <div className="col text-end">
+                <span className="badge text-bg-warning text-wrap text-break" style={{maxWidth: "16rem"}}>
                     {deviceState[deviceFunction.code]}
-                </div>
+                </span>
             </div>
         </div>
     );

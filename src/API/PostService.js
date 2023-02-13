@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default class PostService {
-    // static BACKEND_BASE_URL = 'http://127.0.0.1:8000';
+    //static BACKEND_BASE_URL = 'http://127.0.0.1:8000';
     static BACKEND_BASE_URL = document.currentScript.getAttribute('bbu');
 
     static parseResponse(response){
