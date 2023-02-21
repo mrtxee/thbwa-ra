@@ -16,6 +16,7 @@ function DeviceCt({device, ...props}) {
                 <CommonDevice device={device}
                               updateDeviceStateMethod={props.updateDeviceStateMethod}
                               postDeviceStateMethod={props.postDeviceStateMethod}
+                              sendRCCMethod={props.sendRCCMethod}
                 />
             );
     }

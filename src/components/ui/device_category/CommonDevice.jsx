@@ -7,8 +7,7 @@ import CommonDeviceInputReadonly from "./CommonDeviceInputReadonly";
 import CommonDeviceInputJson from "./CommonDeviceInputJson";
 import newId from "../../utils/newid";
 
-function CommonDevice({device, updateDeviceStateMethod, postDeviceStateMethod}) {
-
+function CommonDevice({device, updateDeviceStateMethod, postDeviceStateMethod, sendRCCMethod}) {
     const maxObjInCard = 2;
     const initialDeviceState = {}
     device.functions.map(deviceFunction => {
@@ -38,6 +37,7 @@ function CommonDevice({device, updateDeviceStateMethod, postDeviceStateMethod}) 
     })
     const [deviceState, setDeviceState] = useState(initialDeviceState);
     const debouncedPostDeviceStateMethod = useRef(debounce(postDeviceStateMethod, 2000)).current
+    //const debouncedPostDeviceStateMethod = useRef(debounce(postDeviceStateMethod, 2000)).current
 
     useEffect(() => {
         updateDeviceStateMethod(device,setDeviceState)
@@ -131,13 +131,36 @@ function CommonDevice({device, updateDeviceStateMethod, postDeviceStateMethod}) 
                         </div>
 
                         <div className="row mt-2">
+                            {device['card_functions'] &&(
                             <div className="col">
-                                {!(device['card_functions'].length > 0) ? <div>no devices in here</div> : device['card_functions'].map(deviceFunction => {
+                                {device['card_functions'].map(deviceFunction => {
                                         return getFunctionInput(deviceFunction);
                                     })
                                 }
                             </div>
+                            )}
                         </div>
+                        {device['remote'] &&(
+                        <div className="row row-cols-3 m-1">
+                            {device['remote']['key_list'].slice(0, 9).map(btn => {
+                                return(
+                                    <div className={'col p-1'} key={`1${btn.key}`}>
+                                        <button type="button"
+                                                alt={btn.key}
+                                                className="btn btn-outline-dark btn-info btn-sm w-100 h-100"
+                                                onClick={e => {
+                                                    sendRCCMethod(device['remote']['parent_id'], device['device_id'], device['remote']['category_id']
+                                                        , device['remote']['remote_index'], btn.key, btn.key_id)
+                                                }}
+                                        >
+                                            {btn.key_name}
+                                        </button>
+                                    </div>
+                                )
+                            })
+                            }
+                        </div>
+                        )}
                     </div>
                     <div className="card-footer bg-transparent border-transparent">
                         <button type="button" className="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target={`#${thisId}`}>
@@ -163,11 +186,35 @@ function CommonDevice({device, updateDeviceStateMethod, postDeviceStateMethod}) 
                                         aria-label="Close"></button>
                             </div>
                             <div className="modal-body">
-                                {!(device.functions.length > 0) ? <div>no devices in here</div> : device.functions.map(deviceFunction => {
-                                        return getFunctionInput(deviceFunction);
-                                    })
-                                }
+                                {(device.functions.length > 0) &&(
+                                    <div className="col">
+                                        {device.functions.map(deviceFunction => {
+                                            return getFunctionInput(deviceFunction);
+                                        })
+                                        }
+                                    </div>
+                                )}
+                                {device['remote'] &&(
+                                    <div className="row row-cols-3 m-1">
+                                    {device['remote']['key_list'].map(btn => {
+                                        return(
+                                            <div className={'col p-1'} key={`2${btn.key}`}>
+                                                <button type="button"
+                                                    alt={btn.key}
+                                                    className="btn btn-outline-dark btn-info btn-lg w-100 h-100"
+                                                    onClick={e => {
+                                                        sendRCCMethod(device['remote']['parent_id'], device['device_id'], device['remote']['category_id']
+                                                            , device['remote']['remote_index'], btn.key, btn.key_id)
+                                                    }}
+                                                >{btn.key_name}
+                                                </button>
+                                            </div>
+                                        )
+                                    })}
+                                    </div>
+                                )}
                             </div>
+
                             <div className="modal-footer">
                                 <small className="text-muted">
                                     {device.category}.{device.product_id}.{device.device_id}

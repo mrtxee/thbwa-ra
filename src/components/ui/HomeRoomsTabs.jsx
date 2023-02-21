@@ -41,6 +41,7 @@ const HomeRoomsTabs = ({home, activeTabIndex, ...props}) => {
                                         room={room}
                                         updateDeviceStateMethod={props.updateDeviceStateMethod}
                                         postDeviceStateMethod={props.postDeviceStateMethod}
+                                        sendRCCMethod={props.sendRCCMethod}
                                 />
                             </div>
                         )}

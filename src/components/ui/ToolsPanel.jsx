@@ -49,6 +49,10 @@ function ToolsPanel({loadSmartHomesSuccessCallback, loadSmartHomesRecommendFlag,
             setSpinnerVisibility('visible');
             setPanelText('84% complete');
 
+            await PostService.fetchRemotes().catch(err =>{ throw err })
+            setSpinnerVisibility('visible');
+            setPanelText('89% complete');
+
             await PostService.fetchDeviceRooms().catch(err =>{ throw err })
             loadSmartHomesSuccessCallback();
             successMsgCallback('smart homes loading success');

@@ -11,6 +11,7 @@ function RoomCt(props) {
                                   device={device}
                                   updateDeviceStateMethod={props.updateDeviceStateMethod}
                                   postDeviceStateMethod={props.postDeviceStateMethod}
+                                  sendRCCMethod = {props.sendRCCMethod}
                         />
                     )}
                 </div>

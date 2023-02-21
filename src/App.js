@@ -80,6 +80,14 @@ function App() {
             }
         })
     }
+    async function sendRCC(device_uuid, remote_uuid, category_id, remote_index, key, key_id) {
+        PostService.sendRCC(device_uuid, remote_uuid, category_id, remote_index, key, key_id).then(resp => {
+            const data = resp
+            if(!'sent'==data){
+                toast_error(`sendRCC error for ${device_uuid}.${remote_uuid}`);
+            }
+        })
+    }
 
     return (
         <div className={"container-fluid p-0"}>
@@ -101,6 +109,7 @@ function App() {
                 activeTabIndex = {0}
                 updateDeviceStateMethod = {updateDeviceState}
                 postDeviceStateMethod = {postDeviceState}
+                sendRCCMethod = {sendRCC}
             />
             <ToastCt />
             <CredentialsErrorModal
