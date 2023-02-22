@@ -149,7 +149,7 @@ function CommonDevice({device, updateDeviceStateMethod, postDeviceStateMethod, s
                                     <div className={'col'} key={`1${btn.key}`}>
                                         <button type="button"
                                                 alt={btn.key}
-                                                className="btn btn-outline-dark btn-in1fo btn-sm w-100 h-100 p-0 py-sm-2 m-0 lh-1"
+                                                className="btn btn-outline-dark btn-sm w-100 h-100 p-0 py-sm-2 m-0 lh-1"
                                                 onClick={e => {
                                                     sendRCCMethod(device['remote']['parent_id'], device['device_id'], device['remote']['category_id']
                                                         , device['remote']['remote_index'], btn.key, btn.key_id)
@@ -197,13 +197,13 @@ function CommonDevice({device, updateDeviceStateMethod, postDeviceStateMethod, s
                                     </div>
                                 )}
                                 {device['remote'] &&(
-                                    <div className="row row-cols-3 m-1">
+                                    <div className="row row-cols-3 g-1">
                                     {device['remote']['key_list'].map(btn => {
                                         return(
-                                            <div className={'col p-1'} key={`2${btn.key}`}>
+                                            <div className={'col'} key={`2${btn.key}`}>
                                                 <button type="button"
                                                     alt={btn.key}
-                                                    className="btn btn-outline-dark btn-info btn-lg w-100 h-100"
+                                                    className="btn btn-outline-dark btn-info btn-lg text-break w-100 h-100 px-1 py-3 m-0 fs-6 lh-2"
                                                     onClick={e => {
                                                         sendRCCMethod(device['remote']['parent_id'], device['device_id'], device['remote']['category_id']
                                                             , device['remote']['remote_index'], btn.key, btn.key_id)
