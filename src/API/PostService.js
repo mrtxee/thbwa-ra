@@ -1,8 +1,8 @@
 import axios from "axios";
 
 export default class PostService {
-    //static BACKEND_BASE_URL = 'http://127.0.0.1:8000';
-    static BACKEND_BASE_URL = document.currentScript.getAttribute('bbu');
+    static BACKEND_BASE_URL = 'http://127.0.0.1:8000';
+    //static BACKEND_BASE_URL = document.currentScript.getAttribute('bbu');
 
     static parseResponse(response){
         if (!response.data.success){
@@ -24,6 +24,7 @@ export default class PostService {
     }
 
     static async getDeviceState(device) {
+        return true
         const response = await axios.get(`${this.BACKEND_BASE_URL}/api/v1.0/get_device_status/${device.device_id}`).catch(function (error) {
             throw error
         })
