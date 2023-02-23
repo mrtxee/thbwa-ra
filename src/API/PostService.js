@@ -24,7 +24,7 @@ export default class PostService {
     }
 
     static async getDeviceState(device) {
-        return true
+        //return true
         const response = await axios.get(`${this.BACKEND_BASE_URL}/api/v1.0/get_device_status/${device.device_id}`).catch(function (error) {
             throw error
         })

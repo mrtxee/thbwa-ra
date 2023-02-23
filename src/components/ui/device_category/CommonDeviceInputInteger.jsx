@@ -13,9 +13,9 @@ function CommonDeviceInputInteger({deviceFunction, deviceState, ChangeHandler}) 
                     </label>
                 </div>
                 <div className="col text-end">
-                    <span className="badge text-bg-light text-wrap p-0">
+                    <small className="fw-semibold text-wrap p-0">
                         {deviceState[deviceFunction.code]}
-                    </span>
+                    </small>
                 </div>
             </div>
             <div className={"row my-2"}>

@@ -115,7 +115,7 @@ function CommonDevice({device, updateDeviceStateMethod, postDeviceStateMethod, s
         device['card_functions'] = device['functions'].filter(f => f.type === "Boolean" || f.type === "Integer" || f.type === "Readonly").slice(0, maxFunctionsInCard);
         return (
             <div>
-                <div className={"card bg-light bg-gradient"} style={{minHeight: '270px'}}>
+                <div className={"card bg-body-tertiary bg-gradient"} style={{minHeight: '270px'}}>
                     <div className={"card-body p-2 px-sm-3 pt-sm-3"}>
                         <div className="d-flex">
                             <div className="flex-shrink-0">
@@ -188,14 +188,6 @@ function CommonDevice({device, updateDeviceStateMethod, postDeviceStateMethod, s
                                         aria-label="Close"></button>
                             </div>
                             <div className="modal-body">
-                                {(device.functions.length > 0) &&(
-                                    <div className="col">
-                                        {device.functions.map(deviceFunction => {
-                                            return getFunctionInput(deviceFunction);
-                                        })
-                                        }
-                                    </div>
-                                )}
                                 {device['remote'] &&(
                                     <div className="row row-cols-3 g-1">
                                     {device['remote']['key_list'].map(btn => {
@@ -213,6 +205,14 @@ function CommonDevice({device, updateDeviceStateMethod, postDeviceStateMethod, s
                                             </div>
                                         )
                                     })}
+                                    </div>
+                                )}
+                                {(device.functions.length > 0) &&(
+                                    <div className="col">
+                                        {device.functions.map(deviceFunction => {
+                                            return getFunctionInput(deviceFunction);
+                                        })
+                                        }
                                     </div>
                                 )}
                             </div>
