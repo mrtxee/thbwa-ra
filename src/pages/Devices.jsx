@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import PostService from "../API/PostService";
+import PostService from "../api/PostService";
 import ToastCt, {toast_error, toast_success} from "../components/ui/ToastCt";
 import ToolsPanel from "../components/ui/ToolsPanel";
 import HomeSelector from "../components/ui/HomeSelector";

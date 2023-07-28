@@ -4,7 +4,7 @@ import About from "./pages/About";
 import Devices from "./pages/Devices";
 import Faq from "./pages/Faq";
 import tuya_image from "./assets/tuya_image.png"
-import HeaderThemeSwitcher from "./components/ui/HeaderThemeSwitcher";
+import HeaderThemeSwitcher from "./pages/Header/HeaderThemeSwitcher";
 import Footer from "./pages/Footer";
 import Header from "./pages/Header";
 

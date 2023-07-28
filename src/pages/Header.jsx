@@ -1,9 +1,22 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import tuya_image from "../assets/tuya_image.png";
 import {Link} from "react-router-dom";
-import HeaderThemeSwitcher from "../components/ui/HeaderThemeSwitcher";
+import HeaderThemeSwitcher from "./Header/HeaderThemeSwitcher";
+import PostService from "../api/PostService";
 
 const Header = () => {
+    const [userContext, setUserContext] = useState();
+    useEffect( () => {
+        PostService.getUserContext().then(data => {
+            setUserContext(data);
+
+            //console.log(data);
+        })
+    },[])
+    useEffect( () => {
+        console.log(userContext);
+    },[userContext])
+
 
     /*
     <div className="container">
@@ -55,7 +68,7 @@ const Header = () => {
         className="container navbar navbar-expand-lg py-3 mb-4 border-bottom align-items-center justify-content-center justify-content-md-between"
         aria-label="Eleventh navbar example">
         <div className="container-fluid">
-            <a href="/" className="navbar-brand text-dark text-decoration-none">
+            <a href="/" className="navbar-brand text-decoration-none">
                 <img className="bi me-2" height="32" alt="tuya" src={tuya_image}/><span
                 className="fs-4">Home Online</span>
             </a>

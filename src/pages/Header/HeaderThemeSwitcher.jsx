@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import PostService from "../../api/PostService";
 
 function HeaderThemeSwitcher() {
     const [theme, setTheme] = useState(localStorage.getItem('theme')==null?"auto":localStorage.getItem('theme'));
@@ -22,7 +23,7 @@ function HeaderThemeSwitcher() {
 
     return (
         <div className="btn-group">
-            <a href="#" className="nav-link px-2 link-dark dropdown-toggle" data-bs-toggle="dropdown"
+            <a href="src/pages/Header/HeaderThemeSwitcher#" className="nav-link px-2 dropdown-toggle" data-bs-toggle="dropdown"
                aria-expanded="false">
                 <i className={"bi "+themeToIcon[theme]}> </i>
             </a>
