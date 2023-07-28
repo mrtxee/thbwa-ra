@@ -30,9 +30,13 @@ function App() {
     const [currentHomeID, setCurrentHomeID] = useState(0);
     const [loadSmartHomesRecommendFlag, setLoadSmartHomesRecommendFlag] = useState(false);
     const [showBadCredentialErrorModal, setShowBadCredentialErrorModal] = useState(false);
+    const [renderTheme, setRenderTheme] = useState(localStorage.getItem('theme')==null?"auto":localStorage.getItem('theme'));
+
+
     useEffect( () => {
         fetchHomes();
     },[])
+
     useEffect( () => {
         if (homes.length>0){
             setCurrentHomeID( homes[0].home_id )
@@ -102,6 +106,7 @@ function App() {
                 value={currentHomeID}
                 onChange={homeChange}
                 homes={homes}
+                renderTheme = {renderTheme}
                 defaultValue="select home"
             />
             <HomeRoomsTabs
