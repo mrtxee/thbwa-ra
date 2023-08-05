@@ -19,10 +19,11 @@ const Test = () => {
                 throw new Error('badCredentialError')
             }
             //console.log(response.data)
-            throw new Error('badDataError')
+            setUserContext(response.data.msgs);
+            //throw new Error('badDataError')
 
         }
-        setUserContext(response.data.data)
+        else setUserContext(response.data.data);
     }
 
     return (<div>

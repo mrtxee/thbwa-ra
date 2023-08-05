@@ -5,19 +5,6 @@ import HeaderThemeSwitcher from "./Header/HeaderThemeSwitcher";
 import PostService from "../api/PostService";
 
 const Header = () => {
-    const [userContext, setUserContext] = useState();
-    useEffect( () => {
-        PostService.getUserContext().then(data => {
-            setUserContext(data);
-
-            //console.log(data);
-        })
-    },[])
-    useEffect( () => {
-        console.log(userContext);
-    },[userContext])
-
-
     /*
     <div className="container">
         <header
