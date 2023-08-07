@@ -70,7 +70,11 @@ const Test = () => {
         </GoogleOAuthProvider>
         <h1>test</h1>
         <p>console:</p>
-        <samp className={"m-4"}>{JSON.stringify(userContext, null, 2)}</samp>
+        <pre className={"m-4"}>
+            <code>
+                {JSON.stringify(userContext, null, 2)}
+            </code>
+        </pre>
         <p className={"m-4"}>
             <button onClick={getUserContext}>go axios</button>
             <button onClick={refreshUserToken}>refresh user token</button>
