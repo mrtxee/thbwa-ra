@@ -1,9 +1,6 @@
 import React, {useEffect, useState} from "react";
 import PostService from "../../api/PostService";
-//import bootstrap, { Modal } from 'react-bootstrap';
-//import { Modal } from 'bootstrap'
-import { Modal, Button } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import {Button, Modal} from 'react-bootstrap';
 
 
 function ToolsPanel({loadSmartHomesSuccessCallback, loadSmartHomesRecommendFlag, errorMsgCallback, successMsgCallback, badCredentialErrorCallback}) {

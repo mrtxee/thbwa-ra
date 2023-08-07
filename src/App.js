@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import {BrowserRouter, Routes, Route, Link} from "react-router-dom";
+import React from 'react';
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import About from "./pages/About";
 import Devices from "./pages/Devices";
 import Faq from "./pages/Faq";
-import Footer from "./pages/Footer";
 import Header from "./pages/Header";
 import Test from "./pages/Test";
+import Test2 from "./pages/Test2";
 
 function App() {
     return (
@@ -18,6 +18,7 @@ function App() {
                         <Route path="/about" element={<About/>}/>
                         <Route path="/faq" element={<Faq/>}/>
                         <Route path="/test" element={<Test/>}/>
+                        <Route path="/test2" element={<Test2/>}/>
                     </Routes>
                 </div>
             </main>

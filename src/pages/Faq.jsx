@@ -1,19 +1,20 @@
 import React from 'react';
 
 const Faq = () => {
-    return (<div>
+    return <div>
         <div className="row">
             <div className="col mt-0">
                 <p>Tuya Home Online реализует веб-интерфейс для управления Вашими умными устройствам.
                 </p>
-                <p>Привязка устройств и программирование сценариев происходит через мобильное приложение. Для того, чтобы у tuyahome.online получил доступ к Вашим устройствам, необходимо указать реквизиты доступа к платформе <a href="https://auth.tuya.com" className="text-decoration-none link-secondary">IOT Tuya</a> в <a href="/user/profile/" className="text-decoration-none link-secondary">профиле пользователя</a>. Для получения реквизитов доступа Вам понадобится мобильное приложение и инструкция ниже.
+                <p>Привязка устройств и программирование сценариев происходит через мобильное приложение. Для того, чтобы у tuyahome.online получил доступ к Вашим устройствам, необходимо указать реквизиты доступа к платформе
+                    <a href="https://auth.tuya.com" className="text-decoration-none link-secondary">IOT Tuya</a> в <a href="/user/profile/" className="text-decoration-none link-secondary">профиле пользователя</a>. Для получения реквизитов доступа Вам понадобится мобильное приложение и инструкция ниже.
                 </p>
                 <h5>Как получить Access id, Access secret, UID?</h5>
                 <dl>
                     <dt>1. Войти в аккаунт tuya</dt>
                     <dd>
                         <figure className="figure">
-                            <a href={require("../assets/faq01.png")} target="_blank">
+                            <a href={require("../assets/faq01.png")} target="_blank" rel="noreferrer" >
                                 <img src={require("../assets/faq01.png")} className="figure-img img-fluid rounded border border-3" alt="..." style={{maxWidth: "520px"}}/>
                             </a>
                             <figcaption className="figure-caption">
@@ -126,7 +127,7 @@ const Faq = () => {
                 </dl>
             </div>
         </div>
-    </div>);
+    </div>;
 };
 
 export default Faq;

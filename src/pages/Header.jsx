@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import tuya_image from "../assets/tuya_image.png";
 import {Link} from "react-router-dom";
 import HeaderThemeSwitcher from "./Header/HeaderThemeSwitcher";
-import PostService from "../api/PostService";
 
 const Header = () => {
     /*
@@ -71,12 +70,14 @@ const Header = () => {
                     <li><Link to="/devices" className="nav-link px-2">Устройства</Link></li>
                     <li><Link to="/faq" className="nav-link px-2">FAQ</Link></li>
                     <li><Link to="/about" className="nav-link px-2">О проекте</Link></li>
+                    <li><Link to="/test" className="nav-link px-2">test</Link></li>
+                    <li><Link to="/test2" className="nav-link px-2">test2</Link></li>
                     <li className="nav-item py-2 py-lg-1 col-12 col-lg-auto">
                         <div className="vr d-none d-lg-flex h-100 mx-lg-2"></div>
                         <hr className="d-lg-none my-2"/>
                     </li>
                     <li>
-                        <HeaderThemeSwitcher />
+                        <HeaderThemeSwitcher/>
                     </li>
                 </ul>
 

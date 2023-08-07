@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import PostService from "../../api/PostService";
 
 function HeaderThemeSwitcher() {
     const [theme, setTheme] = useState(localStorage.getItem('theme')==null?"auto":localStorage.getItem('theme'));

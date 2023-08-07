@@ -1,8 +1,5 @@
-import DeviceCt from "./DeviceCt";
 import React from "react";
 import RoomCt from "./RoomCt";
-import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
-import classnames from 'classnames';
 
 
 function HomeCt(props) {
