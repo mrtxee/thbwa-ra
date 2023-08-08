@@ -1,0 +1,7 @@
+.btn.btn-social img{
+    max-height: 26px;
+}
+.btn.btn-social :first-child{
+    padding-right: 0.5rem;
+    border-right: 1px solid rgba(0,0,0,0.2);
+}
