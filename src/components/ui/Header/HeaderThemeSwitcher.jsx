@@ -22,14 +22,14 @@ function HeaderThemeSwitcher() {
 
     return (
         <div className="btn-group">
-            <a href="src/pages/Header/HeaderThemeSwitcher#" className="nav-link px-2 dropdown-toggle" data-bs-toggle="dropdown"
+            <a href="src/components/ui/Header/HeaderThemeSwitcher#" className="nav-link px-2 dropdown-toggle" data-bs-toggle="dropdown"
                aria-expanded="false">
                 <i className={"bi "+themeToIcon[theme]}> </i>
             </a>
             <ul className="dropdown-menu dropdown-menu-start">
                 {Object.keys(themeToIcon).map(key =>
                     <li key={"HeaderThemeSwitcher"+key}>
-                        <a className="dropdown-item" href="#" onClick={() => setTheme(key)}><i className={"bi "+themeToIcon[key]}> </i>{key}</a>
+                        <a className="dropdown-item" href="src/components/ui/Header/HeaderThemeSwitcher#" onClick={() => setTheme(key)}><i className={"bi "+themeToIcon[key]}> </i>{key}</a>
                     </li>
                     )
                 }

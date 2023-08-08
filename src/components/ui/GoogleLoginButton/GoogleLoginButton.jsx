@@ -1,5 +1,5 @@
 import React from 'react';
-import './GoogleLoginButton/style.css';
+import './GoogleLoginButton.css';
 import {useGoogleLogin} from "@react-oauth/google";
 import axios from "axios";
 
@@ -12,7 +12,7 @@ const GoogleLoginButton = () => {
             // fetching userinfo can be done on the client or the server
             const userInfo = await axios
                 .get('https://www.googleapis.com/oauth2/v3/userinfo', {
-                    headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
+                    headers: {Authorization: `Bearer ${tokenResponse.access_token}`},
                 })
                 .then(res => res.data);
             console.log('userInfo');
@@ -24,7 +24,7 @@ const GoogleLoginButton = () => {
             console.log('google_login');
             login();
         }}>
-            <img src={require("../../assets/google.png")} className="bi bi-google"/> Sign in with Google
+            <img src={require("../../../assets/google.png")} className="bi bi-google"/> Sign in with Google
         </button>
     );
 };

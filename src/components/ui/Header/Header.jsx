@@ -1,7 +1,7 @@
 import React from 'react';
-import tuya_image from "../assets/tuya_image.png";
+import tuya_image from "../../../assets/tuya_image.png";
 import {Link} from "react-router-dom";
-import HeaderThemeSwitcher from "./Header/HeaderThemeSwitcher";
+import HeaderThemeSwitcher from "./HeaderThemeSwitcher";
 
 const Header = () => {
     /*
@@ -54,7 +54,7 @@ const Header = () => {
         className="container navbar navbar-expand-lg py-3 mb-4 border-bottom align-items-center justify-content-center justify-content-md-between"
         aria-label="Eleventh navbar example">
         <div className="container-fluid">
-            <a href="/" className="navbar-brand text-decoration-none">
+            <a href="/src/pages" className="navbar-brand text-decoration-none">
                 <img className="bi me-2" height="32" alt="tuya" src={tuya_image}/><span
                 className="fs-4">Home Online</span>
             </a>
@@ -105,7 +105,7 @@ const Header = () => {
                     {/*    </ul>*/}
                     {/*</div>*/}
                     {/*{% else %}*/}
-                    <a className="btn btn-outline-primary me-2" href="/accounts/login/" role="button">Sign in</a>
+                    <a className="btn btn-outline-primary me-2" href="/src/components/ui/Header/Header" role="button">Sign in</a>
                     {/*{% endif %}*/}
                 </div>
             </div>

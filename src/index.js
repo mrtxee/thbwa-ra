@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Footer from "./pages/Footer";
+import Footer from "./components/ui/Footer/Footer";
 import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

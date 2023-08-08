@@ -3,7 +3,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import About from "./pages/About";
 import Devices from "./pages/Devices";
 import Faq from "./pages/Faq";
-import Header from "./pages/Header";
+import Header from "./components/ui/Header/Header";
 import Test from "./pages/Test";
 import Test2 from "./pages/Test2";
 import ToastCt from "./components/ui/ToastCt";

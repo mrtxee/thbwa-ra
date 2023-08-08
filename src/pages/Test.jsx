@@ -1,10 +1,9 @@
 import React, {useState} from 'react';
 import axios from "axios";
-import {GoogleLogin, GoogleOAuthProvider, useGoogleLogin} from "@react-oauth/google";
+import {GoogleLogin, GoogleOAuthProvider} from "@react-oauth/google";
 import jwtDecode from "jwt-decode";
 import {toast_error} from "../components/ui/ToastCt";
-import './btn-social.css';
-import GoogleLoginButton from "./Header/GoogleLoginButton";
+import GoogleLoginButton from "../components/ui/GoogleLoginButton/GoogleLoginButton";
 
 const Test = () => {
     const CLIENT_ID_GOOGLE = "93483542407-ckrg8q5q527dmcd62ptg0am5j9jhvesb.apps.googleusercontent.com";
@@ -23,7 +22,7 @@ const Test = () => {
         ).catch(function (error) {
             throw error
         })
-        if(response.data.token){
+        if (response.data.token) {
             localStorage.setItem('token', response.data.token);
         }
         setUserContext(response.data);
@@ -37,8 +36,7 @@ const Test = () => {
             function (error) {
                 if (error.response.status === 403 || error.response.status === 401) {
                     toast_error(`bad credentials`);
-                }
-                else throw error
+                } else throw error
             }
         )
         if (!response) return;
@@ -48,12 +46,11 @@ const Test = () => {
     }
 
 
-
     return (<div>
         <h1>GoogleLogin</h1>
         <GoogleOAuthProvider clientId={CLIENT_ID_GOOGLE}>
             <p>
-                <GoogleLoginButton />
+                <GoogleLoginButton/>
             </p>
             <p>
                 <GoogleLogin
