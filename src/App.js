@@ -6,6 +6,7 @@ import Faq from "./pages/Faq";
 import Header from "./pages/Header";
 import Test from "./pages/Test";
 import Test2 from "./pages/Test2";
+import ToastCt from "./components/ui/ToastCt";
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
                     </Routes>
                 </div>
             </main>
+            <ToastCt />
             {/*<Footer />*/}
         </BrowserRouter>
     );

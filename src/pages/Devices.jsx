@@ -115,7 +115,6 @@ const Devices = () => {
                 postDeviceStateMethod = {postDeviceState}
                 sendRCCMethod = {sendRCC}
             />
-            <ToastCt />
             <CredentialsErrorModal
                 showBadCredantialsErrorModal = {showBadCredentialErrorModal}
                 setShowBadCredantialsErrorModal = {setShowBadCredentialErrorModal}
