@@ -7,30 +7,10 @@ import HomeRoomsTabs from "../components/ui/HomeRoomsTabs";
 import CredentialsErrorModal from "../components/ui/CredentialsErrorModal";
 
 const Devices = () => {
-    // TuyaWebSocket is not supported in browser cli mode =(
-    // const TuyaWebSocket = require('./wss/dist').default;
-    // const TuyaWebSocketClient = new TuyaWebSocket({
-    //     accessId: "4fuehnegqrfqspnpymn9",
-    //     accessKey: "5bb653adee024441aa74fc49f50b6727",
-    //     url: TuyaWebSocket.URL.EU,
-    //     env: TuyaWebSocket.env.PROD,
-    //     maxRetryTimes: 100,
-    // });
-    // TuyaWebSocketClient.message((ws, message) => {
-    //     TuyaWebSocketClient.ackMessage(message.messageId);
-    //     if(4===message.payload.protocol)
-    //         console.log('protocol',message.payload.protocol
-    //             ,'device_id', message.payload.data.devId
-    //             , 'updateStatus:',message.payload.data.status[0].code,'=',message.payload.data.status[0].value);
-    // });
-    // TuyaWebSocketClient.start()
-
     const [homes, setHomes] = useState([]);
     const [currentHomeID, setCurrentHomeID] = useState(0);
     const [loadSmartHomesRecommendFlag, setLoadSmartHomesRecommendFlag] = useState(false);
     const [showBadCredentialErrorModal, setShowBadCredentialErrorModal] = useState(false);
-    const [renderTheme, setRenderTheme] = useState(localStorage.getItem('theme')==null?"auto":localStorage.getItem('theme'));
-
 
     useEffect( () => {
         fetchHomes();
@@ -105,7 +85,7 @@ const Devices = () => {
                 value={currentHomeID}
                 onChange={homeChange}
                 homes={homes}
-                renderTheme = {renderTheme}
+                renderTheme = {localStorage.getItem('theme')==null?"auto":localStorage.getItem('theme')}
                 defaultValue="select home"
             />
             <HomeRoomsTabs
