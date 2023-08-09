@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import PostService from "../api/PostService";
-import ToastCt, {toast_error, toast_success} from "../components/ui/ToastCt";
+import {toast_error, toast_success} from "../components/ui/ToastCt";
 import ToolsPanel from "../components/ui/ToolsPanel";
 import HomeSelector from "../components/ui/HomeSelector";
 import HomeRoomsTabs from "../components/ui/HomeRoomsTabs";
@@ -32,8 +32,9 @@ const Devices = () => {
         setShowBadCredentialErrorModal(true);
     }
     function homeChange(home_id){
-        setCurrentHomeID( Number(home_id) );
+        setCurrentHomeID(Number(home_id));
     }
+
     async function updateDeviceState(device, setDeviceState) {
         const loadData = (async () => {
             PostService.getDeviceState(device).catch(err => {

@@ -10,62 +10,70 @@ const CompentensDev = ({fetchUserDataCallback, userdata}) => {
     const [consoleText, setConsoleText] = useState([]);
 
     async function authByGoogleAccessToken(data) {
-        const response = await axios.post(
+        await axios.post(
             `${BACKEND_BASE_URL}/api/v2.0/auth/login/google/`, data
-        ).catch(function (error) {
-            throw error
-        })
-        if (response.data.token) {
-            localStorage.setItem('token', response.data.token);
-        }
-        setConsoleText(response.data);
-    }
-
-
-    async function err403handler() {
-        setConsoleText('err403handler');
-        const response = await axios.get(`${BACKEND_BASE_URL}/api/v2.0/test403`).catch(
-            function (error) {
-                if (error.response.status === 403 || error.response.status === 401) {
-                    toast_error(`bad credentials`);
-                } else throw error
-            }
         )
-        if (!response) return;
-        if (!response.data.success) {
-            // ...
-        }
+            .then((res) => {
+                setConsoleText(res.data);
+                if (res.data.token) {
+                    localStorage.setItem('token', res.data.token);
+                }
+            })
+            .catch((err) => {
+                setConsoleText(`${err.response.status} ${err.response.data}`);
+                toast_error(`${err.response.status} ${err.response.data}`);
+            });
     }
 
 
-    function updateUserData(){
+    function updateUserData() {
         fetchUserDataCallback().then(
             setConsoleText(userdata)
         )
+    }
+
+
+    function authByPassword() {
+        setConsoleText('authByPassword')
+
+        const handleLogin = (username, password) => {
+            const data = {username, password};
+            axios.post(`${BACKEND_BASE_URL}/api/v2.0/auth/login/`, data)
+                .then((res) => {
+                    setConsoleText(res.data);
+                })
+                .catch((err) => {
+                    setConsoleText(err.response.data);
+                    toast_error(`${err.response.status} ${err.response.data}`);
+                });
+
+        };
+        //handleLogin('a','b');
+        handleLogin('r****1', '****bw');
     }
 
     return (
         <div className="container">
             <div className="row align-items-start">
                 <div className="col-3">
-                    <h1>get userdata by token</h1>
+                    <h3>password login apply</h3>
+                    <button className='btn btn-secondary' onClick={authByPassword}>password login apply</button>
+                    <hr/>
+
+                    <h3>get userdata by token</h3>
                     <button className='btn btn-secondary' onClick={updateUserData}>get userdata by token</button>
                     <hr/>
 
-                    <h1>GoogleLogin</h1>
+                    <h3>GoogleLogin</h3>
                     <GoogleOAuthProvider clientId={CLIENT_ID_GOOGLE}>
                         <GoogleLoginButton
                             onSuccessCallback={authByGoogleAccessToken}
                         />
                     </GoogleOAuthProvider>
                     <hr/>
-
-                    <h1>401, 403 http err hander ex</h1>
-                    <button className='btn btn-secondary' onClick={err403handler}>403 handle ex</button>
-                    <hr/>
                 </div>
                 <div className="col">
-                    <h1>console</h1>
+                    <h4>console</h4>
                     <pre className={""}>
                         <code>{JSON.stringify(consoleText, null, 2)}
                         </code>

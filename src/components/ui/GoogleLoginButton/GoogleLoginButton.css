@@ -1,11 +1,13 @@
-.btn.btn-social{
+.btn.btn-social {
     line-height: 2rem;
     white-space: nowrap;
 }
-.btn.btn-social img, .btn.btn-social svg{
-    height:2rem;
+
+.btn.btn-social img, .btn.btn-social svg {
+    height: 2rem;
 }
-.btn.btn-social :first-child{
+
+.btn.btn-social :first-child {
     padding-right: 0.5rem;
     margin-right: 0.5rem;
     border-right-width: 1px;

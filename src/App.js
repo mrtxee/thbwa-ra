@@ -6,7 +6,7 @@ import Faq from "./pages/Faq";
 import Header from "./components/ui/Header/Header";
 import CompentensDev from "./pages/dev/CompentensDev";
 import Extra from "./pages/dev/Extra";
-import ToastCt, {toast_error} from "./components/ui/ToastCt";
+import ToastCt, {toast_error, toast_warning} from "./components/ui/ToastCt";
 import axios from "axios";
 
 function App() {
@@ -23,27 +23,20 @@ function App() {
             return;
         }
         console.log('getting userdata with ' + localStorage.getItem("token"))
-        const userdata1 = await axios.get(
-            `${BACKEND_BASE_URL}/api/v2.0/auth/login/`, {
-                headers: {
-                    Authorization: `Token ${localStorage.getItem("token")}`
-                },
-            }).catch(
-            function (error) {
-                if (error.response.status === 403 || error.response.status === 401) {
-                    toast_error(`bad credentials`);
-                } else throw error;
-            }
-        ).then((resp) => {
-            //console.log(response);
-            if (resp.status !== 200) {
-                console.log(resp);
-                toast_error(`error`);
-                return;
-            }
-            const newUserdata = resp.data
-            setUserdata(newUserdata);
-        });
+        axios.get(`${BACKEND_BASE_URL}/api/v2.0/auth/login/`, {
+            headers: {Authorization: `Token ${localStorage.getItem("token")}`},
+        })
+            .then((res) => {
+                if (res.status !== 200) {
+                    toast_warning(`${res.status} ${res.data}`);
+                    return;
+                }
+                const newUserdata = res.data
+                setUserdata(newUserdata);
+            })
+            .catch((err) => {
+                toast_error(`${err.response.status} ${err.response.data}`);
+            });
     };
 
     /* todo: подключить
