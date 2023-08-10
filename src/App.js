@@ -8,9 +8,13 @@ import CompentensDev from "./pages/dev/CompentensDev";
 import Extra from "./pages/dev/Extra";
 import ToastCt, {toast_error} from "./components/ui/ToastCt";
 import PostServiceV2 from "./api/PostServiceV2";
+import SigninModal from "./components/ui/Header/SigninModal";
+import newid from "./components/utils/newid";
 
 function App() {
     const [userdata, setUserdata] = useState();
+    const CLIENT_ID_GOOGLE = "93483542407-ckrg8q5q527dmcd62ptg0am5j9jhvesb.apps.googleusercontent.com";
+    const SigninModalID = newid();
     const getUserDataByToken = () => {
         PostServiceV2.getUserdata(
             (errMessage, err) => {
@@ -39,7 +43,11 @@ function App() {
 
     return (
         <BrowserRouter>
-            <Header userdata={userdata}/>
+            <Header
+                userdata={userdata}
+                setUserdata={setUserdata}
+                SigninModalID={SigninModalID}
+            />
             <main className="flex-shrink-0 mt-0 mb-4 p-0">
                 <div className="container">
                     <Routes>
@@ -50,11 +58,17 @@ function App() {
                             getUserDataCallback={getUserDataByToken}
                             userdata={userdata}
                             setUserdata={setUserdata}
+                            CLIENT_ID_GOOGLE={CLIENT_ID_GOOGLE}
                         />}/>
                         <Route path="/dev2" element={<Extra/>}/>
                     </Routes>
                 </div>
             </main>
+            <SigninModal
+                SigninModalID={SigninModalID}
+                CLIENT_ID_GOOGLE={CLIENT_ID_GOOGLE}
+                setUserdata = {setUserdata}
+            />
             <ToastCt/>
             {/*<Footer />*/}
         </BrowserRouter>

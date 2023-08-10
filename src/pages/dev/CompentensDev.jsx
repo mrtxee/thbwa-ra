@@ -3,8 +3,7 @@ import {toast_error} from "../../components/ui/ToastCt";
 import PostServiceV2 from "../../api/PostServiceV2";
 import GoogleLoginButton from "../../components/ui/GoogleLoginButton/GoogleLoginButton";
 
-const CompentensDev = ({getUserDataCallback, userdata, setUserdata}) => {
-    const CLIENT_ID_GOOGLE = "93483542407-ckrg8q5q527dmcd62ptg0am5j9jhvesb.apps.googleusercontent.com";
+const CompentensDev = ({getUserDataCallback, userdata, setUserdata, CLIENT_ID_GOOGLE}) => {
     const [consoleText, setConsoleText] = useState({'start': 'state'});
     const defaultErrorHandler = (errMessage) => {
         toast_error(errMessage);
