@@ -10,7 +10,7 @@ const GoogleLoginButtonNested = ({onSuccessCallback}) => {
         }
     });
     return (
-        <button className="btn btn-outline-primary btn-social btn-social-google"
+        <button className="btn btn-lg btn-light btn-outline-primary btn-social btn-social-google"
                 onClick={login}>
             <svg viewBox="0 0 32 32" data-name="Layer 1" id="Layer_1"
                  xmlns="http://www.w3.org/2000/svg">
