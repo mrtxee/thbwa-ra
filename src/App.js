@@ -8,36 +8,20 @@ import CompentensDev from "./pages/dev/CompentensDev";
 import Extra from "./pages/dev/Extra";
 import ToastCt, {toast_error, toast_warning} from "./components/ui/ToastCt";
 import axios from "axios";
+import PostServiceV2 from "./api/PostServiceV2";
 
 function App() {
     const BACKEND_BASE_URL = 'http://127.0.0.1:8000';
     const [userdata, setUserdata] = useState([]);
+    const fetchUserData = () => {
+        PostServiceV2.fetchUserData(
+            (err) => toast_error(err),
+            (res) => setUserdata(res.data)
+        )
+    };
     useEffect(() => {
         fetchUserData();
     }, []);
-
-    const fetchUserData = async () => {
-        console.log('fetchUserData');
-        if (localStorage.getItem("token") === null) {
-            console.log('no token provided in localStorage')
-            return;
-        }
-        console.log('getting userdata with ' + localStorage.getItem("token"))
-        axios.get(`${BACKEND_BASE_URL}/api/v2.0/auth/login/`, {
-            headers: {Authorization: `Token ${localStorage.getItem("token")}`},
-        })
-            .then((res) => {
-                if (res.status !== 200) {
-                    toast_warning(`${res.status} ${res.data}`);
-                    return;
-                }
-                const newUserdata = res.data
-                setUserdata(newUserdata);
-            })
-            .catch((err) => {
-                toast_error(`${err.response.status} ${err.response.data}`);
-            });
-    };
 
     /* todo: подключить
     *   + сделать состояние unserdata

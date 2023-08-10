@@ -1,63 +1,58 @@
-import React, {useState} from 'react';
-import axios from "axios";
-import {GoogleOAuthProvider} from "@react-oauth/google";
+import React, {useEffect, useState} from 'react';
 import {toast_error} from "../../components/ui/ToastCt";
+import PostServiceV2 from "../../api/PostServiceV2";
 import GoogleLoginButton from "../../components/ui/GoogleLoginButton/GoogleLoginButton";
 
 const CompentensDev = ({fetchUserDataCallback, userdata}) => {
     const CLIENT_ID_GOOGLE = "93483542407-ckrg8q5q527dmcd62ptg0am5j9jhvesb.apps.googleusercontent.com";
-    const BACKEND_BASE_URL = 'http://127.0.0.1:8000';
     const [consoleText, setConsoleText] = useState([]);
-
-    async function authByGoogleAccessToken(data) {
-        await axios.post(
-            `${BACKEND_BASE_URL}/api/v2.0/auth/login/google/`, data
-        )
-            .then((res) => {
-                setConsoleText(res.data);
-                if (res.data.token) {
-                    localStorage.setItem('token', res.data.token);
-                }
-            })
-            .catch((err) => {
-                setConsoleText(`${err.response.status} ${err.response.data}`);
-                toast_error(`${err.response.status} ${err.response.data}`);
-            });
+    const defaultErrorHandler = (err) => {
+        toast_error(err);
+        setConsoleText(err);
     }
-
+    useEffect(() => {
+        setConsoleText(userdata);
+    }, [userdata]);
 
     function updateUserData() {
-        fetchUserDataCallback().then(
-            setConsoleText(userdata)
-        )
-    }
-
-
-    function authByPassword() {
-        setConsoleText('authByPassword')
-
-        const handleLogin = (username, password) => {
-            const data = {username, password};
-            axios.post(`${BACKEND_BASE_URL}/api/v2.0/auth/login/`, data)
-                .then((res) => {
-                    setConsoleText(res.data);
-                })
-                .catch((err) => {
-                    setConsoleText(err.response.data);
-                    toast_error(`${err.response.status} ${err.response.data}`);
-                });
-
-        };
-        //handleLogin('a','b');
-        handleLogin('r****1', '****bw');
+        fetchUserDataCallback();
     }
 
     return (
         <div className="container">
             <div className="row align-items-start">
                 <div className="col-3">
+                    <h3>username unique check</h3>
+                    <button className='btn btn-secondary'
+                            onClick={() => {
+                                PostServiceV2.isUniqueUsernameCheck(
+                                    (err) => defaultErrorHandler(err),
+                                    (res) => setConsoleText(res),
+                                    'delmeUser2');
+                            }}>usernameUniqueCheck
+                    </button>
+                    <hr/>
+
+                    <h3>register apply</h3>
+                    <button className='btn btn-secondary'
+                            onClick={() => {
+                                PostServiceV2.registerUser(
+                                    (err) => defaultErrorHandler(err),
+                                    (res) => setConsoleText(res),
+                                    'delmeUser1', '****bw', 'rvanat@mail.ru', 'vasya', 'pupkin');
+                            }}>register apply
+                    </button>
+                    <hr/>
+
                     <h3>password login apply</h3>
-                    <button className='btn btn-secondary' onClick={authByPassword}>password login apply</button>
+                    <button className='btn btn-secondary'
+                            onClick={() => {
+                                PostServiceV2.authenticateUser(
+                                    (err) => defaultErrorHandler(err),
+                                    (res) => setConsoleText(res),
+                                    'r****1', '****bw');
+                            }}>password login apply
+                    </button>
                     <hr/>
 
                     <h3>get userdata by token</h3>
@@ -65,11 +60,21 @@ const CompentensDev = ({fetchUserDataCallback, userdata}) => {
                     <hr/>
 
                     <h3>GoogleLogin</h3>
-                    <GoogleOAuthProvider clientId={CLIENT_ID_GOOGLE}>
-                        <GoogleLoginButton
-                            onSuccessCallback={authByGoogleAccessToken}
-                        />
-                    </GoogleOAuthProvider>
+                    <GoogleLoginButton
+                        CLIENT_ID_GOOGLE={CLIENT_ID_GOOGLE}
+                        onSuccessCallback={(tokenResponse) => {
+                            PostServiceV2.authenticateUserWithGoogleAccessToken(
+                                (err) => defaultErrorHandler(err),
+                                (res) => {
+                                    setConsoleText(res.data);
+                                    if (res.data.token) {
+                                        localStorage.setItem('token', res.data.token);
+                                    }
+                                },
+                                tokenResponse
+                            )
+                        }}
+                    />
                     <hr/>
                 </div>
                 <div className="col">
