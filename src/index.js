@@ -8,7 +8,7 @@ root.render(
     <App />
 );
 
-const footer = ReactDOM.createRoot(document.getElementById('footer'));
-footer.render(
-    <Footer />
-);
+// const footer = ReactDOM.createRoot(document.getElementById('footer'));
+// footer.render(
+//     <Footer />
+// );

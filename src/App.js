@@ -6,32 +6,40 @@ import Faq from "./pages/Faq";
 import Header from "./components/ui/Header/Header";
 import CompentensDev from "./pages/dev/CompentensDev";
 import Extra from "./pages/dev/Extra";
-import ToastCt, {toast_error, toast_warning} from "./components/ui/ToastCt";
-import axios from "axios";
+import ToastCt, {toast_error} from "./components/ui/ToastCt";
 import PostServiceV2 from "./api/PostServiceV2";
 
 function App() {
-    const BACKEND_BASE_URL = 'http://127.0.0.1:8000';
-    const [userdata, setUserdata] = useState([]);
-    const fetchUserData = () => {
-        PostServiceV2.fetchUserData(
-            (err) => toast_error(err),
-            (res) => setUserdata(res.data)
+    const [userdata, setUserdata] = useState();
+    const getUserDataByToken = () => {
+        PostServiceV2.getUserdata(
+            (errMessage, err) => {
+                if (err.status === 401) localStorage.removeItem('token')
+                else toast_error(errMessage);
+            },
+            (res) => setUserdata(res)
         )
     };
+    const updateLocalStorageToken = () => {
+        if (userdata && userdata.token)
+            localStorage.setItem('token', userdata.token);
+    }
     useEffect(() => {
-        fetchUserData();
+        getUserDataByToken();
     }, []);
+    useEffect(() => {
+        updateLocalStorageToken();
+    }, [userdata]);
 
     /* todo: подключить
     *   + сделать состояние unserdata
     *   + обновлять состояние unserdata по токену при страрте, если есть токен
-    *   - если unserdata не пустое, то изменить кнопку signin
+    *   + если unserdata не пустое, то изменить кнопку signin
     * */
 
     return (
         <BrowserRouter>
-            <Header/>
+            <Header userdata={userdata}/>
             <main className="flex-shrink-0 mt-0 mb-4 p-0">
                 <div className="container">
                     <Routes>
@@ -39,8 +47,9 @@ function App() {
                         <Route path="/about" element={<About/>}/>
                         <Route path="/faq" element={<Faq/>}/>
                         <Route path="/dev1" element={<CompentensDev
-                            fetchUserDataCallback={fetchUserData}
+                            getUserDataCallback={getUserDataByToken}
                             userdata={userdata}
+                            setUserdata={setUserdata}
                         />}/>
                         <Route path="/dev2" element={<Extra/>}/>
                     </Routes>

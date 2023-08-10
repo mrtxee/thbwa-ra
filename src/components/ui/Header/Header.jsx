@@ -2,8 +2,9 @@ import React from 'react';
 import tuya_image from "../../../assets/tuya_image.png";
 import {Link} from "react-router-dom";
 import HeaderThemeSwitcher from "./HeaderThemeSwitcher";
+import HeaderUserBlock from "./HeaderUserBlock";
 
-const Header = () => {
+const Header = ({userdata}) => {
     /*
     <div className="container">
         <header
@@ -83,30 +84,7 @@ const Header = () => {
 
 
                 <div className="justify-content-lg-end text-lg-end">
-                    {/*{% if user.is_authenticated %}*/}
-                    {/*<div className="btn-group">*/}
-                    {/*    <a href="#" className="d-block link-dark text-decoration-none dropdown-toggle"*/}
-                    {/*       data-bs-toggle="dropdown" aria-expanded="false">*/}
-                    {/*        {% if user.socialaccount_set.all.0 %}*/}
-                    {/*        <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" className="rounded-circle"*/}
-                    {/*             width="32" height="32">*/}
-                    {/*            {% else %}*/}
-                    {/*            <img src="/static/img/user_spacer.png" className="rounded-circle border" width="32"*/}
-                    {/*                 height="32">*/}
-                    {/*                {% endif %}*/}
-                    {/*                <span className="navbar-text">{{user}}</span>*/}
-                    {/*    </a>*/}
-                    {/*    <ul className="dropdown-menu dropdown-menu-sm-end">*/}
-                    {/*        <li><a className="dropdown-item" href="/user/profile/">Profile</a></li>*/}
-                    {/*        <li>*/}
-                    {/*            <hr className="dropdown-divider">*/}
-                    {/*        </li>*/}
-                    {/*        <li><a className="dropdown-item" href="/accounts/logout/">Sign out</a></li>*/}
-                    {/*    </ul>*/}
-                    {/*</div>*/}
-                    {/*{% else %}*/}
-                    <a className="btn btn-outline-primary me-2" href="/src/components/ui/Header/Header" role="button">Sign in</a>
-                    {/*{% endif %}*/}
+                    <HeaderUserBlock userdata={userdata}/>
                 </div>
             </div>
         </div>

@@ -3,33 +3,49 @@ import {toast_error} from "../../components/ui/ToastCt";
 import PostServiceV2 from "../../api/PostServiceV2";
 import GoogleLoginButton from "../../components/ui/GoogleLoginButton/GoogleLoginButton";
 
-const CompentensDev = ({fetchUserDataCallback, userdata}) => {
+const CompentensDev = ({getUserDataCallback, userdata, setUserdata}) => {
     const CLIENT_ID_GOOGLE = "93483542407-ckrg8q5q527dmcd62ptg0am5j9jhvesb.apps.googleusercontent.com";
-    const [consoleText, setConsoleText] = useState([]);
-    const defaultErrorHandler = (err) => {
-        toast_error(err);
-        setConsoleText(err);
+    const [consoleText, setConsoleText] = useState({'start': 'state'});
+    const defaultErrorHandler = (errMessage) => {
+        toast_error(errMessage);
+        setConsoleText(errMessage);
     }
     useEffect(() => {
-        setConsoleText(userdata);
+        let txt = {'TOKEN': 'state'}
+        if (userdata) {
+            txt = userdata;
+            txt['TOKEN'] = localStorage.getItem('token');
+        }
+        txt['TOKEN'] = localStorage.getItem('token');
+        setConsoleText(txt);
     }, [userdata]);
 
-    function updateUserData() {
-        fetchUserDataCallback();
+    function getUserData() {
+        getUserDataCallback();
     }
 
     return (
         <div className="container">
             <div className="row align-items-start">
                 <div className="col-3">
+
+                    <h3>user logout</h3>
+                    <button className='btn btn-secondary'
+                            onClick={() => {
+                                setUserdata();
+                                localStorage.removeItem("token");
+                            }}>Logout
+                    </button>
+                    <hr/>
+
                     <h3>username unique check</h3>
                     <button className='btn btn-secondary'
                             onClick={() => {
                                 PostServiceV2.isUniqueUsernameCheck(
-                                    (err) => defaultErrorHandler(err),
+                                    (errMessage) => defaultErrorHandler(errMessage),
                                     (res) => setConsoleText(res),
                                     'delmeUser2');
-                            }}>usernameUniqueCheck
+                            }}>Unique username check
                     </button>
                     <hr/>
 
@@ -37,42 +53,36 @@ const CompentensDev = ({fetchUserDataCallback, userdata}) => {
                     <button className='btn btn-secondary'
                             onClick={() => {
                                 PostServiceV2.registerUser(
-                                    (err) => defaultErrorHandler(err),
-                                    (res) => setConsoleText(res),
+                                    (errMessage) => defaultErrorHandler(errMessage),
+                                    (res) => setUserdata(res),
                                     'delmeUser1', '****bw', 'rvanat@mail.ru', 'vasya', 'pupkin');
-                            }}>register apply
+                            }}>Register user
                     </button>
                     <hr/>
 
-                    <h3>password login apply</h3>
+                    <h3>login</h3>
                     <button className='btn btn-secondary'
                             onClick={() => {
                                 PostServiceV2.authenticateUser(
-                                    (err) => defaultErrorHandler(err),
-                                    (res) => setConsoleText(res),
-                                    'r****1', '****bw');
-                            }}>password login apply
+                                    (errMessage) => defaultErrorHandler(errMessage),
+                                    (res) => setUserdata(res),
+                                    'root1', 'Ss3pLsmbw');
+                            }}>Login
                     </button>
                     <hr/>
 
                     <h3>get userdata by token</h3>
-                    <button className='btn btn-secondary' onClick={updateUserData}>get userdata by token</button>
+                    <button className='btn btn-secondary' onClick={getUserData}>Get userdata by token</button>
                     <hr/>
 
-                    <h3>GoogleLogin</h3>
+                    <h3>google login</h3>
                     <GoogleLoginButton
                         CLIENT_ID_GOOGLE={CLIENT_ID_GOOGLE}
                         onSuccessCallback={(tokenResponse) => {
                             PostServiceV2.authenticateUserWithGoogleAccessToken(
-                                (err) => defaultErrorHandler(err),
-                                (res) => {
-                                    setConsoleText(res.data);
-                                    if (res.data.token) {
-                                        localStorage.setItem('token', res.data.token);
-                                    }
-                                },
-                                tokenResponse
-                            )
+                                (errMessage) => defaultErrorHandler(errMessage),
+                                (res) => setUserdata(res),
+                                tokenResponse);
                         }}
                     />
                     <hr/>
