@@ -3,7 +3,7 @@ import {toast_error} from "../../components/ui/ToastCt";
 import PostServiceV2 from "../../api/PostServiceV2";
 import GoogleLoginButton from "../../components/ui/GoogleLoginButton/GoogleLoginButton";
 
-const CompentensDev = ({getUserDataCallback, userdata, setUserdata, CLIENT_ID_GOOGLE}) => {
+const CompentensDev = ({getUserDataCallback, userdata, setUserdata, CLIENT_ID_GOOGLE, onSuccessCallback}) => {
     const [consoleText, setConsoleText] = useState({'start': 'state'});
     const defaultErrorHandler = (errMessage) => {
         toast_error(errMessage);
@@ -43,7 +43,7 @@ const CompentensDev = ({getUserDataCallback, userdata, setUserdata, CLIENT_ID_GO
                                 PostServiceV2.isUniqueUsernameCheck(
                                     (errMessage) => defaultErrorHandler(errMessage),
                                     (res) => setConsoleText(res),
-                                    'delmeUser2');
+                                    {'username': 'delmeUser1'});
                             }}>Unique username check
                     </button>
                     <hr/>
@@ -54,7 +54,7 @@ const CompentensDev = ({getUserDataCallback, userdata, setUserdata, CLIENT_ID_GO
                                 PostServiceV2.registerUser(
                                     (errMessage) => defaultErrorHandler(errMessage),
                                     (res) => setUserdata(res),
-                                    'delmeUser1', '****bw', 'rvanat@mail.ru', 'vasya', 'pupkin');
+                                    {'username': 'delmeUser1', 'password': '****bw', 'email': 'rvanat@mail.ru', 'first_name': 'vasya', 'last_name': 'pupkin'});
                             }}>Register user
                     </button>
                     <hr/>
@@ -65,7 +65,8 @@ const CompentensDev = ({getUserDataCallback, userdata, setUserdata, CLIENT_ID_GO
                                 PostServiceV2.authenticateUser(
                                     (errMessage) => defaultErrorHandler(errMessage),
                                     (res) => setUserdata(res),
-                                    'root1', 'Ss3pLsmbw');
+                                    {'username': 'root1', 'password': 'Ss3pLsmbw'}
+                                );
                             }}>Login
                     </button>
                     <hr/>
@@ -77,12 +78,7 @@ const CompentensDev = ({getUserDataCallback, userdata, setUserdata, CLIENT_ID_GO
                     <h3>google login</h3>
                     <GoogleLoginButton
                         CLIENT_ID_GOOGLE={CLIENT_ID_GOOGLE}
-                        onSuccessCallback={(tokenResponse) => {
-                            PostServiceV2.authenticateUserWithGoogleAccessToken(
-                                (errMessage) => defaultErrorHandler(errMessage),
-                                (res) => setUserdata(res),
-                                tokenResponse);
-                        }}
+                        onSuccessCallback={(tokenResponse) => onSuccessCallback(tokenResponse)}
                     />
                     <hr/>
                 </div>

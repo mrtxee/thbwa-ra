@@ -1,18 +1,17 @@
 import React from 'react';
-import tuya_image from "../../../assets/tuya_image.png";
 import {Link} from "react-router-dom";
 import HeaderThemeSwitcher from "./HeaderThemeSwitcher";
 import HeaderUserBlock from "./HeaderUserBlock";
 
-const Header = ({userdata, setUserdata, SigninModalID}) => {
+const Header = ({userdata, setUserdata, signinModalID}) => {
     return (<nav
         className="container navbar navbar-expand-lg py-3 mb-4 border-bottom align-items-center justify-content-center justify-content-md-between"
         aria-label="Eleventh navbar example">
         <div className="container-fluid">
-            <a href="/src/pages" className="navbar-brand text-decoration-none">
-                <img className="bi me-2" height="32" alt="tuya" src={tuya_image}/><span
+            <Link to="/about" className="navbar-brand text-decoration-none">
+                <img className="bi me-2" height="32" alt="tuya" src={require('./tuya_image.png')}/><span
                 className="fs-4">Home Online</span>
-            </a>
+            </Link>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbar_header"
                     aria-controls="navbar_header" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,7 +38,7 @@ const Header = ({userdata, setUserdata, SigninModalID}) => {
                     <HeaderUserBlock
                         userdata={userdata}
                         setUserdata={setUserdata}
-                        SigninModalID={SigninModalID}
+                        SigninModalID={signinModalID}
                     />
                 </div>
             </div>

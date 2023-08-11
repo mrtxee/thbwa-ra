@@ -1,0 +1,19 @@
+.btn.btn-social2 {
+    line-height: 2em;
+    white-space: nowrap;
+    background: #fdfdfd;
+    border-color:#4285F4;
+}
+.btn.btn-social2:hover {
+    background: #0d6efd;
+    color:#ffffff;
+    border-color:#999999;
+}
+.btn.btn-social2 img, .btn.btn-social2 svg {
+    height: 2em;
+}
+
+.btn.btn-social2 :first-child {
+    padding-right: 0.5em;
+    margin-right: 0.5em;
+}

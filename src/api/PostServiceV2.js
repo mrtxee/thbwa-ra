@@ -29,23 +29,20 @@ export default class PostServiceV2 {
             .catch((err) => errHandler(`${err.response.status} ${err.response.statusText} ${err.response.data}`, err.response));
     }
 
-    static async registerUser(errHandler, resHandler, username, password, email, first_name, last_name) {
-        const data = {username, password, email, first_name, last_name};
+    static async registerUser(errHandler, resHandler, data){
         await axios.post(`${this.BACKEND_BASE_URL}/api/v2.0/auth/register/`, data)
             .then((res) => resHandler(res.data, res))
             .catch((err) => errHandler(`${err.response.status} ${err.response.statusText} ${err.response.data}`, err.response));
     };
 
-    static async isUniqueUsernameCheck(errHandler, resHandler, username) {
-        const data = {username};
+    static async isUniqueUsernameCheck(errHandler, resHandler, data) {
         await axios.post(`${this.BACKEND_BASE_URL}/api/v2.0/auth/uniquecheck/`, data)
             .then((res) => resHandler(res.data, res))
             .catch((err) => errHandler(`${err.response.status} ${err.response.statusText} ${err.response.data}`, err.response));
     };
 
-    static async authenticateUser(errHandler, resHandler, username, password) {
-        const data = {username, password};
-        axios.post(`${this.BACKEND_BASE_URL}/api/v2.0/auth/login/`, data)
+    static async authenticateUser(errHandler, resHandler, data) {
+        await axios.post(`${this.BACKEND_BASE_URL}/api/v2.0/auth/login/`, data)
             .then((res) => resHandler(res.data, res))
             .catch((err) => errHandler(`${err.response.status} ${err.response.statusText} ${err.response.data}`, err.response));
     }

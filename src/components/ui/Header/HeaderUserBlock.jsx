@@ -1,22 +1,15 @@
 import React from 'react';
 import SigninModal from "./SigninModal";
+import {Link} from "react-router-dom";
 
 
 const HeaderUserBlock = ({userdata, setUserdata, SigninModalID}) => {
-    if (userdata) {
-        console.log('HeaderUserBlock for ' + userdata.username);
-        if(!userdata.picture){
-            userdata.picture=require('./user_spacer.png');
-        }
-
-    } else {
-        console.log('HeaderUserBlock NO_USER ');
-    }
+    if (userdata && !userdata.picture) userdata.picture=require('./user_spacer.png');
     return (
         <div>
 
             {!userdata ? (
-                <a className="btn btn-outline-primary me-2" role="button" data-bs-toggle="modal" data-bs-target={"#"+SigninModalID}>Sign in</a>
+                <Link to="/signin" className="btn btn-outline-primary me-2" role="button">Sign in</Link>
             ) : (
                 <div className="btn-group">
                     {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
