@@ -1,17 +1,17 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import './GoogleLoginButtonNested.css';
 import {useGoogleLogin} from "@react-oauth/google";
+import {GoogleOAuthClient} from "../../../context";
 
-const GoogleLoginButtonNested = ({onSuccessCallback}) => {
+const GoogleLoginButtonNested = () => {
+    const {processGoogleOAuth} = useContext(GoogleOAuthClient);
     const login = useGoogleLogin({
-        //prompt: 'consent',
         onSuccess: async tokenResponse => {
-            onSuccessCallback(tokenResponse);
+            processGoogleOAuth(tokenResponse);
         }
     });
     return (
-        <button className="btn btn-lg btn-light btn-outline-primary btn-social btn-social-google"
-                onClick={login}>
+        <button className="w-100 btn btn-light btn-outline-primary btn-social" onClick={login}>
             <svg viewBox="0 0 32 32" data-name="Layer 1" id="Layer_1"
                  xmlns="http://www.w3.org/2000/svg">
                 <path d="M23.75,16A7.7446,7.7446,0,0,1,8.7177,18.6259L4.2849,22.1721A13.244,13.244,0,0,0,29.25,16"

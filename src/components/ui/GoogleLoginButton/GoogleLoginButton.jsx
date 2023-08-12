@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {GoogleOAuthProvider} from "@react-oauth/google";
 import GoogleLoginButtonNested from "./GoogleLoginButtonNested";
+import {GoogleOAuthClient} from "../../../context";
 
-const GoogleLoginButton = ({CLIENT_ID_GOOGLE, onSuccessCallback}) => {
+const GoogleLoginButton = ({onSuccessCallback}) => {
+    const {GOOGLE_CLIENT_ID} = useContext(GoogleOAuthClient);
     return (
-        <GoogleOAuthProvider clientId={CLIENT_ID_GOOGLE}>
+        <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
             <GoogleLoginButtonNested
                 onSuccessCallback={onSuccessCallback}
             />

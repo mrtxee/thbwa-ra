@@ -10,7 +10,7 @@ function HomeCt(props) {
                 <small className="text-muted">{props.home.geo_name}</small>
             </p>
             {props.home.rooms.map(room =>
-                <RoomCt key={room.room_id}  room={room}/>
+                <RoomCt key={room.room_id} room={room}/>
             )}
         </div>
 

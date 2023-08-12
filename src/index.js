@@ -5,10 +5,10 @@ import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <App />
+    <App/>
 );
 
-// const footer = ReactDOM.createRoot(document.getElementById('footer'));
-// footer.render(
-//     <Footer />
-// );
+const footer = ReactDOM.createRoot(document.getElementById('footer'));
+footer.render(
+    <Footer/>
+);

@@ -26,16 +26,16 @@ const HomeRoomsTabs = ({home, activeTabIndex, ...props}) => {
                         </ul>
                     }
 
-                    <div className="tab-content" id="pills-tabContent" style={{margin: "0rem -0.75rem"}}>
+                    <div className="tab-content" id="pills-tabContent">
                         {home.rooms.map((room, index) =>
                             // <div className="tab-pane fade show active">...</div>
 
                             <div role="tabpanel"
-                                 key={"keypills-"+room.room_id}
-                                 className={`tab-pane fade${index === activeTabIndex ? ' show active': ''}`}
+                                 key={"keypills-" + room.room_id}
+                                 className={` tab-pane fade${index === activeTabIndex ? ' show active' : ''}`}
                                  tabIndex={index}
-                                 id={"pills-"+room.room_id}
-                                 aria-labelledby={"pills-"+room.room_id+"-tab"}
+                                 id={"pills-" + room.room_id}
+                                 aria-labelledby={"pills-" + room.room_id + "-tab"}
                             >
                                 <RoomCt key={room.room_id}
                                         room={room}

@@ -25,7 +25,9 @@ function CommonDeviceInputInteger({deviceFunction, deviceState, ChangeHandler}) 
                            max={deviceFunction.values.max}
                            step={deviceFunction.values.step}
                            value={deviceState[deviceFunction.code]}
-                           onChange={e => {ChangeHandler(deviceFunction.code, Number(e.target.value), true)}}
+                           onChange={e => {
+                               ChangeHandler(deviceFunction.code, Number(e.target.value), true)
+                           }}
                            id={`${thisId}`}
                     />
                 </div>

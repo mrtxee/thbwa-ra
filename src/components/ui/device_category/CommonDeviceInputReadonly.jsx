@@ -2,8 +2,8 @@ import newId from "../../utils/newid";
 
 function CommonDeviceInputReadonly({deviceFunction, deviceState}) {
     const thisId = newId();
-    if(""===deviceState[deviceFunction.code])
-        deviceState[deviceFunction.code]="∅"
+    if ("" === deviceState[deviceFunction.code])
+        deviceState[deviceFunction.code] = "∅"
     return (
         <div className={"row row-cols-2 my-2"}>
             <div className="col text-nowrap">

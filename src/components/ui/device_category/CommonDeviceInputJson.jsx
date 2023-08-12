@@ -12,7 +12,9 @@ function CommonDeviceInputJson({deviceFunction, deviceState, ChangeHandler}) {
                           style={{height: "160px"}}
                           placeholder={deviceFunction.name}
                           id={`${thisId}`}
-                          onChange={e => {ChangeHandler(deviceFunction.code, e.target.value, true)}}
+                          onChange={e => {
+                              ChangeHandler(deviceFunction.code, e.target.value, true)
+                          }}
                           value={deviceState[deviceFunction.code]}
                 ></textarea>
                 <label htmlFor={`${thisId}`}>{deviceFunction.name}</label>
