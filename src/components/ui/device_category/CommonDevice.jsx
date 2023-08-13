@@ -114,7 +114,7 @@ function CommonDevice({device, updateDeviceStateMethod, postDeviceStateMethod, s
         device['card_functions'] = device['functions'].filter(f => f.type === "Boolean" || f.type === "Integer" || f.type === "Readonly").slice(0, maxFunctionsInCard);
         return (
             <div>
-                <div className={"card bg-body-tertiary bg-gradient"} style={{minHeight: '270px'}}>
+                <div className={"card bg-body-tertiary bg-gradient shadow-sm"} style={{minHeight: '270px'}}>
                     <div className={"card-body p-2 px-sm-3 pt-sm-3"}>
                         <div className="d-flex">
                             <div className="flex-shrink-0">
