@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
-import PostService from "../../api/PostService";
 import {Button, Modal} from 'react-bootstrap';
+import PostServiceV2 from "../../api/PostServiceV2";
+import {toast_error} from "./ToastCt";
 
 
 function ToolsPanel({
@@ -36,50 +37,63 @@ function ToolsPanel({
         setSpinnerVisibility('visible');
         setPanelText('5% complete');
         try {
-            await PostService.fetchHomes().catch(err => {
-                throw err
-            })
-            setSpinnerVisibility('visible');
-            setPanelText('15% complete');
-
-            await PostService.fetchRooms().catch(err => {
-                throw err
-            })
-            setSpinnerVisibility('visible');
-            setPanelText('27% complete');
-
-            await PostService.fetchDevices().catch(err => {
-                throw err
-            })
-            setSpinnerVisibility('visible');
-            setPanelText('68% complete');
-
-            await PostService.fetchDeviceFunctions().catch(err => {
-                throw err
-            })
-            setSpinnerVisibility('visible');
-            setPanelText('84% complete');
-
-            await PostService.fetchRemotes().catch(err => {
-                throw err
-            })
-            setSpinnerVisibility('visible');
-            setPanelText('89% complete');
-
-            await PostService.fetchDeviceRooms().catch(err => {
-                throw err
-            })
-            loadSmartHomesSuccessCallback();
-            successMsgCallback('smart homes loading success');
-            setPanelText(null);
-            setSpinnerVisibility('invisible');
+            await PostServiceV2.fetchHomes(
+                (errMessage) => {
+                    toast_error(errMessage);
+                    throw errMessage;
+                },
+                () => {
+                    setSpinnerVisibility('visible');
+                    setPanelText('15% complete');
+                }
+            )
+            await PostServiceV2.fetchRooms(
+                (errMessage) => {
+                    toast_error(errMessage);
+                    throw errMessage;
+                },
+                () => setPanelText('27% complete')
+            )
+            await PostServiceV2.fetchDevices(
+                (errMessage) => {
+                    toast_error(errMessage);
+                    throw errMessage;
+                },
+                () => setPanelText('68% complete')
+            )
+            await PostServiceV2.fetchDeviceFunctions(
+                (errMessage) => {
+                    toast_error(errMessage);
+                    throw errMessage;
+                },
+                () => setPanelText('84% complete')
+            )
+            await PostServiceV2.fetchRemotes(
+                (errMessage) => {
+                    toast_error(errMessage);
+                    throw errMessage;
+                },
+                () => setPanelText('89% complete')
+            )
+            await PostServiceV2.fetchDeviceRooms(
+                (errMessage) => {
+                    toast_error(errMessage);
+                    throw errMessage;
+                },
+                () => {
+                    loadSmartHomesSuccessCallback();
+                    successMsgCallback('smart homes loading success');
+                    setPanelText(null);
+                    setSpinnerVisibility('invisible');
+                }
+            )
         } catch (err) {
             console.log(err.message);
+            //todo: сделай, чтобы эта проверка работала
             if ('badCredentialError' === err.message)
                 badCredentialErrorCallback();
             errorHandler('connection error');
         }
-        ;
     }
 
     return (

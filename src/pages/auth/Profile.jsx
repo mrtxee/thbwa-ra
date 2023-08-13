@@ -5,31 +5,18 @@ import {toast_error, toast_success} from "../../components/ui/ToastCt";
 import PostServiceV2 from "../../api/PostServiceV2";
 
 const Profile = () => {
-    const {loginData} = useContext(UserContext);
+    const {loginData, setLoginData} = useContext(UserContext);
     const [userSettingsData, setUserSettingsData] = useState({
-        "access_id": "",
-        "access_secret": "",
-        "uid": "",
-        "endpoint_url": ""
+        "access_id": "", "access_secret": "", "uid": "", "endpoint_url": ""
     });
     const [userData, setUserData] = useState({
-        "username": "",
-        "last_login": "",
-        "date_joined": "",
-        "email": "",
-        "first_name": "",
-        "last_name": ""
+        "username": "", "last_login": "", "date_joined": "", "email": "", "first_name": "", "last_name": ""
     });
-
 
     function updateUserSettingsHandleSubmit(e) {
         e.preventDefault();
         const form = e.target;
-        PostServiceV2.updateUserSettings(
-            (errMsg) => toast_error(errMsg),
-            (res) => toast_success("updated"),
-            Object.fromEntries(new FormData(form).entries())
-        );
+        PostServiceV2.updateUserSettings((errMsg) => toast_error(errMsg), (res) => toast_success("updated"), Object.fromEntries(new FormData(form).entries()));
     }
 
     useEffect(() => {
@@ -61,16 +48,30 @@ const Profile = () => {
                         <div>
                             <i className="bi bi-calendar-check"></i> {userData.last_login}
                         </div>
-                        <div className="mt-3">
+                    </div>
+                    <div className="card-footer pb-3">
+                        <div>
                             <Link to="/user/profile/update" className="text-decoration-none">
-                                <i className="bi bi-gear"></i> update profile
+                                <i className="bi bi-gear"></i> Update profile
                             </Link>
-                            <div className="mb-1">
-                                <Link to="/user/changepass" className="text-decoration-none">
-                                    <i className="bi bi-lock"></i> change password
-                                </Link>
-                            </div>
                         </div>
+                        <div>
+                            <Link to="/user/changepass" className="text-decoration-none">
+                                <i className="bi bi-lock"></i> Change password
+                            </Link>
+                        </div>
+                        <div>
+                            <a type="button" className="text-decoration-none"
+                                    onClick={() => {
+                                        PostServiceV2.userLogoutEverywhere((errMessage) => toast_error(errMessage), (res) => {
+                                            setLoginData();
+                                            localStorage.removeItem('token');
+                                        })
+                                    }}>
+                                <i className="bi bi-door-closed"></i> Sign out on all devices
+                            </a>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -133,7 +134,7 @@ const Profile = () => {
                                     <option value="openapi-weaz.tuyaeu.com">WesternEurope</option>
                                 </select>
                             </div>
-                            <div className="mb-3 mt-3">
+                            <div className="mb-1 mt-3">
                                 <button type="submit" className="w-100 btn btn-outline-primary">Save settings
                                 </button>
                             </div>

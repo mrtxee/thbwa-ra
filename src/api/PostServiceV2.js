@@ -1,17 +1,72 @@
 import axios from "axios";
 
 export default class PostServiceV2 {
+    //static BACKEND_BASE_URL = document.currentScript.getAttribute('bbu');
     static BACKEND_BASE_URL = 'http://127.0.0.1:8000';
 
-    //static BACKEND_BASE_URL = document.currentScript.getAttribute('bbu');
-//postDeviceState
+
+    static async fetchHomes(errHandler, resHandler) {
+        if (!localStorage.getItem("token")) return;
+        await axios.put(`${this.BACKEND_BASE_URL}/api/v2.0/homes/load/`, {}, {
+            headers: {Authorization: `Token ${localStorage.getItem("token")}`}
+        })
+            .then((res) => resHandler(res.data, res))
+            .catch((err) => errHandler(`${err.response.status} ${err.response.statusText} ${err.response.data}`.substring(0, 199), err.response));
+    }
+    static async fetchRooms(errHandler, resHandler) {
+        if (!localStorage.getItem("token")) return;
+        await axios.put(`${this.BACKEND_BASE_URL}/api/v2.0/rooms/load/`, {}, {
+            headers: {Authorization: `Token ${localStorage.getItem("token")}`}
+        })
+            .then((res) => resHandler(res.data, res))
+            .catch((err) => errHandler(`${err.response.status} ${err.response.statusText} ${err.response.data}`.substring(0, 199), err.response));
+    }
+    static async fetchDevices(errHandler, resHandler) {
+        if (!localStorage.getItem("token")) return;
+        await axios.put(`${this.BACKEND_BASE_URL}/api/v2.0/devices/load/`, {}, {
+            headers: {Authorization: `Token ${localStorage.getItem("token")}`}
+        })
+            .then((res) => resHandler(res.data, res))
+            .catch((err) => errHandler(`${err.response.status} ${err.response.statusText} ${err.response.data}`.substring(0, 199), err.response));
+    }
+    static async fetchDeviceFunctions(errHandler, resHandler) {
+        if (!localStorage.getItem("token")) return;
+        await axios.put(`${this.BACKEND_BASE_URL}/api/v2.0/devices/functions/load/`, {}, {
+            headers: {Authorization: `Token ${localStorage.getItem("token")}`}
+        })
+            .then((res) => resHandler(res.data, res))
+            .catch((err) => errHandler(`${err.response.status} ${err.response.statusText} ${err.response.data}`.substring(0, 199), err.response));
+    }
+    static async fetchRemotes(errHandler, resHandler) {
+        if (!localStorage.getItem("token")) return;
+        await axios.put(`${this.BACKEND_BASE_URL}/api/v2.0/devices/remotes/load/`, {}, {
+            headers: {Authorization: `Token ${localStorage.getItem("token")}`}
+        })
+            .then((res) => resHandler(res.data, res))
+            .catch((err) => errHandler(`${err.response.status} ${err.response.statusText} ${err.response.data}`.substring(0, 199), err.response));
+    }
+    static async fetchDeviceRooms(errHandler, resHandler) {
+        if (!localStorage.getItem("token")) return;
+        await axios.put(`${this.BACKEND_BASE_URL}/api/v2.0/rooms/devices/load/`, {}, {
+            headers: {Authorization: `Token ${localStorage.getItem("token")}`}
+        })
+            .then((res) => resHandler(res.data, res))
+            .catch((err) => errHandler(`${err.response.status} ${err.response.statusText} ${err.response.data}`.substring(0, 199), err.response));
+    }
+    static async sendRCC(errHandler, resHandler, device_uuid, rcc) {
+        if (!localStorage.getItem("token")) return;
+        await axios.put(`${this.BACKEND_BASE_URL}/api/v2.0/devices/${device_uuid}/rcc/`, rcc, {
+            headers: {Authorization: `Token ${localStorage.getItem("token")}`}
+        })
+            .then((res) => resHandler(res.data, res))
+            .catch((err) => errHandler(`${err.response.status} ${err.response.statusText} ${err.response.data}`.substring(0, 199), err.response));
+    }
 
     static async putDeviceState(errHandler, resHandler, device_uuid, state) {
         if (!localStorage.getItem("token")) return;
-        await axios.put(`${this.BACKEND_BASE_URL}/api/v2.0/devices/${device_uuid}/status/`, state,
-            {
-                headers: {Authorization: `Token ${localStorage.getItem("token")}`}
-            })
+        await axios.put(`${this.BACKEND_BASE_URL}/api/v2.0/devices/${device_uuid}/status/`, state, {
+            headers: {Authorization: `Token ${localStorage.getItem("token")}`}
+        })
             .then((res) => resHandler(res.data, res))
             .catch((err) => errHandler(`${err.response.status} ${err.response.statusText} ${err.response.data}`.substring(0, 199), err.response));
     }
@@ -87,7 +142,7 @@ export default class PostServiceV2 {
 
     static async userLogoutEverywhere(errHandler, resHandler) {
         if (!localStorage.getItem("token")) return;
-        await axios.get(`${this.BACKEND_BASE_URL}/api/v2.0/auth/logout/`, {
+        await axios.get(`${this.BACKEND_BASE_URL}/api/v2.0/auth/logout/all/`, {
             headers: {Authorization: `Token ${localStorage.getItem("token")}`}
         })
             .then((res) => resHandler(res.data, res))

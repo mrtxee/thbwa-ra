@@ -22,8 +22,6 @@ const Header = () => {
                     <li><Link to="/devices" className="nav-link px-2">Устройства</Link></li>
                     <li><Link to="/faq" className="nav-link px-2">FAQ</Link></li>
                     <li><Link to="/about" className="nav-link px-2">О проекте</Link></li>
-                    <li><Link to="/dev1" className="nav-link px-2">ComponentsDev</Link></li>
-                    <li><Link to="/dev2" className="nav-link px-2">Extra</Link></li>
                     <li className="nav-item py-2 py-lg-1 col-12 col-lg-auto">
                         <div className="vr d-none d-lg-flex h-100 mx-lg-2"></div>
                         <hr className="d-lg-none my-2"/>

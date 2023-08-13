@@ -41,9 +41,7 @@ function App() {
                 <Header/>
                 <main className="flex-shrink-0 mt-0 mb-4 p-0">
                     <GoogleOAuthClient.Provider value={{GOOGLE_CLIENT_ID, processGoogleOAuth}}>
-                        <RoutesSchema
-                            getUserDataByToken={getLoginDataByToken}
-                        />
+                        <RoutesSchema/>
                     </GoogleOAuthClient.Provider>
                 </main>
                 <ToastCt/>
