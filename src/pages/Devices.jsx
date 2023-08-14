@@ -3,15 +3,14 @@ import {toast_error, toast_success} from "../components/ui/ToastCt";
 import ToolsPanel from "../components/ui/ToolsPanel";
 import HomeSelector from "../components/ui/HomeSelector";
 import HomeRoomsTabs from "../components/ui/HomeRoomsTabs";
-import CredentialsErrorModal from "../components/ui/CredentialsErrorModal";
+import BadTuyaCredentialsErrorModal from "../components/ui/Devices/BadTuyaCredentialsErrorModal";
 import PostServiceV2 from "../api/PostServiceV2";
 
 const Devices = () => {
     const [homes, setHomes] = useState([]);
     const [currentHomeID, setCurrentHomeID] = useState(0);
-    const [loadSmartHomesRecommendFlag, setLoadSmartHomesRecommendFlag] = useState(false);
-    const [showBadCredentialErrorModal, setShowBadCredentialErrorModal] = useState(false);
-
+    const [loadTuyaDevicesRecommendationFlag, setLoadTuyaDevicesRecommendationFlag] = useState(false);
+    const [showBadTuyaCredentialsErrorModal, setShowBadTuyaCredentialsErrorModal] = useState(false);
     useEffect(() => {
         fetchHomes();
     }, [])
@@ -23,24 +22,24 @@ const Devices = () => {
     }, [homes]);
 
     function fetchHomes() {
-        PostServiceV2.getHomesRoomsDevices((errMsg) => toast_error(errMsg), (res) => {
-            setHomes(res.data);
-            setLoadSmartHomesRecommendFlag(res.data.length < 1);
-        });
+        PostServiceV2.getHomesRoomsDevices(
+            (errMsg, err) => processTuyaError(err),
+            (res) => {
+                setHomes(res.data);
+                setLoadTuyaDevicesRecommendationFlag(res.data.length < 1);
+            }
+        );
     }
 
-    function badCredentialErrorModalHandler() {
-        setShowBadCredentialErrorModal(true);
-    }
-
-    function homeChange(home_id) {
-        setCurrentHomeID(Number(home_id));
+    function processTuyaError(err){
+        if (422 === err.status) setShowBadTuyaCredentialsErrorModal(true);
+        toast_error(`${err.status} ${err.statusText} ${err.data}`.substring(0, 199));
     }
 
     async function updateDeviceState(device, setDeviceState) {
-        const loadDeviceState = (device, setDeviceState) => PostServiceV2.getDeviceState((errMessage) => {
-            toast_error(errMessage)
-        }, (res) => {
+        const loadDeviceState = (device, setDeviceState) => PostServiceV2.getDeviceState(
+            (errMsg, err) => processTuyaError(err),
+            (res) => {
             setDeviceState(res.data)
         }, device.device_id);
         loadDeviceState(device, setDeviceState);
@@ -51,26 +50,29 @@ const Devices = () => {
     }
 
     async function postDeviceState(device, newDeviceState) {
-        PostServiceV2.putDeviceState((errMessage) => toast_error(errMessage), () => {
-        }, device.device_id, newDeviceState)
+        PostServiceV2.putDeviceState(
+            (errMsg, err) => processTuyaError(err),
+            () => {},
+            device.device_id, newDeviceState)
     }
 
     async function sendRCC(device_uuid, remote_uuid, category_id, remote_index, key, key_id) {
-        PostServiceV2.sendRCC((errMessage) => toast_error(errMessage), () => {
-        }, device_uuid, {remote_uuid, category_id, remote_index, key, key_id})
+        PostServiceV2.sendRCC(
+            (errMsg, err) => processTuyaError(err),
+            () => {},
+            device_uuid, {remote_uuid, category_id, remote_index, key, key_id})
     }
 
     return (<div className={"container container-fluid p-0"}>
         <ToolsPanel
-            loadSmartHomesSuccessCallback={fetchHomes}
-            loadSmartHomesRecommendFlag={loadSmartHomesRecommendFlag}
-            errorMsgCallback={toast_error}
+            loadTuyaDevicesSuccessCallback={fetchHomes}
+            loadTuyaDevicesRecommendationFlag={loadTuyaDevicesRecommendationFlag}
             successMsgCallback={toast_success}
-            badCredentialErrorCallback={badCredentialErrorModalHandler}
+            processTuyaError={processTuyaError}
         />
         <HomeSelector
             value={currentHomeID}
-            onChange={homeChange}
+            onChange={(home_id)=>setCurrentHomeID(Number(home_id))}
             homes={homes}
             renderTheme={localStorage.getItem('theme') == null ? "auto" : localStorage.getItem('theme')}
             defaultValue="select home"
@@ -82,9 +84,9 @@ const Devices = () => {
             postDeviceStateMethod={postDeviceState}
             sendRCCMethod={sendRCC}
         />
-        <CredentialsErrorModal
-            showBadCredantialsErrorModal={showBadCredentialErrorModal}
-            setShowBadCredantialsErrorModal={setShowBadCredentialErrorModal}
+        <BadTuyaCredentialsErrorModal
+            showBadTuyaCredentialsErrorModal={showBadTuyaCredentialsErrorModal}
+            setShowBadTuyaCredentialsErrorModal={setShowBadTuyaCredentialsErrorModal}
         />
     </div>);
 };

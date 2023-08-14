@@ -3,71 +3,56 @@ import {Button, Modal} from 'react-bootstrap';
 import PostServiceV2 from "../../api/PostServiceV2";
 
 
-function ToolsPanel({
-                        loadSmartHomesSuccessCallback,
-                        loadSmartHomesRecommendFlag,
-                        errorMsgCallback,
-                        successMsgCallback,
-                        badCredentialErrorCallback
-                    }) {
+function ToolsPanel({loadTuyaDevicesSuccessCallback, loadTuyaDevicesRecommendationFlag, successMsgCallback, processTuyaError}) {
     const [panelText, setPanelText] = useState([]);
     const [spinnerVisibility, setSpinnerVisibility] = useState('invisible'); //d-none d-block
-
     const [showLoadSmartHomesConfirmationModal, setShowLoadSmartHomesConfirmationModal] = useState(false);
-    const loadSmartHomesConfirmationModalCloseHandler = () => setShowLoadSmartHomesConfirmationModal(false);
-    const loadSmartHomesConfirmationModalSubmitHandler = () => {
-        loadSmartHomesConfirmationModalCloseHandler();
-        smartHomesLoadClickHandler();
-    };
+
 
     useEffect(() => {
-        setShowLoadSmartHomesConfirmationModal(loadSmartHomesRecommendFlag);
-        if (loadSmartHomesRecommendFlag)
+        setShowLoadSmartHomesConfirmationModal(loadTuyaDevicesRecommendationFlag);
+        if (loadTuyaDevicesRecommendationFlag)
             document.getElementById("toolsPanelCollapse").classList.add('show');
-    }, [loadSmartHomesRecommendFlag])
+    }, [loadTuyaDevicesRecommendationFlag])
 
-    function errorHandler(msg) {
-        errorMsgCallback(msg);
-        setPanelText(msg);
-        setSpinnerVisibility('invisible');
-    }
+
 
     async function smartHomesLoadClickHandler() {
         setSpinnerVisibility('visible');
         setPanelText('5% complete');
         try {
             await PostServiceV2.fetchHomes(
-                (errMessage, err) => {throw ([err, errMessage])},
+                (errMessage, err) => {throw (err)},
                 () => setPanelText('15% complete')
             );
             await PostServiceV2.fetchRooms(
-                (errMessage, err) => {throw ([err, errMessage])},
+                (errMessage, err) => {throw (err)},
                 () => setPanelText('27% complete')
             );
             await PostServiceV2.fetchDevices(
-                (errMessage, err) => {throw ([err, errMessage])},
+                (errMessage, err) => {throw (err)},
                 () => setPanelText('68% complete')
             );
             await PostServiceV2.fetchDeviceFunctions(
-                (errMessage, err) => {throw ([err, errMessage])},
+                (errMessage, err) => {throw (err)},
                 () => setPanelText('84% complete')
             );
             await PostServiceV2.fetchRemotes(
-                (errMessage, err) => {throw ([err, errMessage])},
+                (errMessage, err) => {throw (err)},
                 () => setPanelText('89% complete')
             );
             await PostServiceV2.fetchDeviceRooms(
-                (errMessage, err) => {throw ([err, errMessage])},
+                (errMessage, err) => {throw (err)},
                 () => {
-                    loadSmartHomesSuccessCallback();
+                    loadTuyaDevicesSuccessCallback();
                     successMsgCallback('smart homes loading success');
                     setPanelText(null);
                     setSpinnerVisibility('invisible');
                 }
             )
-        } catch ([err, errMessage]) {
-            if (422 === err.status) badCredentialErrorCallback();
-            errorHandler(errMessage);
+        } catch (err) {
+            setPanelText('error');
+            processTuyaError(err);
         }
     }
 
@@ -97,18 +82,23 @@ function ToolsPanel({
                     </div>
                 </div>
             </div>
-            <Modal show={showLoadSmartHomesConfirmationModal} onHide={loadSmartHomesConfirmationModalCloseHandler}>
+
+            <Modal show={showLoadSmartHomesConfirmationModal} onHide={() => setShowLoadSmartHomesConfirmationModal(false)}>
                 <Modal.Header closeButton>
                     <Modal.Title>Загрузить устроства?</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>Умные устройства и дома не обнаружены. Загрузить устройства из Вашего
                     tuya-аккаунта?</Modal.Body>
                 <Modal.Footer>
-                    <Button variant="primary" onClick={loadSmartHomesConfirmationModalSubmitHandler}>Загрузить
+                    <Button variant="primary" onClick={() => {
+                            setShowLoadSmartHomesConfirmationModal(false);
+                            smartHomesLoadClickHandler();
+                    }}>Загрузить
                         устройства</Button>
-                    <Button variant="secondary" onClick={loadSmartHomesConfirmationModalCloseHandler}>Отмена</Button>
+                    <Button variant="secondary" onClick={() => setShowLoadSmartHomesConfirmationModal(false)}>Отмена</Button>
                 </Modal.Footer>
             </Modal>
+
         </div>
     );
 }

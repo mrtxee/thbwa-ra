@@ -1,8 +1,8 @@
-import newId from '../../utils/newid';
+import {useId} from "react";
 
 function CommonDeviceInputInteger({deviceFunction, deviceState, ChangeHandler}) {
 
-    const thisId = newId();
+    const thisId = useId();
     return (
         <div>
             <div className={"row row-cols-2 my-2"}>
@@ -20,7 +20,7 @@ function CommonDeviceInputInteger({deviceFunction, deviceState, ChangeHandler}) 
             </div>
             <div className={"row my-2"}>
                 <div className={"col"}>
-                    <input type="range" className="form-range"
+                    <input type="range" className="form-range bg-body-info info text-primary bg-info info border-info form-range-info range-info"
                            min={deviceFunction.values.min}
                            max={deviceFunction.values.max}
                            step={deviceFunction.values.step}
@@ -30,6 +30,7 @@ function CommonDeviceInputInteger({deviceFunction, deviceState, ChangeHandler}) 
                            }}
                            id={`${thisId}`}
                     />
+                    https://stackoverflow.com/questions/56424105/how-can-i-change-the-bootstrap-4-range-slider-colors
                 </div>
             </div>
         </div>

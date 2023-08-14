@@ -14,7 +14,7 @@ function Dj({device, ...props}) {
     }, [])
 
     function switchStateChange(e) {
-        console.log(`switchStateChange switch_led is ${e.target.checked} for ${device.device_id}`)
+        //console.log(`switchStateChange switch_led is ${e.target.checked} for ${device.device_id}`)
         const newDeviceState = {...deviceState, "switch_led": e.target.checked}
         setDeviceState(newDeviceState)
         deviceCt.postDeviceStateMethod(device, newDeviceState)

@@ -13,7 +13,7 @@ const SignIn = () => {
             toast_error('пароли не совпадают');
             return;
         }
-        console.log(Object.fromEntries(new FormData(e.target).entries()));
+        //console.log(Object.fromEntries(new FormData(e.target).entries()));
         PostServiceV2.updateUserPassword((errMsg) => toast_error(errMsg), (res) => {
             toast_success("updated");
         }, Object.fromEntries(new FormData(e.target).entries()));

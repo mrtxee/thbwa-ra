@@ -71,7 +71,7 @@ const UnitsDev = () => {
                                     toast_error(errMessage);
                                     throw errMessage;
                                 }, (res) => {
-                                    console.log(res);
+                                    //console.log(res);
                                     setConsoleText(res)
                                 })
                             }}>load devices-functions
