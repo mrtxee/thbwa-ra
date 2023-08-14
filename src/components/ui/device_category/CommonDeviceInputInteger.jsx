@@ -20,7 +20,7 @@ function CommonDeviceInputInteger({deviceFunction, deviceState, ChangeHandler}) 
             </div>
             <div className={"row my-2"}>
                 <div className={"col"}>
-                    <input type="range" className="form-range bg-body-info info text-primary bg-info info border-info form-range-info range-info"
+                    <input type="range" className="form-range bg-body-info"
                            min={deviceFunction.values.min}
                            max={deviceFunction.values.max}
                            step={deviceFunction.values.step}
@@ -30,7 +30,6 @@ function CommonDeviceInputInteger({deviceFunction, deviceState, ChangeHandler}) 
                            }}
                            id={`${thisId}`}
                     />
-                    https://stackoverflow.com/questions/56424105/how-can-i-change-the-bootstrap-4-range-slider-colors
                 </div>
             </div>
         </div>
