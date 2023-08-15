@@ -61,7 +61,7 @@ const Profile = () => {
                             </Link>
                         </div>
                         <div>
-                            <a type="button" className="text-decoration-none"
+                            <button type="button" className="btn btn-link text-decoration-none p-0"
                                     onClick={() => {
                                         PostServiceV2.userLogoutEverywhere((errMessage) => toast_error(errMessage), (res) => {
                                             setLoginData();
@@ -69,7 +69,7 @@ const Profile = () => {
                                         })
                                     }}>
                                 <i className="bi bi-door-closed"></i> Sign out on all devices
-                            </a>
+                            </button>
                         </div>
 
                     </div>

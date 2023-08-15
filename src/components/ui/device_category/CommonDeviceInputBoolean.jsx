@@ -1,8 +1,7 @@
-import newId from '../../utils/newid';
+import {useId} from "react";
 
 function CommonDeviceInputBoolean({deviceFunction, deviceState, ChangeHandler}) {
-
-    const thisId = newId();
+    const thisId = useId();
     return (
 
         <div>

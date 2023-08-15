@@ -1,8 +1,8 @@
-import newId from '../../utils/newid';
+import {useId} from "react";
 
 function CommonDeviceInputJson({deviceFunction, deviceState, ChangeHandler}) {
 
-    const thisId = newId();
+    const thisId = useId();
     return (
         <div className={"row my-2"}>
             <div className="col-12">{deviceFunction.name}</div>

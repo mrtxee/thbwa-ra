@@ -24,15 +24,12 @@ function App() {
             (res) => setLoginData(res)
         )
     };
-    const updateLocalStorageToken = () => {
-        if (loginData && loginData.token)
-            localStorage.setItem('token', loginData.token);
-    }
     useEffect(() => {
         getLoginDataByToken();
     }, []);
     useEffect(() => {
-        updateLocalStorageToken();
+        if (loginData && loginData.token)
+            localStorage.setItem('token', loginData.token);
     }, [loginData]);
 
     return (

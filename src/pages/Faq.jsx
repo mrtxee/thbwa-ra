@@ -28,7 +28,7 @@ const Faq = () => {
                                          style={{maxWidth: "520px"}}/>
                                 </a>
                                 <figcaption className="figure-caption">
-                                    Зарегистрироваться и войти в аккаунт <a target="_blank"
+                                    Зарегистрироваться и войти в аккаунт <a target="_blank" rel="noreferrer"
                                                                             href="https://auth.tuya.com/"
                                                                             className="text-decoration-none">tuya.com</a>
                                 </figcaption>
@@ -37,7 +37,7 @@ const Faq = () => {
                         <dt>2. Создайте новый проект</dt>
                         <dd>
                             <figure className="figure">
-                                <a href={require("../assets/faq03.png")} target="_blank">
+                                <a href={require("../assets/faq03.png")} target="_blank" rel="noreferrer">
                                     <img src={require("../assets/faq03.png")}
                                          className="figure-img img-fluid rounded border border-3" alt="..."
                                          style={{maxWidth: "520px"}}/>
@@ -53,7 +53,7 @@ const Faq = () => {
                         </dd>
                         <dd>
                             <figure className="figure">
-                                <a href={require("../assets/faq04.png")} target="_blank">
+                                <a href={require("../assets/faq04.png")} target="_blank" rel="noreferrer">
                                     <img src={require("../assets/faq04.png")}
                                          className="figure-img img-fluid rounded border border-3" alt="..."
                                          style={{maxWidth: "520px"}}/>
@@ -66,7 +66,7 @@ const Faq = () => {
                         </dd>
                         <dd>
                             <figure className="figure">
-                                <a href={require("../assets/faq05.png")} target="_blank">
+                                <a href={require("../assets/faq05.png")} target="_blank" rel="noreferrer">
                                     <img src={require("../assets/faq05.png")}
                                          className="figure-img img-fluid rounded border border-3" alt="..."
                                          style={{maxWidth: "520px"}}/>
@@ -79,7 +79,7 @@ const Faq = () => {
                         </dd>
                         <dt>3. Подключить мобильное приложение</dt>
                         <dd>
-                            <a href={require("../assets/faq07.png")} target="_blank">
+                            <a href={require("../assets/faq07.png")} target="_blank" rel="noreferrer">
                                 <figure className="figure">
                                     <img src={require("../assets/faq07.png")}
                                          className="figure-img img-fluid rounded border border-3" alt="..."
@@ -94,7 +94,7 @@ const Faq = () => {
                         <dd>
 
                             <figure className="figure">
-                                <a href={require("../assets/faq08.png")} target="_blank">
+                                <a href={require("../assets/faq08.png")} target="_blank" rel="noreferrer">
                                     <img src={require("../assets/faq08.png")}
                                          className="figure-img img-fluid rounded border border-3" alt="..."
                                          style={{maxWidth: "520px"}}/>
@@ -115,7 +115,7 @@ const Faq = () => {
                         </dd>
                         <dd>
                             <figure className="figure">
-                                <a href={require("../assets/faq09.png")} target="_blank">
+                                <a href={require("../assets/faq09.png")} target="_blank" rel="noreferrer">
                                     <img src={require("../assets/faq09.png")}
                                          className="figure-img img-fluid rounded border border-3" alt="..."
                                          style={{maxWidth: "520px"}}/>
@@ -128,7 +128,7 @@ const Faq = () => {
                         <dt>4. Скопировать реквизиты доступа</dt>
                         <dd>
                             <figure className="figure">
-                                <a href={require("../assets/faq10.png")} target="_blank">
+                                <a href={require("../assets/faq10.png")} target="_blank" rel="noreferrer">
                                     <img src={require("../assets/faq10.png")}
                                          className="figure-img img-fluid rounded border border-3" alt="..."
                                          style={{maxWidth: "520px"}}/>
@@ -141,7 +141,7 @@ const Faq = () => {
                         </dd>
                         <dd>
                             <figure className="figure">
-                                <a href={require("../assets/faq06.png")} target="_blank">
+                                <a href={require("../assets/faq06.png")} target="_blank" rel="noreferrer">
                                     <img src={require("../assets/faq06.png")}
                                          className="figure-img img-fluid rounded border border-3" alt="..."
                                          style={{maxWidth: "520px"}}/>

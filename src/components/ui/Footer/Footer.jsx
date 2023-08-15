@@ -7,7 +7,7 @@ const Footer = () => {
                 <span className="text-muted">© 2023 Tuya Home Online, Inc</span>
             </div>
             <div className="flex-grow-1">
-                <sub className="text-muted ">v. </sub>
+                <sub className="text-muted ">v.1.3</sub>
             </div>
             <div className="flex-shrink-0 text-end">
                 <a className="text-decoration-none" href="https://t.me/mrtxee"><i

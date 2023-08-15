@@ -8,9 +8,9 @@ import UnitsDev from "../pages/dev/UnitsDev";
 import {UserContext} from "../context";
 import SignUp from "../pages/auth/SignUp";
 import PasswordSend from "../pages/auth/PasswordSend";
-import PasswordChange from "../pages/auth/PasswordChange";
-import Profile from "../pages/auth/Profile";
-import UpdateProfile from "../pages/auth/UpdateProfile";
+import PasswordChange from "../pages/user/PasswordChange";
+import Profile from "../pages/user/Profile";
+import UpdateProfile from "../pages/user/UpdateProfile";
 
 const RoutesSchema = () => {
     const {loginData} = useContext(UserContext);

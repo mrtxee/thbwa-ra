@@ -1,7 +1,7 @@
-import newId from "../../utils/newid";
+import {useId} from "react";
 
 function CommonDeviceInputReadonly({deviceFunction, deviceState}) {
-    const thisId = newId();
+    const thisId = useId();
     if ("" === deviceState[deviceFunction.code])
         deviceState[deviceFunction.code] = "∅"
     return (

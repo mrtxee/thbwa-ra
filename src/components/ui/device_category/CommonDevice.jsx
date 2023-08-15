@@ -1,16 +1,16 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useId, useRef, useState} from "react";
 import {debounce} from "lodash"
 import CommonDeviceInputEnum from "./CommonDeviceInputEnum";
 import CommonDeviceInputBoolean from "./CommonDeviceInputBoolean";
 import CommonDeviceInputInteger from "./CommonDeviceInputInteger";
 import CommonDeviceInputReadonly from "./CommonDeviceInputReadonly";
 import CommonDeviceInputJson from "./CommonDeviceInputJson";
-import newId from "../../utils/newid";
 
 function CommonDevice({device, updateDeviceStateMethod, postDeviceStateMethod, sendRCCMethod}) {
     const maxFunctionsInCard = 2;
     const maxRemoteInCard = 6;
     const initialDeviceState = {}
+    const thisDeviceCardId = useId();
     device.functions.map(deviceFunction => {
         switch (deviceFunction.type) {
             case "Integer":
@@ -110,7 +110,7 @@ function CommonDevice({device, updateDeviceStateMethod, postDeviceStateMethod, s
     if (device.status.length === 0 && device.functions.length === 0) {
         console.log(device.device_id + " is PASSIVE device. do not render");
     } else {
-        const thisId = newId();
+
         device['card_functions'] = device['functions'].filter(f => f.type === "Boolean" || f.type === "Integer" || f.type === "Readonly").slice(0, maxFunctionsInCard);
         return (
             <div>
@@ -165,17 +165,17 @@ function CommonDevice({device, updateDeviceStateMethod, postDeviceStateMethod, s
                     </div>
                     <div className="card-footer bg-transparent border-transparent p-2  px-sm-3">
                         <button type="button" className="btn btn-outline-primary w-100" data-bs-toggle="modal"
-                                data-bs-target={`#${thisId}`}>
+                                data-bs-target={`#${thisDeviceCardId}`}>
                             <i className="bi bi-gear"></i> more
                         </button>
                     </div>
                 </div>
-                <div className="modal fade" id={`${thisId}`} tabIndex="-1" aria-labelledby={`${thisId}Label`}
+                <div className="modal fade" id={`${thisDeviceCardId}`} tabIndex="-1" aria-labelledby={`${thisDeviceCardId}Label`}
                      aria-hidden="true">
                     <div className="modal-dialog modal-lg">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title " id={`${thisId}Label`}>
+                                <h5 className="modal-title " id={`${thisDeviceCardId}Label`}>
                                     <img
                                         src={device.icon_url}
                                         className="rounded float-start img-thumbnail me-2 p-0"

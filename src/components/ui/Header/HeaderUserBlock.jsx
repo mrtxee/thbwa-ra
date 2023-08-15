@@ -14,23 +14,23 @@ const HeaderUserBlock = () => {
             ) : (
                 <div className="btn-group">
                     {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                    <a href="#" className="d-block link-dark text-decoration-none dropdown-toggle"
+                    <button type="button" className="btn btn-link d-block link-dark text-decoration-none dropdown-toggle"
                        data-bs-toggle="dropdown" aria-expanded="false">
                         <img src={loginData.picture} className="rounded-circle border" width="32" height="32"
                              alt={'user'}/>
                         <span className="navbar-text"> {loginData.name}</span>
-                    </a>
+                    </button>
                     <ul className="dropdown-menu dropdown-menu-sm-end">
                         <li><Link className="dropdown-item" to="/user/profile">Profile</Link></li>
                         <li>
                             <hr className="dropdown-divider"/>
                         </li>
-                        <li><a className="dropdown-item" href="#"
+                        <li><button type="button" className="btn btn-link dropdown-item" href="#"
                                onClick={() => {
                                    setLoginData();
                                    localStorage.removeItem("token");
                                }}
-                        >Sign out</a></li>
+                        >Sign out</button></li>
                     </ul>
                 </div>
             )}

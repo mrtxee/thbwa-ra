@@ -22,15 +22,15 @@ function HeaderThemeSwitcher() {
 
     return (
         <div className="btn-group">
-            <a href="#" className="nav-link px-2 dropdown-toggle" data-bs-toggle="dropdown"
+            <button type="button" className="btn btn-link nav-link px-2 dropdown-toggle" data-bs-toggle="dropdown"
                aria-expanded="false">
                 <i className={"bi " + themeToIcon[theme]}> </i>
-            </a>
+            </button>
             <ul className="dropdown-menu dropdown-menu-start">
                 {Object.keys(themeToIcon).map(key =>
                     <li key={"HeaderThemeSwitcher" + key}>
-                        <a className="dropdown-item" href="#" onClick={() => setTheme(key)}><i
-                            className={"bi " + themeToIcon[key]}> </i>{key}</a>
+                        <button type="button" className="btn btn-link dropdown-item" onClick={() => setTheme(key)}><i
+                            className={"bi " + themeToIcon[key]}> </i>{key}</button>
                     </li>
                 )
                 }

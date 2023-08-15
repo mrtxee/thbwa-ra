@@ -15,7 +15,7 @@ const HomeRoomsTabs = ({home, activeTabIndex, ...props}) => {
                                 <li className="nav-item" role="presentation" key={"li" + room.room_id}>
                                     <button type="button" role="tab" data-bs-toggle="pill"
                                             className={`nav-link${index === activeTabIndex ? ' active' : ''}`}
-                                            aria-selected={`${index === activeTabIndex ? true : false}`}
+                                            aria-selected={index === activeTabIndex}
                                             id={"pills-" + room.room_id + "-tab"}
                                             data-bs-target={"#pills-" + room.room_id}
                                             aria-controls={"pills-" + room.room_id}
