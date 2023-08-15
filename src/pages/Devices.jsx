@@ -63,7 +63,7 @@ const Devices = () => {
             device_uuid, {remote_uuid, category_id, remote_index, key, key_id})
     }
 
-    return (<div className={"container container-fluid p-0"}>
+    return (<div className={"container container-fluid p-2"}>
         <ToolsPanel
             loadTuyaDevicesSuccessCallback={fetchHomes}
             loadTuyaDevicesRecommendationFlag={loadTuyaDevicesRecommendationFlag}
