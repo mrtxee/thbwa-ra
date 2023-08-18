@@ -4,7 +4,8 @@ export default class PostServiceV2 {
     //static BACKEND_BASE_URL = document.currentScript.getAttribute('bbu');
     //static BACKEND_BASE_URL = 'http://127.0.0.1:8000';
 	//static BACKEND_BASE_URL = 'http://tuyahome.online:90'
-    static BACKEND_BASE_URL = process.env.REACT_APP_BACKEND_BASE_URL;
+    //static BACKEND_BASE_URL = process.env.REACT_APP_BACKEND_BASE_URL;
+    static BACKEND_BASE_URL = 'https://tuyahome.online:90'
 
 
 
@@ -171,9 +172,6 @@ export default class PostServiceV2 {
     };
 
     static async authenticateUser(errHandler, resHandler, data) {
-        console.log('BACKEND_BASE_URL');
-        console.log(this.BACKEND_BASE_URL);
-
         await axios.post(`${this.BACKEND_BASE_URL}/api/v2.0/auth/login/`, data)
             .then((res) => resHandler(res.data, res))
             .catch((err) => errHandler(`${err.response.status} ${err.response.statusText} ${err.response.data}`.substring(0, 199), err.response));
