@@ -22,12 +22,14 @@ const Header = () => {
                 <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse d-lg-flex" id="navbar_header">
-                <ul className="navbar-nav me-auto mb-2 mb-lg-0 flex-grow-1 justify-content-lg-center">
+                <ul className="navbar-nav me-auto mb-lg-0 flex-grow-1 justify-content-lg-center">
                     <li><Link to="/devices" className="nav-link px-2" onClick={() => navbarLinkToggle()}>Устройства</Link></li>
                     <li><Link to="/about" className="nav-link px-2" onClick={() => navbarLinkToggle()}>О проекте</Link></li>
                     <li><Link to="/faq" className="nav-link px-2" onClick={() => navbarLinkToggle()}>FAQ</Link></li>
                 </ul>
-                <div className="justify-content-end text-end d-flex flex-row">
+                <hr className="d-lg-none"/>
+                <div className="d-flex flex-row">
+
                     <HeaderThemeSwitcher/>
                     <HeaderUserBlock navbarLinkToggle={navbarLinkToggle}/>
                 </div>

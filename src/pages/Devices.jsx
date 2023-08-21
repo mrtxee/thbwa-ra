@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {toast_error, toast_success} from "../components/ui/ToastCt";
 import ToolsPanel from "../components/ui/ToolsPanel";
-import HomeSelector from "../components/ui/HomeSelector";
+import HomeSelector from "../components/ui/Devices/HomeSelector";
 import HomeRoomsTabs from "../components/ui/HomeRoomsTabs";
 import BadTuyaCredentialsErrorModal from "../components/ui/Devices/BadTuyaCredentialsErrorModal";
 import PostServiceV2 from "../api/PostServiceV2";
+import HomeHeader from "../components/ui/Devices/HomeHeader";
 
 const Devices = () => {
     const [homes, setHomes] = useState([]);
@@ -70,7 +71,7 @@ const Devices = () => {
             successMsgCallback={toast_success}
             processTuyaError={processTuyaError}
         />
-        <HomeSelector
+        <HomeHeader
             value={currentHomeID}
             onChange={(home_id)=>setCurrentHomeID(Number(home_id))}
             homes={homes}

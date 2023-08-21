@@ -1,4 +1,5 @@
 import React from 'react';
+import {Image} from "react-bootstrap";
 
 // const Extra = ({signinModalID}) => {
 // return (
@@ -23,9 +24,7 @@ const Faq = () => {
                         <dd>
                             <figure className="figure">
                                 <a href={require("../assets/faq01.png")} target="_blank" rel="noreferrer">
-                                    <img src={require("../assets/faq01.png")}
-                                         className="figure-img img-fluid rounded border border-3" alt="..."
-                                         style={{maxWidth: "520px"}}/>
+                                    <Image src={require("../assets/faq01.png")} className="rounded border border-3" alt="..." fluid />
                                 </a>
                                 <figcaption className="figure-caption">
                                     Зарегистрироваться и войти в аккаунт <a target="_blank" rel="noreferrer"
@@ -38,9 +37,7 @@ const Faq = () => {
                         <dd>
                             <figure className="figure">
                                 <a href={require("../assets/faq03.png")} target="_blank" rel="noreferrer">
-                                    <img src={require("../assets/faq03.png")}
-                                         className="figure-img img-fluid rounded border border-3" alt="..."
-                                         style={{maxWidth: "520px"}}/>
+                                    <Image src={require("../assets/faq03.png")} className="rounded border border-3" alt="..." fluid />
                                 </a>
                                 <figcaption className="figure-caption">
                                     <p className="mb-1">
@@ -54,9 +51,7 @@ const Faq = () => {
                         <dd>
                             <figure className="figure">
                                 <a href={require("../assets/faq04.png")} target="_blank" rel="noreferrer">
-                                    <img src={require("../assets/faq04.png")}
-                                         className="figure-img img-fluid rounded border border-3" alt="..."
-                                         style={{maxWidth: "520px"}}/>
+                                    <Image src={require("../assets/faq04.png")} className="rounded border border-3" alt="..." fluid />
                                 </a>
                                 <figcaption className="figure-caption">
                                     Заполнить описание нового проекта. <strong>Data Center</strong> - регион, с который
@@ -67,9 +62,7 @@ const Faq = () => {
                         <dd>
                             <figure className="figure">
                                 <a href={require("../assets/faq05.png")} target="_blank" rel="noreferrer">
-                                    <img src={require("../assets/faq05.png")}
-                                         className="figure-img img-fluid rounded border border-3" alt="..."
-                                         style={{maxWidth: "520px"}}/>
+                                    <Image src={require("../assets/faq05.png")} className="rounded border border-3" alt="..." fluid />
                                 </a>
                                 <figcaption className="figure-caption">
                                     Добавить все группы API-команд. Нажать <strong>All</strong>,
@@ -81,9 +74,7 @@ const Faq = () => {
                         <dd>
                             <a href={require("../assets/faq07.png")} target="_blank" rel="noreferrer">
                                 <figure className="figure">
-                                    <img src={require("../assets/faq07.png")}
-                                         className="figure-img img-fluid rounded border border-3" alt="..."
-                                         style={{maxWidth: "520px"}}/>
+                                    <Image src={require("../assets/faq07.png")} className="rounded border border-3" alt="..." fluid />
                                     <figcaption className="figure-caption">
                                         Открыть созданный проект, Перейти на вкладку <strong>Devices - Link Tuya App
                                         Account</strong>, Нажать <strong>Add App Account</strong>
@@ -95,9 +86,7 @@ const Faq = () => {
 
                             <figure className="figure">
                                 <a href={require("../assets/faq08.png")} target="_blank" rel="noreferrer">
-                                    <img src={require("../assets/faq08.png")}
-                                         className="figure-img img-fluid rounded border border-3" alt="..."
-                                         style={{maxWidth: "520px"}}/>
+                                    <Image src={require("../assets/faq08.png")} className="rounded border border-3" alt="..." fluid />
                                 </a>
                                 <figcaption className="figure-caption">
                                     <p className="mb-1">
@@ -116,9 +105,7 @@ const Faq = () => {
                         <dd>
                             <figure className="figure">
                                 <a href={require("../assets/faq09.png")} target="_blank" rel="noreferrer">
-                                    <img src={require("../assets/faq09.png")}
-                                         className="figure-img img-fluid rounded border border-3" alt="..."
-                                         style={{maxWidth: "520px"}}/>
+                                    <Image src={require("../assets/faq09.png")} className="rounded border border-3" alt="..." fluid />
                                 </a>
                                 <figcaption className="figure-caption">
                                     Если вы все сделали правильно, получите сообщение об успешном добавлении устройств
@@ -129,9 +116,7 @@ const Faq = () => {
                         <dd>
                             <figure className="figure">
                                 <a href={require("../assets/faq10.png")} target="_blank" rel="noreferrer">
-                                    <img src={require("../assets/faq10.png")}
-                                         className="figure-img img-fluid rounded border border-3" alt="..."
-                                         style={{maxWidth: "520px"}}/>
+                                    <Image src={require("../assets/faq10.png")} className="rounded border border-3" alt="..." fluid />
                                 </a>
                                 <figcaption className="figure-caption">
                                     Открыть проект, перейти на вкладку <strong>Devices - Link Tuya App
@@ -142,9 +127,7 @@ const Faq = () => {
                         <dd>
                             <figure className="figure">
                                 <a href={require("../assets/faq06.png")} target="_blank" rel="noreferrer">
-                                    <img src={require("../assets/faq06.png")}
-                                         className="figure-img img-fluid rounded border border-3" alt="..."
-                                         style={{maxWidth: "520px"}}/>
+                                    <Image src={require("../assets/faq06.png")} className="rounded border border-3" alt="..." fluid />
                                 </a>
                                 <figcaption className="figure-caption">
                                     Открыть проект, перейти на вкладку <strong>Authorization - Cloud

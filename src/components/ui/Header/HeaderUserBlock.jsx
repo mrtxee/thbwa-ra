@@ -19,7 +19,7 @@ const HeaderUserBlock = ({navbarLinkToggle}) => {
                              alt={'user'}/>
                         <span className="navbar-text"> {loginData.name}</span>
                     </button>
-                    <ul className="dropdown-menu dropdown-menu-sm-end">
+                    <ul className="dropdown-menu">
                         <li><Link className="dropdown-item" to="/user/profile" onClick={() => navbarLinkToggle()}>Profile</Link></li>
                         <li>
                             <hr className="dropdown-divider"/>

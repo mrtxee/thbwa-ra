@@ -15,15 +15,15 @@ const About = () => {
 
             <div className="row mt-0">
                 <div className="col text-end">
-                    <img src={require('../assets/app01.png')} width="32" className="rounded opacity-75 me-1" alt="..."/>
-                    <img src={require('../assets/app02.png')} width="32" className="rounded opacity-75 me-1" alt="..."/>
-                    <img src={require('../assets/app05.png')} width="32" className="rounded opacity-75 me-1" alt="..."/>
-                    <img src={require('../assets/app10.png')} width="32" className="rounded opacity-75 me-1" alt="..."/>
-                    <img src={require('../assets/app09.png')} width="32" className="rounded opacity-75 me-1" alt="..."/>
-                    <img src={require('../assets/app03.png')} width="32" className="rounded opacity-75 me-1" alt="..."/>
-                    <img src={require('../assets/app07.png')} width="32" className="rounded opacity-75 me-1" alt="..."/>
-                    <img src={require('../assets/app04.png')} width="32" className="rounded opacity-75 me-1" alt="..."/>
-                    <img src={require('../assets/app06.png')} width="32" className="rounded opacity-75" alt="..."/>
+                    <img src={require('../assets/app01.png')} width="32" className="rounded opacity-75 ms-1 mt-1" alt="..."/>
+                    <img src={require('../assets/app02.png')} width="32" className="rounded opacity-75 ms-1 mt-1" alt="..."/>
+                    <img src={require('../assets/app05.png')} width="32" className="rounded opacity-75 ms-1 mt-1" alt="..."/>
+                    <img src={require('../assets/app10.png')} width="32" className="rounded opacity-75 ms-1 mt-1" alt="..."/>
+                    <img src={require('../assets/app09.png')} width="32" className="rounded opacity-75 ms-1 mt-1" alt="..."/>
+                    <img src={require('../assets/app03.png')} width="32" className="rounded opacity-75 ms-1 mt-1" alt="..."/>
+                    <img src={require('../assets/app07.png')} width="32" className="rounded opacity-75 ms-1 mt-1" alt="..."/>
+                    <img src={require('../assets/app04.png')} width="32" className="rounded opacity-75 ms-1 mt-1" alt="..."/>
+                    <img src={require('../assets/app06.png')} width="32" className="rounded opacity-75 ms-1 mt-1" alt="..."/>
 
                 </div>
             </div>

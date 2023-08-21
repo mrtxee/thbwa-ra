@@ -1,13 +1,10 @@
 import axios from "axios";
 
 export default class PostServiceV2 {
-    //static BACKEND_BASE_URL = document.currentScript.getAttribute('bbu');
     //static BACKEND_BASE_URL = 'http://127.0.0.1:8000';
-	//static BACKEND_BASE_URL = 'http://tuyahome.online:90'
-    //static BACKEND_BASE_URL = process.env.REACT_APP_BACKEND_BASE_URL;
-    static BACKEND_BASE_URL = 'https://tuyahome.online:90'
-
-
+    //static BACKEND_BASE_URL = 'http://tuyahome.online:90';
+    //static BACKEND_BASE_URL = 'https://tuyahome.online:90';
+    static BACKEND_BASE_URL = process.env.REACT_APP_BACKEND_BASE_URL;
 
     static async fetchHomes(errHandler, resHandler) {
         if (!localStorage.getItem("token")) return;
@@ -17,6 +14,7 @@ export default class PostServiceV2 {
             .then((res) => resHandler(res.data, res))
             .catch((err) => errHandler(`${err.response.status} ${err.response.statusText} ${err.response.data}`.substring(0, 199), err.response));
     }
+
     static async fetchRooms(errHandler, resHandler) {
         if (!localStorage.getItem("token")) return;
         await axios.put(`${this.BACKEND_BASE_URL}/api/v2.0/rooms/load/`, {}, {
@@ -25,6 +23,7 @@ export default class PostServiceV2 {
             .then((res) => resHandler(res.data, res))
             .catch((err) => errHandler(`${err.response.status} ${err.response.statusText} ${err.response.data}`.substring(0, 199), err.response));
     }
+
     static async fetchDevices(errHandler, resHandler) {
         if (!localStorage.getItem("token")) return;
         await axios.put(`${this.BACKEND_BASE_URL}/api/v2.0/devices/load/`, {}, {
@@ -33,6 +32,7 @@ export default class PostServiceV2 {
             .then((res) => resHandler(res.data, res))
             .catch((err) => errHandler(`${err.response.status} ${err.response.statusText} ${err.response.data}`.substring(0, 199), err.response));
     }
+
     static async fetchDeviceFunctions(errHandler, resHandler) {
         if (!localStorage.getItem("token")) return;
         await axios.put(`${this.BACKEND_BASE_URL}/api/v2.0/devices/functions/load/`, {}, {
@@ -41,6 +41,7 @@ export default class PostServiceV2 {
             .then((res) => resHandler(res.data, res))
             .catch((err) => errHandler(`${err.response.status} ${err.response.statusText} ${err.response.data}`.substring(0, 199), err.response));
     }
+
     static async fetchRemotes(errHandler, resHandler) {
         if (!localStorage.getItem("token")) return;
         await axios.put(`${this.BACKEND_BASE_URL}/api/v2.0/devices/remotes/load/`, {}, {
@@ -49,6 +50,7 @@ export default class PostServiceV2 {
             .then((res) => resHandler(res.data, res))
             .catch((err) => errHandler(`${err.response.status} ${err.response.statusText} ${err.response.data}`.substring(0, 199), err.response));
     }
+
     static async fetchDeviceRooms(errHandler, resHandler) {
         if (!localStorage.getItem("token")) return;
         await axios.put(`${this.BACKEND_BASE_URL}/api/v2.0/rooms/devices/load/`, {}, {
@@ -57,6 +59,7 @@ export default class PostServiceV2 {
             .then((res) => resHandler(res.data, res))
             .catch((err) => errHandler(`${err.response.status} ${err.response.statusText} ${err.response.data}`.substring(0, 199), err.response));
     }
+
     static async sendRCC(errHandler, resHandler, device_uuid, rcc) {
         if (!localStorage.getItem("token")) return;
         await axios.put(`${this.BACKEND_BASE_URL}/api/v2.0/devices/${device_uuid}/rcc/`, rcc, {

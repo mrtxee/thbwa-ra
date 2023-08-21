@@ -19,12 +19,12 @@ function HeaderThemeSwitcher() {
     }, [theme]);
 
     return (<div className={"border-end border-1 pe-3 me-3"}>
-        <div className="btn-group">
+        <div className="btn-group h-100">
             <button type="button" className="btn btn-link nav-link dropdown-toggle" data-bs-toggle="dropdown"
                     aria-expanded="false">
                 <i className={"bi " + themeToIcon[theme]}> </i>
             </button>
-            <ul className="dropdown-menu dropdown-menu-start">
+            <ul className="dropdown-menu">
                 {Object.keys(themeToIcon).map(key => <li key={"HeaderThemeSwitcher" + key}>
                     <button type="button" className="btn btn-link dropdown-item" onClick={() => setTheme(key)}><i
                         className={"bi " + themeToIcon[key]}> </i>{key}</button>
