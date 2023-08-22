@@ -24,11 +24,11 @@ const About = () => {
                     <img src={require('../assets/app07.png')} width="32" className="rounded opacity-75 ms-1 mt-1" alt="..."/>
                     <img src={require('../assets/app04.png')} width="32" className="rounded opacity-75 ms-1 mt-1" alt="..."/>
                     <img src={require('../assets/app06.png')} width="32" className="rounded opacity-75 ms-1 mt-1" alt="..."/>
-
+                    <img src={require('../assets/app08.png')} width="32" className="rounded opacity-75 ms-1 mt-1" alt="..."/>
                 </div>
             </div>
             <div className="row">
-                <div className="col mt-0">
+                <div className="col mt-4">
                     <p className="lead">
                         Главные преимущества
                     </p>

@@ -12,9 +12,8 @@ const Faq = () => {
                     <p>Tuya Home Online реализует веб-интерфейс для управления Вашими умными устройствам.</p>
                     <p>Привязка устройств и программирование сценариев происходит через мобильное приложение. Для того,
                         чтобы у tuyahome.online получил доступ к Вашим устройствам, необходимо указать реквизиты доступа
-                        к платформе
-                        <a href="https://auth.tuya.com" className="text-decoration-none link-secondary">IOT
-                            Tuya</a> в <a href="/user/profile/" className="text-decoration-none link-secondary">профиле
+                        к платформе <a href="https://auth.tuya.com" className="text-decoration-none">IOT
+                            Tuya</a> в <a href="/user/profile/" className="text-decoration-none">профиле
                             пользователя</a>. Для получения реквизитов доступа Вам понадобится мобильное приложение и
                         инструкция ниже.
                     </p>
@@ -24,7 +23,8 @@ const Faq = () => {
                         <dd>
                             <figure className="figure">
                                 <a href={require("../assets/faq01.png")} target="_blank" rel="noreferrer">
-                                    <Image src={require("../assets/faq01.png")} className="rounded border border-3" alt="..." fluid />
+                                    <Image src={require("../assets/faq01.png")} className="rounded border border-3"
+                                           alt="..." fluid/>
                                 </a>
                                 <figcaption className="figure-caption">
                                     Зарегистрироваться и войти в аккаунт <a target="_blank" rel="noreferrer"
@@ -37,7 +37,8 @@ const Faq = () => {
                         <dd>
                             <figure className="figure">
                                 <a href={require("../assets/faq03.png")} target="_blank" rel="noreferrer">
-                                    <Image src={require("../assets/faq03.png")} className="rounded border border-3" alt="..." fluid />
+                                    <Image src={require("../assets/faq03.png")} className="rounded border border-3"
+                                           alt="..." fluid/>
                                 </a>
                                 <figcaption className="figure-caption">
                                     <p className="mb-1">
@@ -51,7 +52,8 @@ const Faq = () => {
                         <dd>
                             <figure className="figure">
                                 <a href={require("../assets/faq04.png")} target="_blank" rel="noreferrer">
-                                    <Image src={require("../assets/faq04.png")} className="rounded border border-3" alt="..." fluid />
+                                    <Image src={require("../assets/faq04.png")} className="rounded border border-3"
+                                           alt="..." fluid/>
                                 </a>
                                 <figcaption className="figure-caption">
                                     Заполнить описание нового проекта. <strong>Data Center</strong> - регион, с который
@@ -62,7 +64,8 @@ const Faq = () => {
                         <dd>
                             <figure className="figure">
                                 <a href={require("../assets/faq05.png")} target="_blank" rel="noreferrer">
-                                    <Image src={require("../assets/faq05.png")} className="rounded border border-3" alt="..." fluid />
+                                    <Image src={require("../assets/faq05.png")} className="rounded border border-3"
+                                           alt="..." fluid/>
                                 </a>
                                 <figcaption className="figure-caption">
                                     Добавить все группы API-команд. Нажать <strong>All</strong>,
@@ -74,7 +77,8 @@ const Faq = () => {
                         <dd>
                             <a href={require("../assets/faq07.png")} target="_blank" rel="noreferrer">
                                 <figure className="figure">
-                                    <Image src={require("../assets/faq07.png")} className="rounded border border-3" alt="..." fluid />
+                                    <Image src={require("../assets/faq07.png")} className="rounded border border-3"
+                                           alt="..." fluid/>
                                     <figcaption className="figure-caption">
                                         Открыть созданный проект, Перейти на вкладку <strong>Devices - Link Tuya App
                                         Account</strong>, Нажать <strong>Add App Account</strong>
@@ -86,7 +90,8 @@ const Faq = () => {
 
                             <figure className="figure">
                                 <a href={require("../assets/faq08.png")} target="_blank" rel="noreferrer">
-                                    <Image src={require("../assets/faq08.png")} className="rounded border border-3" alt="..." fluid />
+                                    <Image src={require("../assets/faq08.png")} className="rounded border border-3"
+                                           alt="..." fluid/>
                                 </a>
                                 <figcaption className="figure-caption">
                                     <p className="mb-1">
@@ -105,7 +110,8 @@ const Faq = () => {
                         <dd>
                             <figure className="figure">
                                 <a href={require("../assets/faq09.png")} target="_blank" rel="noreferrer">
-                                    <Image src={require("../assets/faq09.png")} className="rounded border border-3" alt="..." fluid />
+                                    <Image src={require("../assets/faq09.png")} className="rounded border border-3"
+                                           alt="..." fluid/>
                                 </a>
                                 <figcaption className="figure-caption">
                                     Если вы все сделали правильно, получите сообщение об успешном добавлении устройств
@@ -116,7 +122,8 @@ const Faq = () => {
                         <dd>
                             <figure className="figure">
                                 <a href={require("../assets/faq10.png")} target="_blank" rel="noreferrer">
-                                    <Image src={require("../assets/faq10.png")} className="rounded border border-3" alt="..." fluid />
+                                    <Image src={require("../assets/faq10.png")} className="rounded border border-3"
+                                           alt="..." fluid/>
                                 </a>
                                 <figcaption className="figure-caption">
                                     Открыть проект, перейти на вкладку <strong>Devices - Link Tuya App
@@ -127,7 +134,8 @@ const Faq = () => {
                         <dd>
                             <figure className="figure">
                                 <a href={require("../assets/faq06.png")} target="_blank" rel="noreferrer">
-                                    <Image src={require("../assets/faq06.png")} className="rounded border border-3" alt="..." fluid />
+                                    <Image src={require("../assets/faq06.png")} className="rounded border border-3"
+                                           alt="..." fluid/>
                                 </a>
                                 <figcaption className="figure-caption">
                                     Открыть проект, перейти на вкладку <strong>Authorization - Cloud

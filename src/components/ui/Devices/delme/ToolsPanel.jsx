@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Button, Modal} from 'react-bootstrap';
-import PostServiceV2 from "../../api/PostServiceV2";
+import PostServiceV2 from "../../../../api/PostServiceV2";
 
 
 function ToolsPanel({loadTuyaDevicesSuccessCallback, loadTuyaDevicesRecommendationFlag, successMsgCallback, processTuyaError}) {
@@ -8,14 +8,11 @@ function ToolsPanel({loadTuyaDevicesSuccessCallback, loadTuyaDevicesRecommendati
     const [spinnerVisibility, setSpinnerVisibility] = useState('invisible'); //d-none d-block
     const [showLoadSmartHomesConfirmationModal, setShowLoadSmartHomesConfirmationModal] = useState(false);
 
-
     useEffect(() => {
         setShowLoadSmartHomesConfirmationModal(loadTuyaDevicesRecommendationFlag);
         if (loadTuyaDevicesRecommendationFlag)
             document.getElementById("toolsPanelCollapse").classList.add('show');
     }, [loadTuyaDevicesRecommendationFlag])
-
-
 
     async function smartHomesLoadClickHandler() {
         setSpinnerVisibility('visible');
@@ -60,7 +57,7 @@ function ToolsPanel({loadTuyaDevicesSuccessCallback, loadTuyaDevicesRecommendati
         <div className={"d-flex flex-row"}>
             <div className={"me-2"}>
                 <a className="btn btn-outline-secondary" data-bs-toggle="collapse" role="button" aria-expanded="true"
-                   aria-controls="toolsPanelCollapse" href="#toolsPanelCollapse">
+                   aria-controls="toolsPanelCollapse" href="src/components/ui/Devices/delme/ToolsPanel#toolsPanelCollapse">
                     <i className="bi bi-gear"></i>
                 </a>
             </div>
@@ -98,7 +95,6 @@ function ToolsPanel({loadTuyaDevicesSuccessCallback, loadTuyaDevicesRecommendati
                     <Button variant="secondary" onClick={() => setShowLoadSmartHomesConfirmationModal(false)}>Отмена</Button>
                 </Modal.Footer>
             </Modal>
-
         </div>
     );
 }

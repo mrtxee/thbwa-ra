@@ -12,6 +12,8 @@ import PasswordChange from "../pages/user/PasswordChange";
 import Profile from "../pages/user/Profile";
 import UpdateProfile from "../pages/user/UpdateProfile";
 
+//{/*<Route path="/favicon.ico" element={require('/src/assets/favicon.ico')}/>*/}
+
 const RoutesSchema = () => {
     const {loginData} = useContext(UserContext);
 
@@ -34,7 +36,7 @@ const RoutesSchema = () => {
             <Route path="/user/profile" element={loginData ? <Profile/> : <About/>}/>
             <Route path="/user/profile/update" element={loginData ? <UpdateProfile/> : <About/>}/>
             <Route path="/dev1" element={<UnitsDev/>}/>
-            <Route path="*" element=
+            <Route path="*"  element=
                 {loginData ? <Navigate to="/devices"/> : <About/>}
             />
         </Routes>);

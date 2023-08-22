@@ -26,7 +26,7 @@ const Profile = () => {
 
     if (loginData && !loginData.picture) loginData.picture = require('./user_spacer.png');
     return (<div className="container pt-2">
-        <div className="row justify-content-center g-4 row-cols-2 pb-5">
+        <div className="row justify-content-center g-3 row-cols-2 pb-5">
             <div className={"col-12 col-sm-9 col-md-6 col-lg-5 col-xl-5"}>
                 <div className={"card shadow bg-body-tertiary rounded"}>
                     <div className="card-header text-center">

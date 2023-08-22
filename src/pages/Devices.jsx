@@ -1,7 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {toast_error, toast_success} from "../components/ui/ToastCt";
-import ToolsPanel from "../components/ui/ToolsPanel";
-import HomeSelector from "../components/ui/Devices/HomeSelector";
 import HomeRoomsTabs from "../components/ui/HomeRoomsTabs";
 import BadTuyaCredentialsErrorModal from "../components/ui/Devices/BadTuyaCredentialsErrorModal";
 import PostServiceV2 from "../api/PostServiceV2";
@@ -33,6 +31,7 @@ const Devices = () => {
     }
 
     function processTuyaError(err){
+        console.log(err);
         if (422 === err.status) setShowBadTuyaCredentialsErrorModal(true);
         toast_error(`${err.status} ${err.statusText} ${err.data}`.substring(0, 199));
     }
@@ -64,19 +63,16 @@ const Devices = () => {
             device_uuid, {remote_uuid, category_id, remote_index, key, key_id})
     }
 
-    return (<div className={"container container-fluid p-2"}>
-        <ToolsPanel
+    return (<div className={"container container-fluid p-sm-0 px-1"}>
+        <HomeHeader
+            value={currentHomeID}
+            onHomeSelect={(home_id)=>setCurrentHomeID(Number(home_id))}
+            homes={homes}
+            renderTheme={localStorage.getItem('theme') == null ? "auto" : localStorage.getItem('theme')}
             loadTuyaDevicesSuccessCallback={fetchHomes}
             loadTuyaDevicesRecommendationFlag={loadTuyaDevicesRecommendationFlag}
             successMsgCallback={toast_success}
             processTuyaError={processTuyaError}
-        />
-        <HomeHeader
-            value={currentHomeID}
-            onChange={(home_id)=>setCurrentHomeID(Number(home_id))}
-            homes={homes}
-            renderTheme={localStorage.getItem('theme') == null ? "auto" : localStorage.getItem('theme')}
-            defaultValue="select home"
         />
         <HomeRoomsTabs
             home={homes.filter(h => h.home_id === Number(currentHomeID))[0]}
