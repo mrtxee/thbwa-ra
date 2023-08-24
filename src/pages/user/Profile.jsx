@@ -71,7 +71,15 @@ const Profile = () => {
                                 <i className="bi bi-door-closed"></i> Sign out on all devices
                             </button>
                         </div>
-
+                        <div>
+                            <button type="button" className="btn btn-link text-decoration-none p-0"
+                                    onClick = {() => {
+                                        setLoginData();
+                                        localStorage.removeItem("token");
+                                    }}>
+                                <i className="bi bi-door-closed-fill"></i> Sign out
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

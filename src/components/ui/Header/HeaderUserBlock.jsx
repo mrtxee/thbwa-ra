@@ -9,32 +9,17 @@ const HeaderUserBlock = ({navbarLinkToggle}) => {
     return (
         <div>
             {!loginData ? (
-                <Link to="/signin" className="btn btn-outline-primary me-2" role="button" onClick={() => navbarLinkToggle()}>Sign in</Link>
+                <Link to="/signin" className="btn btn-outline-primary me-2" role="button"
+                      onClick={() => navbarLinkToggle()}>Sign in</Link>
             ) : (
                 <div className="btn-group">
-                    <button type="button"
-                            className="btn btn-link nav-link d-block text-decoration-none dropdown-toggle"
-                            data-bs-toggle="dropdown" aria-expanded="false">
+                    <Link to="/user/profile" type="button"
+                          className="btn btn-link nav-link d-block text-decoration-none"
+                          onClick={() => navbarLinkToggle()}>
                         <img src={loginData.picture} className="rounded-circle border" width="32" height="32"
                              alt={'user'}/>
                         <span className="navbar-text"> {loginData.name}</span>
-                    </button>
-                    <ul className="dropdown-menu">
-                        <li><Link className="dropdown-item" to="/user/profile" onClick={() => navbarLinkToggle()}>Profile</Link></li>
-                        <li>
-                            <hr className="dropdown-divider"/>
-                        </li>
-                        <li>
-                            <button type="button" className="btn btn-link dropdown-item"
-                                    onClick={() => {
-                                        setLoginData();
-                                        localStorage.removeItem("token");
-                                        navbarLinkToggle();
-                                    }}
-                            >Sign out
-                            </button>
-                        </li>
-                    </ul>
+                    </Link>
                 </div>
             )}
         </div>

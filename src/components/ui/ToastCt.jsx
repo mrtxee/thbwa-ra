@@ -3,7 +3,7 @@ import React from "react";
 
 export function toast_error(msg) {
     const options = {
-        position: toast.POSITION.BOTTOM_RIGHT,
+        position: toast.POSITION.TOP_RIGHT,
         closeOnClick: true,
         pauseOnHover: false,
         draggable: true,
@@ -15,7 +15,7 @@ export function toast_error(msg) {
 
 export function toast_warning(msg) {
     const options = {
-        position: toast.POSITION.BOTTOM_RIGHT,
+        position: toast.POSITION.TOP_RIGHT,
         closeOnClick: true,
         pauseOnHover: false,
         draggable: true,
