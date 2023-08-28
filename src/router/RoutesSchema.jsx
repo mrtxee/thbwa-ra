@@ -7,10 +7,11 @@ import SignIn from "../pages/auth/SignIn";
 import UnitsDev from "../pages/dev/UnitsDev";
 import {UserContext} from "../context";
 import SignUp from "../pages/auth/SignUp";
-import PasswordSend from "../pages/auth/PasswordSend";
+import PasswordReset_Step1 from "../pages/auth/PasswordReset_Step1";
 import PasswordChange from "../pages/user/PasswordChange";
 import Profile from "../pages/user/Profile";
 import UpdateProfile from "../pages/user/UpdateProfile";
+import PasswordReset_Step2 from "../pages/auth/PasswordReset_Step2";
 
 //{/*<Route path="/favicon.ico" element={require('/src/assets/favicon.ico')}/>*/}
 
@@ -30,11 +31,14 @@ const RoutesSchema = () => {
                 {loginData ? <Navigate to="/user/profile"/> : <SignUp/>}
             />
             <Route path="/sendpass" element=
-                {loginData ? <Navigate to="/user/profile"/> : <PasswordSend/>}
+                {loginData ? <Navigate to="/user/profile"/> : <PasswordReset_Step1/>}
             />
             <Route path="/user/changepass" element={loginData ? <PasswordChange/> : <About/>}/>
             <Route path="/user/profile" element={loginData ? <Profile/> : <About/>}/>
             <Route path="/user/profile/update" element={loginData ? <UpdateProfile/> : <About/>}/>
+            <Route path="/accounts/password/reset/key/:token/"
+                   element={loginData ? <Devices/> : <PasswordReset_Step2/>}
+            />
             <Route path="/dev1" element={<UnitsDev/>}/>
             <Route path="*"  element=
                 {loginData ? <Navigate to="/devices"/> : <About/>}

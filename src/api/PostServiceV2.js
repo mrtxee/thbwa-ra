@@ -110,6 +110,12 @@ export default class PostServiceV2 {
             .catch((err) => errHandler(`${err.response.status} ${err.response.statusText} ${err.response.data}`.substring(0, 199), err.response));
     };
 
+    static async passwordResetConfirm(errHandler, resHandler, data) {
+        await axios.put(`${this.BACKEND_BASE_URL}/api/v2.0/auth/resetpass/`, data)
+            .then((res) => resHandler(res.data, res))
+            .catch((err) => errHandler(`${err.response.status} ${err.response.statusText} ${err.response.data}`.substring(0, 199), err.response));
+    };
+
     static async updateUserPassword(errHandler, resHandler, data) {
         await axios.post(`${this.BACKEND_BASE_URL}/api/v2.0/user/newpass/`, data, {headers: {Authorization: `Token ${localStorage.getItem("token")}`}})
             .then((res) => resHandler(res.data, res))

@@ -3,7 +3,7 @@ import GoogleLoginButton from "../../components/ui/GoogleLoginButton/GoogleLogin
 import PostServiceV2 from "../../api/PostServiceV2";
 import {toast_error, toast_success} from "../../components/ui/ToastCt";
 
-const PasswordSend = () => {
+const PasswordReset_Step1 = () => {
     function sendPasswordLinkHandleSubmit(e) {
         e.preventDefault();
         PostServiceV2.passwordReset(
@@ -54,4 +54,4 @@ const PasswordSend = () => {
     );
 };
 
-export default PasswordSend;
+export default PasswordReset_Step1;
