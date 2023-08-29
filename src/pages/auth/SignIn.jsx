@@ -20,13 +20,13 @@ const SignIn = () => {
 
     return (
         <div className={"container pt-2"}>
-            <div className="row justify-content-center mb-4">
+            <div className="row justify-content-center mb-4 px-sm-0 px-2">
                 <div className={"col-12 col-sm-8 col-md-6 col-lg-4 p-0 card shadow-lg bg-body-tertiary rounded"}>
                     <GoogleLoginButton/>
                 </div>
             </div>
 
-            <div className="row justify-content-center mb-4">
+            <div className="row justify-content-center mb-4 px-sm-0 px-2">
                 <div className={"col-12 col-sm-8 col-md-6 col-lg-4 p-0 card shadow-lg bg-body-tertiary rounded"}>
                     <div className="card-header text-center">
                         Sign in with username
@@ -39,7 +39,7 @@ const SignIn = () => {
                             </div>
                             <div className="mb-2">
                                 <label htmlFor="f1pw" className="form-label mb-0">Password</label>
-                                <Link to="/sendpass" className={"float-end text-secondary text-decoration-none"}
+                                <Link to="/sendpass" className={"float-end link-secondary text-decoration-none"}
                                       style={{fontSize: "0.9rem"}}>Forgot password?</Link>
                                 <input type="password" name="password" className="form-control" id="f1pw" required/>
                             </div>

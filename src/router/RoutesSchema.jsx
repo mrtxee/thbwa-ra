@@ -36,7 +36,7 @@ const RoutesSchema = () => {
             <Route path="/user/changepass" element={loginData ? <PasswordChange/> : <About/>}/>
             <Route path="/user/profile" element={loginData ? <Profile/> : <About/>}/>
             <Route path="/user/profile/update" element={loginData ? <UpdateProfile/> : <About/>}/>
-            <Route path="/accounts/password/reset/key/:token/"
+            <Route path="/resetpass/:key/"
                    element={loginData ? <Devices/> : <PasswordReset_Step2/>}
             />
             <Route path="/dev1" element={<UnitsDev/>}/>

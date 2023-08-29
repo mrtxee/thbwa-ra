@@ -8,24 +8,24 @@ const PasswordReset_Step1 = () => {
         e.preventDefault();
         PostServiceV2.passwordReset(
             (errMsg, err) => {
-                if (err.status === 417) toast_error("указанный e-mail не зарегстророван")
+                if (err.status === 417) toast_error("Указанный e-mail не зарегстророван")
                 else toast_error(errMsg)
             },
             (res) => {
-                toast_success("письмо для восстановление пароля будет отправлено в ближайшее время");
+                toast_success("Письмо для восстановление пароля будет отправлено в ближайшее время");
             },
             Object.fromEntries(new FormData(e.target).entries()));
     }
 
     return (
         <div className={"container pt-2"}>
-            <div className="row justify-content-center mb-4">
+            <div className="row justify-content-center mb-4 px-sm-0 px-2">
                 <div className={"col-12 col-sm-8 col-md-6 col-lg-4 p-0 card shadow-lg bg-body-tertiary rounded"}>
                     <GoogleLoginButton/>
                 </div>
             </div>
 
-            <div className="row justify-content-center mb-4">
+            <div className="row justify-content-center mb-4 px-sm-0 px-2">
                 <div className={"col-12 col-sm-8 col-md-6 col-lg-4 p-0 card shadow-lg bg-body-tertiary rounded"}>
                     <div className="card-header text-center">
                         Account recovery

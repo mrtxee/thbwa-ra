@@ -36,7 +36,7 @@ const PasswordChange = () => {
                                 </span>
                             </div>
                             <div className="mb-3">
-                                <label htmlFor="f41" className="form-label mb-0">Old password</label>
+                                <label htmlFor="f41" className="form-label mb-0">Current password</label>
                                 <input type="password" name="old_password" className="form-control" id="f41" required
                                        minLength="5" maxLength="128"/>
                             </div>
@@ -46,7 +46,7 @@ const PasswordChange = () => {
                                        minLength="5" maxLength="128"/>
                             </div>
                             <div className="mb-3">
-                                <label htmlFor="f42" className="form-label mb-0">New password repeat</label>
+                                <label htmlFor="f42" className="form-label mb-0">New password (again)</label>
                                 <input type="password" name="password2" className="form-control" id="f42" required
                                        minLength="5" maxLength="128"/>
                             </div>
